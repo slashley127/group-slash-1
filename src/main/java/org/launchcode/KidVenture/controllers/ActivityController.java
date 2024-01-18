@@ -4,7 +4,7 @@ package org.launchcode.KidVenture.controllers;
 import jakarta.validation.Valid;
 import org.launchcode.KidVenture.models.Activity;
 import org.launchcode.KidVenture.models.TypeOfActivity;
-import org.launchcode.KidVenture.models.data.ActivityRepository;
+//import org.launchcode.KidVenture.models.data.ActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,25 +18,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("kidVenture")
 public class ActivityController {
 
-    @Autowired
-    private ActivityRepository activityRepository;
+   // @Autowired
+   // private ActivityRepository activityRepository;
 
-    @GetMapping("add")
+    @GetMapping("create")
     public String displayAddEmployerForm(Model model) {
         model.addAttribute("title", "Add Activity");
         model.addAttribute(new Activity());
-        model.addAttribute("types", TypeOfActivity.values());
+        model.addAttribute("typesOfActivities", TypeOfActivity.values());
         return "activities/create";
     }
 
-    @PostMapping("add")
+    @PostMapping("create")
     public String processAddEmployerForm(@ModelAttribute @Valid Activity newActivity,
                                          Errors errors, Model model) {
 
         if (errors.hasErrors()) {
             return "activities/create";
         }
-        activityRepository.save(newActivity);
+       // activityRepository.save(newActivity);
         return "redirect:../";
     }
 

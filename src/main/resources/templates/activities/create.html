@@ -1,10 +1,38 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org/">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
-</head>
-<body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<body class="container  body-content">
+<h1>Add Activity</h1>
+
+
+<form method="post" style="max-width:600px;">
+    <div class="form-group">
+        <label th:for="name">Activity</label>
+        <input class="form-control" th:field="${activity.name}" />
+        <span th:errors="${activity.name}" class="error"></span>
+    </div>
+
+    <div class="form-group">
+        <label th:for="child">Child's Name</label>
+        <input class="form-control" th:field="${activity.child}" />
+        <span th:errors="${activity.child}" class="error"></span>
+    </div>
+    <div class="form-group">
+        <label th:for="date">Today's Date</label>
+        <input class="form-control" th:field="${activity.date}" />
+        <span th:errors="${activity.date}" class="error"></span>
+    </div>
+    <div class="form-group">
+        <label> Type of Activity
+            <select th:field="${activity.typeOfActivity}">
+                <option th:each="typeOfActivity : ${typesOfActivities}"
+                        th:value="${typeOfActivity}"
+                        th:text="${typeOfActivity.displayName}"
+                ></option>
+            </select>
+        </label>
+    </div>
+    <input type="submit" value="Add Activity" />
+</form>
 
 </body>
 </html>
