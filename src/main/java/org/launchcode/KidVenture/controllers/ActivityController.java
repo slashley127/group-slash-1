@@ -34,7 +34,7 @@ public class ActivityController {
                                          Errors errors, Model model) {
 
         if (errors.hasErrors()) {
-            return "activites/create";
+            return "activities/create";
         }
         activityRepository.save(newActivity);
         return "redirect:../";

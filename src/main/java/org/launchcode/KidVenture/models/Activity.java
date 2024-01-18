@@ -2,6 +2,9 @@ package org.launchcode.KidVenture.models;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
 import java.util.Date;
 import java.util.Objects;
@@ -9,11 +12,19 @@ import java.util.Objects;
 public class Activity extends AbstractEntity {
 
     //TO DO: change child from String to Child type once we add the child profiles.
+
+    @NotBlank
+    @Size(max= 50, message= "Name must be fewer than 50 characters")
     private String child;
+
+    @NotBlank
     private Date date;
 
+    @NotBlank
     private TypeOfActivity typeOfActivity;
 
+    @NotBlank
+    @Positive
     private double durationOfActivity;
 
     public Activity() {
