@@ -2,9 +2,7 @@ package org.launchcode.KidVenture.models;
 
 //import jakarta.persistence.GeneratedValue;
 //import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 import java.util.Date;
 import java.util.Objects;
@@ -18,7 +16,19 @@ public class Activity extends AbstractEntity {
     private String child;
 
     @NotBlank
-    private Date date;
+    private Month month;
+
+    @Positive
+    @NotBlank
+    @Max(value =31, message="Must be a valid date")
+    @Min(value = 1, message = "Must be a valid date")
+    private int day;
+
+    @Positive
+    @NotBlank
+    @Min(value= 2024, message= "Must be a year 2024 or later")
+    @Max(value=2200, message="The year you've entered is too far in the future")
+    private int year;
 
     @NotBlank
     private TypeOfActivity typeOfActivity;
@@ -30,9 +40,12 @@ public class Activity extends AbstractEntity {
     public Activity() {
     }
 
-    public Activity(String child, Date date, TypeOfActivity typeOfActivity, double durationOfActivity) {
+    public Activity(String child, Month month, int day, int year, TypeOfActivity typeOfActivity, double durationOfActivity) {
+        super();
         this.child = child;
-        this.date = date;
+        this.month = month;
+        this.day = day;
+        this.year = year;
         this.typeOfActivity = typeOfActivity;
         this.durationOfActivity = durationOfActivity;
     }
@@ -47,12 +60,28 @@ public class Activity extends AbstractEntity {
         this.child = child;
     }
 
-    public Date getDate() {
-        return date;
+    public Month getMonth() {
+        return month;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setMonth(Month month) {
+        this.month = month;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
     }
 
     public TypeOfActivity getTypeOfActivity() {
