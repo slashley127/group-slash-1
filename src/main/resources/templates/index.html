@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+
+<!--<head th:replace="~{fragments :: head}">-->
+<!--</head>-->
+<body>
+
+<!--<div th:replace="~{fragments :: page-header}"></div>-->
+
+<div class="container body-content">
+    <h2>KidVenture</h2>
+
+</div>
+<script th:inline="javascript">
+
+    const showPopup = [[${showReachedGoal}]];
+ if (showPopup){
+     alert("You have reached your daily goal.");
+     }
+</script>
+</body>
+</html>
