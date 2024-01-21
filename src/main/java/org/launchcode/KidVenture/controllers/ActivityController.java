@@ -22,54 +22,60 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("kidVenture")
-@SuppressWarnings("unchecked")
+@RequestMapping("activities")
 public class ActivityController {
 
-    private final Logger log = LoggerFactory.getLogger(ActivityController.class);
+    private ActivityRepository activityRepository;
+    public ActivityController(ActivityRepository activityRepository) {
+        this.activityRepository = activityRepository;
+    }
 
-    @Autowired
-     ActivityRepository activityRepository;
-
-    @GetMapping("/activities")
-    Collection<Activity> activities() {
-        return (Collection<Activity>) activityRepository.findAll();
+    @GetMapping
+    public List<Activity> getActivities() {
+        return activityRepository.findAll();
             }
 
 
    //Will allow us to display a particular activity
 
-    @GetMapping ("/activity/{id}")
-    ResponseEntity<?> getGroup(@PathVariable int id) {
-        Optional<Activity> activity = activityRepository.findById(id);
-        return activity.map(response -> ResponseEntity.ok().body(response))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    @GetMapping("/{id}")
+    public Activity getActivity(@PathVariable int id) {
+        return activityRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
     //will allow us to create an activity
-    @PostMapping("/activity")
-    ResponseEntity<Activity> createGroup(@Valid @RequestBody Activity activity) throws URISyntaxException {
-        log.info("Request to create activity: {}", activity);
-        Activity result = (Activity) activityRepository.save(activity);
-        return ResponseEntity.created(new URI("/kidVenture/activity/" + result.getId()))
-                .body(result);
+
+    @PostMapping
+    public ResponseEntity createActivity(@Valid @RequestBody Activity activity) throws URISyntaxException {
+        Activity savedActivity = activityRepository.save(activity);
+        return ResponseEntity.created(new URI("/activities/" + savedActivity.getId())).body(savedActivity);
     }
 
   //will allow us to update/edit an activity
-    @PutMapping("/activity/{id}")
-    ResponseEntity<Activity> updateGroup(@Valid @RequestBody Activity activity) {
-        log.info("Request to update activity: {}", activity);
-        Activity result = (Activity) activityRepository.save(activity);
-        return ResponseEntity.ok().body(result);
-    }
+  @PutMapping("/{id}")
+  public ResponseEntity updateActivity(@PathVariable int id, @RequestBody Activity activity) {
+      Activity currentActivity = activityRepository.findById(id).orElseThrow(RuntimeException::new);
+      currentActivity.setName(activity.getName());
+      currentActivity.setChild(activity.getChild());
+      currentActivity.setMonth(activity.getMonth());
+      currentActivity.setDay(activity.getDay());
+      currentActivity.setYear(activity.getYear());
+      currentActivity.setTypeOfActivity(activity.getTypeOfActivity());
+      currentActivity.setDurationOfActivity(activity.getDurationOfActivity());
+      return ResponseEntity.ok(currentActivity);
+  }
 //will allow us to delete an activity
-    @DeleteMapping("/activity/{id}")
-    public ResponseEntity<?> deleteActivity(@PathVariable int id) {
-        log.info("Request to delete activity: {}", id);
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteActivity(@PathVariable int id) {
         activityRepository.deleteById(id);
         return ResponseEntity.ok().build();
     }
+
 }
+
+
+
 
 
 
