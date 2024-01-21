@@ -1,12 +1,10 @@
 package org.launchcode.KidVenture.models;
 
-//import jakarta.persistence.GeneratedValue;
-//import jakarta.persistence.Id;
 import jakarta.validation.constraints.*;
+import jakarta.persistence.*;
 
-import java.util.Date;
-import java.util.Objects;
 
+@Entity
 public class Activity extends AbstractEntity {
 
     //TO DO: change child from String to Child type once we add the child profiles.

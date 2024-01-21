@@ -1,77 +1,75 @@
 package org.launchcode.KidVenture.controllers;
-
-
 import jakarta.validation.Valid;
 import org.launchcode.KidVenture.models.Activity;
 import org.launchcode.KidVenture.models.Month;
 import org.launchcode.KidVenture.models.TypeOfActivity;
-//import org.launchcode.KidVenture.models.data.ActivityRepository;
+import org.launchcode.KidVenture.models.data.ActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import java.net.URI;
+import java.net.URISyntaxException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
-@Controller
+@RestController
 @RequestMapping("kidVenture")
+@SuppressWarnings("unchecked")
 public class ActivityController {
 
-   // @Autowired
-   // private ActivityRepository activityRepository;
+    private final Logger log = LoggerFactory.getLogger(ActivityController.class);
 
-    @GetMapping("create")
-    public String displayAddEmployerForm(Model model) {
-        model.addAttribute("title", "Add Activity");
-        model.addAttribute(new Activity());
-        model.addAttribute("months", Month.values());
-        model.addAttribute("typesOfActivities", TypeOfActivity.values());
-        return "activities/create";
-    }
+    @Autowired
+     ActivityRepository activityRepository;
 
-    @PostMapping("create")
-    public String processAddEmployerForm(@ModelAttribute @Valid Activity newActivity,
-                                         Errors errors, Model model) {
-
-        if (errors.hasErrors()) {
-            return "activities/create";
-        }
-       // activityRepository.save(newActivity);
-        return "redirect:../";
-    }
-
-    //NOTE: Adding an arraylist of activities just to test this while we don't have the database created yet.
-
-    Activity soccer = new Activity("Sally", Month.JANUARY, 19, 2024, TypeOfActivity.SPORTSANDEXERCISE, 60)
-    Activity marioKart = new Activity("Peter", Month.JANUARY, 20, 2024, TypeOfActivity.VIDEOGAME, 30);
-    ArrayList<Activity> sampleActivities = new ArrayList<>();
-
-    @GetMapping("delete")
-    public String displayDeleteActivityForm(Model model) {
-
-
-            model.addAttribute("title", "Delete Activity");
-          //  model.addAttribute("Activities",activityRepository.findAll());
-        //Adding a stand-in until we have the database connected
-        model.addAttribute("Activities", sampleActivities);
-            return "activities/delete";
-
-    }
-    @PostMapping("delete")
-    public String processDeleteActivitiesForm(@RequestParam(required = false) int[] ids) {
-
-        if (ids != null) {
-            for (int id : ids) {
-             //   activityRepository.remove(id);
+    @GetMapping("/activities")
+    Collection<Activity> activities() {
+        return (Collection<Activity>) activityRepository.findAll();
             }
-        }
 
-        return "redirect:/activities";
+
+   //Will allow us to display a particular activity
+
+    @GetMapping ("/activity/{id}")
+    ResponseEntity<?> getGroup(@PathVariable int id) {
+        Optional<Activity> activity = activityRepository.findById(id);
+        return activity.map(response -> ResponseEntity.ok().body(response))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    //will allow us to create an activity
+    @PostMapping("/activity")
+    ResponseEntity<Activity> createGroup(@Valid @RequestBody Activity activity) throws URISyntaxException {
+        log.info("Request to create activity: {}", activity);
+        Activity result = (Activity) activityRepository.save(activity);
+        return ResponseEntity.created(new URI("/kidVenture/activity/" + result.getId()))
+                .body(result);
+    }
 
-
+  //will allow us to update/edit an activity
+    @PutMapping("/activity/{id}")
+    ResponseEntity<Activity> updateGroup(@Valid @RequestBody Activity activity) {
+        log.info("Request to update activity: {}", activity);
+        Activity result = (Activity) activityRepository.save(activity);
+        return ResponseEntity.ok().body(result);
+    }
+//will allow us to delete an activity
+    @DeleteMapping("/activity/{id}")
+    public ResponseEntity<?> deleteActivity(@PathVariable int id) {
+        log.info("Request to delete activity: {}", id);
+        activityRepository.deleteById(id);
+        return ResponseEntity.ok().build();
+    }
 }
+
+
 
