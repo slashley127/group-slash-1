@@ -1,8 +1,20 @@
 package org.launchcode.KidVenture.models;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 public class User {
+
+    @NotNull(message = "Username is required.")
+    @Size(min = 1, message = "Username is required")
     private String username;
+
+    @NotNull(message = "Email is required")
+    @Size(min = 1, message = "Email is required")
     private String email;
+
+    @NotNull(message = "Password is required")
+    @Size(min = 5, message = "Password must be at least 5 characters.")
     private String password;
 
     public User(){
@@ -15,6 +27,7 @@ public class User {
         this.email = email;
         this.password = password;
     }
+
 
     public String getUsername() {
         return username;
