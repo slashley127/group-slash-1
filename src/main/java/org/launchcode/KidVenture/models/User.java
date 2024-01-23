@@ -1,5 +1,6 @@
 package org.launchcode.KidVenture.models;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -11,6 +12,7 @@ public class User {
 
     @NotNull(message = "Email is required")
     @Size(min = 1, message = "Email is required")
+    @Email(message = "Email must be correctly formatted")
     private String email;
 
     @NotNull(message = "Password is required")
