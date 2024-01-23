@@ -1,9 +1,11 @@
 package org.launchcode.KidVenture.models;
 
+import jakarta.persistence.Entity;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+@Entity
 public class User {
 
     @NotNull(message = "Username is required.")

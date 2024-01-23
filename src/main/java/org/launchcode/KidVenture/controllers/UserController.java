@@ -1,9 +1,14 @@
 package org.launchcode.KidVenture.controllers;
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.launchcode.KidVenture.models.data.UserRepository;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping
 public class UserController {
+    private UserRepository userRepository;
+    public UserController(UserRepository userRepository){
+        this.userRepository = userRepository;
+    }
+
+
 }
