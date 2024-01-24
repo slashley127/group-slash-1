@@ -20,6 +20,9 @@ class App extends Component {
               <h2>Activities</h2>
               {activities.map(activity =>
                   <div key={activity.id}>
+                    <table>
+                      
+                    </table>
                     {activity.name}
                   </div>
               )}
