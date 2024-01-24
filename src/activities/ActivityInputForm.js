@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
 
-class ActivityEdit() extends Component {
+class ActivityEdit extends Component {
 
     emptyActivity = {
         name:"",
@@ -24,15 +24,14 @@ class ActivityEdit() extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    async function componentDidMount() {
+    async componentDidMount() {
         if (this.props.match.params.id !== 'new') {
             const anActivity  = await (await fetch(`/api/activities/${this.props.match.params.id}`)).json();
             this.setState({activity: anActivity});
         }
     }
 
-    
-        function handleChange(e) {
+         handleChange(e) {
             const target = e.target;
             const value = target.value;
             const name = target.name;
@@ -41,7 +40,7 @@ class ActivityEdit() extends Component {
             this.setState({activity});
         }
     
-        async function handleSubmit(e) {
+        async handleSubmit(e) {
             e.preventDefault();
             const {activity} = this.state;
             await fetch('/api/activities' + (activity.id ? '/' + activity.id : ''), {
@@ -72,7 +71,7 @@ class ActivityEdit() extends Component {
                                 <Label for="child">Name of Child</Label>
                                 <Input type="text" name="child" id="child" value={activity.email || ''}
                                        onChange={this.handleChange} autoComplete="child"/>
-                            </FormGroup>\
+                            </FormGroup>
                             <FormGroup>
                                 <Label for="month">Month</Label>
                                 <Input type="text" name="month" id="month" value={activity.month || ''}
@@ -112,6 +111,7 @@ class ActivityEdit() extends Component {
             }
     
     }
+    export default ActivityEdit;
 
 
 
