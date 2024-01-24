@@ -75,7 +75,6 @@ class ActivityList extends Component {
 
   render() {
     const { activities } = this.state;
-
  if (this.showGoalReachedAlert(activities)) {
       Swal.fire({
         title: 'Goal Reached',
