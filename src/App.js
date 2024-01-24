@@ -18,15 +18,28 @@ class App extends Component {
           <header className="App-header">
             <div className="App-intro">
               <h2>Activities</h2>
-              {activities.map(activity =>
-                  <div key={activity.id}>
                     <table>
-                      
+                      <tr>
+                        <th>Name of Activity</th>
+                        <th>Child's Name</th>
+                        <th>Date of Activity</th>
+                        <th>Type of Activity</th>
+                        <th>Duration of Activity</th>
+                        <th>Mood of Child</th>
+                       </tr>
+                       
+                        {activities.map(activity =>
+                          <tr key={activity.id}>
+                            <td>{activity.name}</td>
+                            <td>{activity.child}</td>
+                            <td>{activity.month}/{activity.day}/{activity.year}</td>
+                            <td>{activity.typeOfActivity}</td>
+                            <td>{activity.durationOfActivity}</td>
+                            <td>{activity.mood}</td>
+                       </tr>
+                        )}
                     </table>
-                    {activity.name}
                   </div>
-              )}
-            </div>
           </header>
         </div>
     );
