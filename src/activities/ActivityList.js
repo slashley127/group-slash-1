@@ -51,6 +51,15 @@ class ActivityList extends Component {
     this.setState({ activities: body });
   }
 
+  showGoalReachedAlert(activities) {
+    for (let activity of activities) {
+
+      return true; // TODO add in if statements for measurements
+
+    }
+
+  }
+
   async remove(id) {
     await fetch(`/api/activities/${id}`, {
       method: 'DELETE',
@@ -67,6 +76,14 @@ class ActivityList extends Component {
   render() {
     const { activities } = this.state;
 
+ if (this.showGoalReachedAlert(activities)) {
+      Swal.fire({
+        title: 'Goal Reached',
+        text: 'You have reached your daily goal!',
+        icon: 'check',
+        confirmButtonText: 'Awesome!'
+      })
+    }
 
     return (
       <div className="App">
