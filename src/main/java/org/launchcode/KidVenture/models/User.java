@@ -12,7 +12,7 @@ public class User {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private int id;
 
     @NotNull(message = "Username is required.")
     @Size(min = 1, message = "Username is required")
@@ -39,11 +39,11 @@ public class User {
     }
 
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
