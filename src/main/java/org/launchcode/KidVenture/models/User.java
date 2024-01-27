@@ -12,10 +12,10 @@ public class User {
 
     @Id
     @GeneratedValue
-    private int id;
+    private Long id;
 
     @NotNull(message = "Username is required.")
-    @Size(min = 1, message = "Username is required")
+    @Size(min = 3, message = "Username is required")
     private String username;
 
     @NotNull(message = "Email is required")
@@ -39,11 +39,11 @@ public class User {
     }
 
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
