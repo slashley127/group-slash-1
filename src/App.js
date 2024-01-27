@@ -22,7 +22,7 @@ class App extends Component {
 
   <div className = "navbar-container">
     <Routes>
-      <Route path="/" element={<Home/>} />
+      <Route path="/" element={<Home/>} />   {/* Moved Home.js into the pages folder */}
       <Route path="/profile" element={<Profile/>} />
       <Route path="/child" element={<Child/>} />
       <Route path="/activities" element={<Activities/>} />
