@@ -10,7 +10,7 @@ class Home extends Component {
             <div>
                 <h1>Welcome to KidVenture!</h1>
                 <Container fluid>
-                    <Button color="link"><Link to="/api/activities">Activities</Link></Button>
+                    <Button color="link"><Link to="/activities">Activities</Link></Button>
                 </Container>
             </div>
         );
