@@ -26,17 +26,17 @@ public class User {
     @NotNull(message = "Password is required")
     @Size(min = 5, message = "Password must be at least 5 characters.")
     private String password;
-//
-//    public User(){
-//
-//    }
-//
-//    public User(String username, String email, String password){
-//        this();
-//        this.username = username;
-//        this.email = email;
-//        this.password = password;
-//    }
+
+    public User(){
+
+    }
+
+    public User(String username, String email, String password){
+        this();
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
 
 
     public Long getId() {
