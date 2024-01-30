@@ -1,13 +1,23 @@
 import React, { Component } from 'react';
-import { Link, useParams, withRouter } from 'react-router-dom';
+import { Link, useParams, withRouter, useNavigate } from 'react-router-dom';
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
+import withNavigateHook from './NavigateHook';
+
+
 
 
 function withParams(Component) {
-  return props => <Component {...props} params={useParams()} />;
+  return props => 
+
+  <Component {...props} params={useParams()} />;
+
+  
 }
 
-class ActivityEdit extends Component {
+
+
+
+class ActivityEdit extends React.Component {
 
     emptyInfo = {
         name:"",
@@ -29,6 +39,7 @@ class ActivityEdit extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+
     async componentDidMount() {
         const { id } = this.props.params;
         if (id !== 'new') {
@@ -46,18 +57,29 @@ class ActivityEdit extends Component {
             this.setState({info});
         }
     
-        async handleSubmit(event) {
-            event.preventDefault();
+        async handleSubmit(e) {
+            e.preventDefault();
             const {info} = this.state;
-            await fetch('/activities' + (info.id ? '/' + info.id : ''), {
-                method: (info.id) ? 'PUT' : 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(info),
-            });
-            this.props.history.push('/activities');
+            if (!info.id) {
+                await fetch ('/activities', {
+                    method: "POST",
+                    headers: {
+                        'Accept': "application/json",
+                        'Content-Type': "application/json"
+                    },
+                    body: JSON.stringify(info)
+                });
+            } else {
+                await fetch(`/activities/${info.id}`, {
+                    method: "PUT",
+                    headers: {
+                        'Accept': "application/json",
+                        'Content-Type': "application/json"
+                    },
+                    body: JSON.stringify(info)
+                });
+            }
+            this.props.navigation("/activities");
         }
 
             render() {
@@ -118,7 +140,7 @@ class ActivityEdit extends Component {
             }
     
     }
-    export default withParams(ActivityEdit);
+    export default withParams(withNavigateHook(ActivityEdit));
 
 
 

@@ -6,6 +6,9 @@ import { Button, ButtonGroup } from 'reactstrap';
 
 class ActivityList extends Component {
   state = {
+    activities: []
+  };
+  /*state = {
     activities: [
       {
         id: 1,
@@ -43,6 +46,7 @@ class ActivityList extends Component {
         mood: "excited",
       }]
   }
+  */
 
 
   async componentDidMount() {
@@ -51,7 +55,7 @@ class ActivityList extends Component {
     this.setState({ activities: body });
   }
 
-  showGoalReachedAlert(activities) {
+ /* showGoalReachedAlert(activities) {
     for (let activity of activities) {
 
       return true; // TODO add in if statements for measurements
@@ -59,9 +63,10 @@ class ActivityList extends Component {
     }
 
   }
+  */
 
   async remove(id) {
-    await fetch(`/api/activities/${id}`, {
+    await fetch(`/activities/${id}`, {
         method: 'DELETE',
         headers: {
             'Accept': 'application/json',
@@ -72,13 +77,19 @@ class ActivityList extends Component {
       this.setState({ activities: updatedActivities });
     });
 }
+render() {
+  const {activities, isLoading} = this.state;
 
-  render() {
-    const {activities} = this.state;
+  if (isLoading) {
+      return <p>Loading...</p>;
+  }
     return (
         <div className="App">
           <header className="App-header">
             <div className="App-intro">
+            <div className="float-right">
+                    <Button color="success" tag={Link} to="/activities/new">Add Activity</Button>
+                </div>
               <h2>Activities</h2>
                     <table>
                       <tr>
@@ -101,7 +112,7 @@ class ActivityList extends Component {
                             <td>{activity.mood}</td>
                             <td>
                             <ButtonGroup>
-                                <Button size="sm" color="primary" tag={Link} to={"/api/activities/" + activity.id}>Edit</Button>
+                                <Button size="sm" color="primary" tag={Link} to={"/activities/" + activity.id}>Edit</Button>
                                 <Button size="sm" color="danger" onClick={() => this.remove(activity.id)}>Delete</Button>
                             </ButtonGroup>
                             </td>
