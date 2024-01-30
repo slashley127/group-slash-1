@@ -9,36 +9,36 @@ public class Activity extends AbstractEntity {
 
     //TO DO: change child from String to Child type once we add the child profiles.
 
-    @NotBlank
-    @Size(max= 50, message= "Name must be fewer than 50 characters")
+
+
     private String child;
 
-    @NotBlank
-    private Month month;
 
-    @Positive
-    @NotBlank
-    @Max(value =31, message="Must be a valid date")
-    @Min(value = 1, message = "Must be a valid date")
+
+    private int month;
+
+
     private int day;
 
-    @Positive
-    @NotBlank
-    @Min(value= 2024, message= "Must be a year 2024 or later")
-    @Max(value=2200, message="The year you've entered is too far in the future")
+
     private int year;
 
-    @NotBlank
-    private TypeOfActivity typeOfActivity;
 
-    @NotBlank
-    @Positive
+    private String typeOfActivity;
+
+
+
     private double durationOfActivity;
+    private boolean isEnrichmentActivity;
+
+    private boolean isScreenTime;
+
+    public String mood;
 
     public Activity() {
     }
 
-    public Activity(String child, Month month, int day, int year, TypeOfActivity typeOfActivity, double durationOfActivity) {
+    public Activity(String child, int month, int day, int year, String typeOfActivity, double durationOfActivity, String mood, boolean isEnrichmentActivity, boolean isScreenTime ) {
         super();
         this.child = child;
         this.month = month;
@@ -46,9 +46,26 @@ public class Activity extends AbstractEntity {
         this.year = year;
         this.typeOfActivity = typeOfActivity;
         this.durationOfActivity = durationOfActivity;
+        this.mood = mood;
+        this.isEnrichmentActivity = isEnrichmentActivity;
+        this.isScreenTime = isScreenTime;
     }
 
+    public boolean getIsEnrichmentActivity() {
+        return isEnrichmentActivity;
+    }
 
+    public void setEnrichmentActivity(boolean isEnrichmentActivity) {
+        this.isEnrichmentActivity = isEnrichmentActivity;
+    }
+
+    public boolean getIsScreenTime() {
+        return isScreenTime;
+    }
+
+    public void setIsScreenTime(boolean isScreenTime) {
+        this.isScreenTime = isScreenTime;
+    }
 
     public String getChild() {
         return child;
@@ -58,11 +75,11 @@ public class Activity extends AbstractEntity {
         this.child = child;
     }
 
-    public Month getMonth() {
+    public int getMonth() {
         return month;
     }
 
-    public void setMonth(Month month) {
+    public void setMonth(int month) {
         this.month = month;
     }
 
@@ -82,11 +99,11 @@ public class Activity extends AbstractEntity {
         this.year = year;
     }
 
-    public TypeOfActivity getTypeOfActivity() {
+    public String getTypeOfActivity() {
         return typeOfActivity;
     }
 
-    public void setTypeOfActivity(TypeOfActivity typeOfActivity) {
+    public void setTypeOfActivity(String typeOfActivity) {
         this.typeOfActivity = typeOfActivity;
     }
 
@@ -98,5 +115,11 @@ public class Activity extends AbstractEntity {
         this.durationOfActivity = durationOfActivity;
     }
 
+    public String getMood() {
+        return mood;
+    }
 
+    public void setMood(String mood) {
+        this.mood = mood;
+    }
 }

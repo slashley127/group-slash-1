@@ -1,31 +1,19 @@
 package org.launchcode.KidVenture.controllers;
 import jakarta.validation.Valid;
 import org.launchcode.KidVenture.models.Activity;
-import org.launchcode.KidVenture.models.Month;
-import org.launchcode.KidVenture.models.TypeOfActivity;
 import org.launchcode.KidVenture.models.data.ActivityRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("activities")
+@RequestMapping("/activities")
 public class ActivityController {
 
-    private ActivityRepository activityRepository;
+    private final ActivityRepository activityRepository;
     public ActivityController(ActivityRepository activityRepository) {
         this.activityRepository = activityRepository;
     }
@@ -46,7 +34,7 @@ public class ActivityController {
     //will allow us to create an activity
 
     @PostMapping
-    public ResponseEntity createActivity(@Valid @RequestBody Activity activity) throws URISyntaxException {
+    public ResponseEntity createActivity(@RequestBody Activity activity) throws URISyntaxException {
         Activity savedActivity = activityRepository.save(activity);
         return ResponseEntity.created(new URI("/activities/" + savedActivity.getId())).body(savedActivity);
     }
@@ -62,6 +50,10 @@ public class ActivityController {
       currentActivity.setYear(activity.getYear());
       currentActivity.setTypeOfActivity(activity.getTypeOfActivity());
       currentActivity.setDurationOfActivity(activity.getDurationOfActivity());
+      currentActivity.setMood(activity.getMood());
+      currentActivity.setIsScreenTime(activity.getIsScreenTime());
+      currentActivity.setEnrichmentActivity(activity.getIsEnrichmentActivity());
+      activityRepository.save(currentActivity);
       return ResponseEntity.ok(currentActivity);
   }
 //will allow us to delete an activity
