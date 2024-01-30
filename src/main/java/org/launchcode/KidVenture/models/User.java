@@ -7,12 +7,14 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.util.Objects;
+
 @Entity
 public class User {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private int id;
 
     @NotNull(message = "Username is required.")
     @Size(min = 3, message = "Username is required")
@@ -28,22 +30,21 @@ public class User {
     private String password;
 
     public User(){
-
     }
 
     public User(String username, String email, String password){
-        this();
+        super();
         this.username = username;
         this.email = email;
         this.password = password;
     }
 
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -69,5 +70,24 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+
+    @Override
+    public String toString(){
+        return username;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User that = (User) o;
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(id);
     }
 }
