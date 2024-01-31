@@ -2,7 +2,6 @@ package org.launchcode.KidVenture.controllers;
 
 import org.launchcode.KidVenture.models.User;
 import org.launchcode.KidVenture.models.data.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,9 +11,12 @@ import java.net.URISyntaxException;
 @RestController
 @RequestMapping("/newUser")
 public class UserController {
-    @Autowired
-    private UserRepository userRepository;
 
+    private final UserRepository userRepository;
+
+    public UserController(UserRepository userRepository){
+        this.userRepository= userRepository;
+    }
 
     @GetMapping("/{id}")
     public User getUser(@PathVariable int id) {
@@ -32,6 +34,8 @@ public class UserController {
         User currentUser = userRepository.findById(id).orElseThrow(RuntimeException::new);
         currentUser.setUsername(user.getUsername());
         currentUser.setEmail(user.getEmail());
+        currentUser = userRepository.save(user);
+
         return ResponseEntity.ok(currentUser);
     }
 

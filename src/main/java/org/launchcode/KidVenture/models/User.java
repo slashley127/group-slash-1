@@ -3,30 +3,29 @@ package org.launchcode.KidVenture.models;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.persistence.Table;
 
 import java.util.Objects;
 
 @Entity
+@Table (name = "user")
 public class User {
 
     @Id
     @GeneratedValue
     private int id;
 
-    @NotNull(message = "Username is required.")
-    @Size(min = 3, message = "Username is required")
+//    @NotNull(message = "Username is required.")
+//    @Size(min = 3, message = "Username is required")
     private String username;
 
-    @NotNull(message = "Email is required")
-    @Size(min = 1, message = "Email is required")
-    @Email(message = "Email must be correctly formatted")
+//    @NotNull(message = "Email is required")
+//    @Size(min = 1, message = "Email is required")
+//    @Email(message = "Email must be correctly formatted")
     private String email;
 
-    @NotNull(message = "Password is required")
-    @Size(min = 5, message = "Password must be at least 5 characters.")
+//    @NotNull(message = "Password is required")
+//    @Size(min = 5, message = "Password must be at least 5 characters.")
     private String password;
 
     public User(){
