@@ -20,14 +20,15 @@ function withParams(Component) {
 class ActivityEdit extends React.Component {
 
     emptyInfo = {
-        name:"",
+        nameOfActivity:"",
         child:"",
         month:"",
         day:"",
         year:"",
-        typeOfActivity:"",
         durationOfActivity:"",
-        mood:""
+        isEnrichmentActivity: "",
+        isScreenTime:"",
+        mood: ""
 
     }
     constructor(props) {
@@ -91,9 +92,9 @@ class ActivityEdit extends React.Component {
                         {title}
                         <Form onSubmit={this.handleSubmit}>
                             <FormGroup>
-                                <Label for="name">Name</Label>
-                                <Input type="text" name="name" id="name" value={info.name || ''}
-                                       onChange={this.handleChange} autoComplete="name"/>
+                                <Label for="nameOfActivity">Name of Activity</Label>
+                                <Input type="text" name="nameOfActivity" id="nameOfActivity" value={info.nameOfActivity || ''}
+                                       onChange={this.handleChange} autoComplete="nameOfActivity"/>
                             </FormGroup>
                             <FormGroup>
                                 <Label for="child">Name of Child</Label>
@@ -116,13 +117,13 @@ class ActivityEdit extends React.Component {
                                        onChange={this.handleChange} autoComplete="year"/>
                             </FormGroup>
                             <FormGroup>
-                                <Label for="typeOfActivity">Type of Activity</Label>
-                                <Input type="text" name="typeOfActivity" id="typeOfActivity" value={info.typeOfActivity || ''}
-                                       onChange={this.handleChange} autoComplete="typeOfActivity"/>
-                            </FormGroup>
-                            <FormGroup>
                                 <Label for="durationOfActivity">Duration of Activity </Label>
                                 <Input type="text" name="durationOfActivity" id="durationOfActivity" value={info.durationOfActivity || ''}
+                                       onChange={this.handleChange} autoComplete="durationOfActivity"/>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for="isEnrichmentActivity">Is this an enrichment activity?</Label>
+                                <Input type="checkbox" name="durationOfActivity" id="durationOfActivity" value={info.durationOfActivity || ''}
                                        onChange={this.handleChange} autoComplete="durationOfActivity"/>
                             </FormGroup>
                             <FormGroup>
