@@ -3,13 +3,11 @@ package org.launchcode.KidVenture.models;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
 import java.util.Objects;
 
 @Entity
-@Table (name = "user")
-public class User {
+public class SignIn {
 
     @Id
     @GeneratedValue
@@ -28,10 +26,10 @@ public class User {
 //    @Size(min = 5, message = "Password must be at least 5 characters.")
     private String password;
 
-    public User(){
+    public SignIn(){
     }
 
-    public User(String username, String email, String password){
+    public SignIn(String username, String email, String password){
         super();
         this.username = username;
         this.email = email;
@@ -81,7 +79,7 @@ public class User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User that = (User) o;
+        SignIn that = (SignIn) o;
         return id == that.id;
     }
 

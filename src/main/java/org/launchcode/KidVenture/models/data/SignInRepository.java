@@ -1,9 +1,9 @@
 package org.launchcode.KidVenture.models.data;
 
-import org.launchcode.KidVenture.models.User;
+import org.launchcode.KidVenture.models.SignIn;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface SignInRepository extends JpaRepository<SignIn, Integer> {
 }
