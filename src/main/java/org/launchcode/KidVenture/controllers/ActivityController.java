@@ -43,12 +43,11 @@ public class ActivityController {
   @PutMapping("/{id}")
   public ResponseEntity updateActivity(@PathVariable int id, @RequestBody Activity activity) {
       Activity currentActivity = activityRepository.findById(id).orElseThrow(RuntimeException::new);
-      currentActivity.setName(activity.getName());
+      currentActivity.setNameOfActivity(activity.getNameOfActivity());
       currentActivity.setChild(activity.getChild());
       currentActivity.setMonth(activity.getMonth());
       currentActivity.setDay(activity.getDay());
       currentActivity.setYear(activity.getYear());
-      currentActivity.setTypeOfActivity(activity.getTypeOfActivity());
       currentActivity.setDurationOfActivity(activity.getDurationOfActivity());
       currentActivity.setMood(activity.getMood());
       currentActivity.setIsScreenTime(activity.getIsScreenTime());

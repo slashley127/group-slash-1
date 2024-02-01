@@ -9,48 +9,38 @@ public class Activity extends AbstractEntity {
 
     //TO DO: change child from String to Child type once we add the child profiles.
 
-
-
+    private String nameOfActivity;
     private String child;
-
-
-
     private int month;
-
-
     private int day;
-
-
     private int year;
-
-
-    private String typeOfActivity;
-
-
-
     private double durationOfActivity;
     private boolean isEnrichmentActivity;
-
     private boolean isScreenTime;
-
     public String mood;
 
     public Activity() {
     }
-
-    public Activity(String child, int month, int day, int year, String typeOfActivity, double durationOfActivity, String mood, boolean isEnrichmentActivity, boolean isScreenTime ) {
+    public Activity(String nameOfActivity, String child, int month, int day, int year, double durationOfActivity, String mood, boolean isEnrichmentActivity, boolean isScreenTime ) {
         super();
+        this.nameOfActivity = nameOfActivity;
         this.child = child;
         this.month = month;
         this.day = day;
         this.year = year;
-        this.typeOfActivity = typeOfActivity;
         this.durationOfActivity = durationOfActivity;
         this.mood = mood;
         this.isEnrichmentActivity = isEnrichmentActivity;
         this.isScreenTime = isScreenTime;
     }
 
+    public String getNameOfActivity() {
+        return nameOfActivity;
+    }
+
+    public void setNameOfActivity(String nameOfActivity) {
+        this.nameOfActivity = nameOfActivity;
+    }
     public boolean getIsEnrichmentActivity() {
         return isEnrichmentActivity;
     }
@@ -97,14 +87,6 @@ public class Activity extends AbstractEntity {
 
     public void setYear(int year) {
         this.year = year;
-    }
-
-    public String getTypeOfActivity() {
-        return typeOfActivity;
-    }
-
-    public void setTypeOfActivity(String typeOfActivity) {
-        this.typeOfActivity = typeOfActivity;
     }
 
     public double getDurationOfActivity() {
