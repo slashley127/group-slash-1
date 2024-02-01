@@ -1,82 +1,37 @@
-const randomActivities = ["Go to the local library and checkout some books",
-"Bake a treat together",
-"Do a scavenger hunt around the house",
-"Build a pillow fort",
-"Fly a kite",
-"Have a tea party with stuffed animals",
-"Talk about a new family tradition you could start",
-"Plan a playdate with friends",
-"Have an egg race",
-"Make paper dolls",
-"Learn some simple vocabulary in a language neither of you know",
-"Tell your child about your favorite holiday traditions growing up",
-"See who can say the alphabet backwards the fastest",
-"Play a board game",
-"Do a puzzle",
-"Take a walk around the neighborhood",
-"Draw pictures of your favorite animals together",
-"Play 'I spy' ",
-"Play charades",
-"Paint your hands and make handprint art",
-"Jump rope",
-"Learn a clapping and rhyming game",
-"Read your favorite book from when you were a child to your child",
-"Make paper airplanes",
-"Build a sculpture with clay",
-"Sing your favorite songs ",
-"Play catch outside ",
-"Plant some seeds in a little pot to grow on a windowsill",
-"Play 'Simon Says'",
-"Write and illustrate a storybook together",
-"See who can make the silliest face",
-"Learn tongue twisters",
-"Race toy cars",
-"Make lemonade together",
-"Blow bubbles",
-"At night, look at the sky and find constellations",
-"Play Hide n' Seek",
-"Have an outdoor (or indoor) picnic.",
-"Create sensory bins full of beans, cotton balls, coins, etc.",
-"Build a house for the fairies",
-"Make cards for loved ones",
-"Make and play with finger puppets",
-"Make popsicles with different types of fruit and juice",
-"Design a family crest",
-"Build a birdhouse",
-"Apply temporary tattoos",
-"Dress up in silly costumes",
-"Plan a party (birthday, holiday, just-for-fun)",
-"Make friendship bracelets",
-"Draw your family tree",
-"See who can stand on one leg the longest",
-"Make slime",
-"Make a piggybank out of recycled materials and talk about saving money",
-"Make a collage with pictures from old magazines",
-"Paint rocks and stones",
-"Bird watch",
-"Learn origami",
-"Play with water balloons",
-"Have a talent show",
-"Learn tricks with a yo-yo",
-"See who can jump the farthest",
-"Camp out in the living room ",
-"Pretend the floor is lava",
-"Volunteer in the community",
-"Go to a museum",
-"Go to the zoo",
-"Have an ice cream sundae party ",
-"Clean out old toys to donate",
-"Sing karaoke "]
+import React, { Component } from 'react';
+import { Button } from 'reactstrap';
+import {useState} from 'react';
+import Card from "./RandomGeneratorCard";
 
-function randomActivity() {
-    for (let i=0; i<randomActivities.length; i++) {
-        let randomIndex = Math.floor(Math.random() * randomActivities.length);
-        return (randomActivities[randomIndex]);
-    }
+
+
+function Enrichment() {
+    const [enrichment, setEnrichment] = useState({
+        id: 1,
+        activity: "Go to the local library and checkout some books",
+        benefits: "early literacy, community engagement"
+    });
+
+    async function getActivity() {
+        await fetch("/enrichment/random")
+          .then((res) => res.json())
+          .then((data) => setEnrichment(data));
+      }
+
+
+    return (
+        <div>
+            <h1>Random Activity Generator</h1>
+            <p> Cannot think of what activity to do with your children that does not involve screens? Click below for a random idea!</p>
+            <div>
+                {enrichment && <Card enrichment = {enrichment}/>}
+            </div>
+            <Button onClick ={getActivity}>Generate Random Activity</Button>
+        </div>
+    )
+
 }
 
-return (
-    <div>
-        <button onClick = {randomActivity}>Generate a Random Activity!</button>
-    </div>
-)
+
+
+export default Enrichment;
