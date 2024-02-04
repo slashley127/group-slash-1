@@ -32,15 +32,15 @@ class App extends Component {
     </Routes>
   </div>
 
-  <div>
+  {/* <div>
     <Routes>
       <Route path='/' exact={true} element = { <Home/>}/>
       <Route path='/api/activities' exact={true} element={<ActivityList/>}/>
       <Route path='/api/activities/id' element={<ActivityEdit/>}/>
     </Routes>
-  </div>
+  </div> */}
 
-
+{/* Just here for testing. Remove Later. */}
 <div>
     <EmergencyContact />
 </div>
