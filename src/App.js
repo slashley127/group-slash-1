@@ -10,6 +10,7 @@ import Child from "./components/pages/Child"
 import Analyzer from "./components/pages/Analyzer"
 import Activities from "./components/pages/Activities"
 import About from "./components/pages/About"
+import EmergencyContact from './components/EmergencyContact';
 import { Route, Routes } from 'react-router-dom';
 
 class App extends Component {
@@ -39,6 +40,10 @@ class App extends Component {
     </Routes>
   </div>
 
+
+<div>
+    <EmergencyContact />
+</div>
 </>
     );
   }
