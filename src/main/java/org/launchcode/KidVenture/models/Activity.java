@@ -3,6 +3,8 @@ package org.launchcode.KidVenture.models;
 import jakarta.validation.constraints.*;
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 
 @Entity
 public class Activity extends AbstractEntity {
@@ -11,27 +13,21 @@ public class Activity extends AbstractEntity {
 
     private String nameOfActivity;
     private String child;
-    private int month;
-    private int day;
-    private int year;
+    private String date;
     private double durationOfActivity;
-    private boolean isEnrichmentActivity;
-    private boolean isScreenTime;
+    private String typeOfActivity;
     public String mood;
 
     public Activity() {
     }
-    public Activity(String nameOfActivity, String child, int month, int day, int year, double durationOfActivity, String mood, boolean isEnrichmentActivity, boolean isScreenTime ) {
+    public Activity(String nameOfActivity, String child, String date, double durationOfActivity, String typeOfActivity, String mood) {
         super();
         this.nameOfActivity = nameOfActivity;
         this.child = child;
-        this.month = month;
-        this.day = day;
-        this.year = year;
+        this.date = date;
         this.durationOfActivity = durationOfActivity;
+        this.typeOfActivity = typeOfActivity;
         this.mood = mood;
-        this.isEnrichmentActivity = isEnrichmentActivity;
-        this.isScreenTime = isScreenTime;
     }
 
     public String getNameOfActivity() {
@@ -41,20 +37,13 @@ public class Activity extends AbstractEntity {
     public void setNameOfActivity(String nameOfActivity) {
         this.nameOfActivity = nameOfActivity;
     }
-    public boolean getIsEnrichmentActivity() {
-        return isEnrichmentActivity;
+
+    public String getTypeOfActivity() {
+        return typeOfActivity;
     }
 
-    public void setEnrichmentActivity(boolean isEnrichmentActivity) {
-        this.isEnrichmentActivity = isEnrichmentActivity;
-    }
-
-    public boolean getIsScreenTime() {
-        return isScreenTime;
-    }
-
-    public void setIsScreenTime(boolean isScreenTime) {
-        this.isScreenTime = isScreenTime;
+    public void setTypeOfActivity(String typeOfActivity) {
+        this.typeOfActivity = typeOfActivity;
     }
 
     public String getChild() {
@@ -65,29 +54,6 @@ public class Activity extends AbstractEntity {
         this.child = child;
     }
 
-    public int getMonth() {
-        return month;
-    }
-
-    public void setMonth(int month) {
-        this.month = month;
-    }
-
-    public int getDay() {
-        return day;
-    }
-
-    public void setDay(int day) {
-        this.day = day;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
 
     public double getDurationOfActivity() {
         return durationOfActivity;
@@ -104,4 +70,13 @@ public class Activity extends AbstractEntity {
     public void setMood(String mood) {
         this.mood = mood;
     }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
 }

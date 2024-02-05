@@ -45,13 +45,10 @@ public class ActivityController {
       Activity currentActivity = activityRepository.findById(id).orElseThrow(RuntimeException::new);
       currentActivity.setNameOfActivity(activity.getNameOfActivity());
       currentActivity.setChild(activity.getChild());
-      currentActivity.setMonth(activity.getMonth());
-      currentActivity.setDay(activity.getDay());
-      currentActivity.setYear(activity.getYear());
+      currentActivity.setDate(activity.getDate());
       currentActivity.setDurationOfActivity(activity.getDurationOfActivity());
+      currentActivity.setTypeOfActivity(activity.getTypeOfActivity());
       currentActivity.setMood(activity.getMood());
-      currentActivity.setIsScreenTime(activity.getIsScreenTime());
-      currentActivity.setEnrichmentActivity(activity.getIsEnrichmentActivity());
       activityRepository.save(currentActivity);
       return ResponseEntity.ok(currentActivity);
   }
