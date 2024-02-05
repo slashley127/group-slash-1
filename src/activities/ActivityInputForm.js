@@ -6,6 +6,7 @@ import withNavigateHook from './NavigateHook';
 
 
 
+
 function withParams(Component) {
   return props => 
 
@@ -14,20 +15,14 @@ function withParams(Component) {
   
 }
 
-
-
-
 class ActivityEdit extends React.Component {
 
     emptyInfo = {
         nameOfActivity:"",
         child:"",
-        month:"",
-        day:"",
-        year:"",
+        date:"",
         durationOfActivity:"",
-        isEnrichmentActivity: "",
-        isScreenTime:"",
+        typeOfActivity:"",
         mood: ""
 
     }
@@ -48,21 +43,28 @@ class ActivityEdit extends React.Component {
             this.setState({info: activity});
         }
     }
-
-         handleChange(e) {
-            const target = e.target;
-            const value = target.value;
-            const name = target.name;
-            let info = {...this.state.info};
-            info[name] = value;
-            this.setState({info});
+    handleChange(e) {
+        const target = e.target;
+        const value = target.value;
+        const name = target.name;
+        let info = {...this.state.info};
+        if (name === "date") {
+            const formattedDate = new Date(value).toISOString().split('T')[0];
+            info[name] = formattedDate;
+        }else{
+        info[name] = value;
         }
+        this.setState({ info });
+    
+}
     
         async handleSubmit(e) {
             e.preventDefault();
             const {info} = this.state;
             if (!info.id) {
-                await fetch ('/activities', {
+                try {
+
+               const response =  await fetch ('/activities', {
                     method: "POST",
                     headers: {
                         'Accept': "application/json",
@@ -70,7 +72,14 @@ class ActivityEdit extends React.Component {
                     },
                     body: JSON.stringify(info)
                 });
-            } else {
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                  }
+                } catch (error) {
+                  console.error('Error during POST request:', error);
+            } 
+        }       else {
                 await fetch(`/activities/${info.id}`, {
                     method: "PUT",
                     headers: {
@@ -102,29 +111,24 @@ class ActivityEdit extends React.Component {
                                        onChange={this.handleChange} autoComplete="child"/>
                             </FormGroup>
                             <FormGroup>
-                                <Label for="month">Month</Label>
-                                <Input type="text" name="month" id="month" value={info.month || ''}
-                                       onChange={this.handleChange} autoComplete="month"/>
+                                <Label for="date">Date</Label>
+                                <Input type="date" name="date" id="date" value={info.date || ''}
+                                       onChange={this.handleChange} autoComplete="date"/>
                             </FormGroup>
                             <FormGroup>
-                                <Label for="day">Day</Label>
-                                <Input type="text" name="day" id="day" value={info.day || ''}
-                                       onChange={this.handleChange} autoComplete="day"/>
-                            </FormGroup>
-                            <FormGroup>
-                                <Label for="year">Year</Label>
-                                <Input type="text" name="year" id="year" value={info.year || ''}
-                                       onChange={this.handleChange} autoComplete="year"/>
-                            </FormGroup>
-                            <FormGroup>
-                                <Label for="durationOfActivity">Duration of Activity </Label>
+                                <Label for="durationOfActivity">Duration of Activity in Minutes </Label>
                                 <Input type="text" name="durationOfActivity" id="durationOfActivity" value={info.durationOfActivity || ''}
                                        onChange={this.handleChange} autoComplete="durationOfActivity"/>
                             </FormGroup>
                             <FormGroup>
-                                <Label for="isEnrichmentActivity">Is this an enrichment activity?</Label>
-                                <Input type="checkbox" name="durationOfActivity" id="durationOfActivity" value={info.durationOfActivity || ''}
-                                       onChange={this.handleChange} autoComplete="durationOfActivity"/>
+                                <Label for="typeOfActivity">Type of Activity</Label>
+                                <select name= "typeOfActivity" id= "typeOfActivity" value={info.typeOfActivity || ''}
+                                       onChange={this.handleChange} autoComplete="typeOfActivity">
+                                    <option value="screen time">screen time</option>
+                                    <option value="educational">educational</option>
+                                    <option value="exercise">exercise</option>
+                                    <option value="social">social</option>
+                                </select>
                             </FormGroup>
                             <FormGroup>
                                 <Label for="mood">Mood</Label>

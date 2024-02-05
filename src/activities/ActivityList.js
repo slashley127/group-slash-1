@@ -104,9 +104,9 @@ render() {
                        
                         {activities.map(activity =>
                           <tr key={activity.id}>
-                            <td>{activity.name}</td>
+                            <td>{activity.nameOfActivity}</td>
                             <td>{activity.child}</td>
-                            <td>{activity.month}/{activity.day}/{activity.year}</td>
+                            <td>{activity.date}</td>
                             <td>{activity.typeOfActivity}</td>
                             <td>{activity.durationOfActivity}</td>
                             <td>{activity.mood}</td>
