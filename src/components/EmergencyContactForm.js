@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import withNavigateHook from './NavigateHook';
+import { Link, useParams } from 'react-router-dom';
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
+
+function withParams(Component) {
+    return props => 
+  
+    <Component {...props} params={useParams()} />;
+  
+    
+  }
 
 class EmergencyContactForm extends Component {
 
@@ -28,8 +37,9 @@ class EmergencyContactForm extends Component {
     }
 
     async componentDidMount() {
-        if (this.props.match.params.id !== 'new') {
-            const emergencyContact = await (await fetch(`/emergencyContacts/${this.props.match.params.id}`)).json();
+        const { id } = this.props.params;
+        if (id !== 'new') {
+            const emergencyContact = await (await fetch(`/emergencycontacts/${id}`)).json();
             this.setState({item: emergencyContact});
         }
     }
@@ -55,7 +65,7 @@ async handleSubmit(event) {
         },
         body: JSON.stringify(item),
     });
-    this.props.history.push('/emergencyContacts');
+    this.props.navigation('/emergencycontacts');
 }
 
 
@@ -66,6 +76,7 @@ async handleSubmit(event) {
 
         return (
             <div>
+<h1>Emergency Contact Form</h1>
                 <Container>
                     <Form onSubmit={this.handleSubmit}>
                     {/* Required fields */}
@@ -143,7 +154,7 @@ async handleSubmit(event) {
                         
                         <FormGroup>
                             <Button type="submit">Submit</Button>
-                            <Button tag={Link} to="/child">Cancel</Button>
+                            <Button tag={Link} to="/emergencycontacts">Cancel</Button>
                         </FormGroup>
 
                     </Form>
@@ -154,4 +165,4 @@ async handleSubmit(event) {
     }
 }
 
-    export default withRouter (EmergencyContactForm);
+    export default withParams (withNavigateHook(EmergencyContactForm));
