@@ -11,19 +11,19 @@ class EmergencyContact extends Component {
     }
 
     componentDidMount() {
-        fetch('/emergencyContacts')
+        fetch('/emergencycontacts')
             .then(response => response.json())
-            .then(data => this.setState({clients: data}));
+            .then(data => this.setState({emergencycontacts: data}));
     }
     async remove(id) {
-        await fetch(`/emergencyContacts/${id}`, {
+        await fetch(`/emergencycontacts/${id}`, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             }
         }).then(() => {
-            let updatedEmergencyContacts = [...this.state.clients].filter(i => i.id !== id);
+            let updatedEmergencyContacts = [...this.state.emergencycontacts].filter(i => i.id !== id);
             this.setState({emergencyContacts: updatedEmergencyContacts});
         });
     }
@@ -47,7 +47,8 @@ class EmergencyContact extends Component {
 
                 <td>
                     <ButtonGroup>
-                        <Button tag={Link} to="/emergencyContacts/new">Add Emergency Contact</Button>
+                        <Button tag={Link} to="/emergencycontacts/new
+                        +">Add Emergency Contact</Button>
                         <Button size="sm" color="primary" tag={Link} to={"/emergencyContacts/" + emergencyContact.id}>Edit</Button>
                         <Button size="sm" color="danger" onClick={() => this.remove(emergencyContact.id)}>Delete</Button>
                     </ButtonGroup>
@@ -59,7 +60,7 @@ class EmergencyContact extends Component {
             <div>
                 <Container>
                     <div>
-                        <Button color="success" tag={Link} to="/emergencyContacts/new">Add Emergency Contact</Button>
+                        <Button color="success" tag={Link} to="/emergencycontacts/new">Add Emergency Contact</Button>
                     </div>
                     <h2>Emergency Contacts</h2>
 
