@@ -5,7 +5,7 @@ import ActivityList from './activities/ActivityList';
 import ActivityEdit from "./activities/ActivityInputForm";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from "./Home"
-import Enrichment from './RandomGenerator';
+import Enrichment from './randomGenerator/RandomGenerator';
 
 class App extends Component {
   render() {
