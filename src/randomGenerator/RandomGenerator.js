@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 import {useState} from 'react';
-import Card from "../RandomGeneratorCard";
+import Card from "./RandomGeneratorCard";
 
 
 
