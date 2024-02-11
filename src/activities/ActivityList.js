@@ -156,41 +156,42 @@ class ActivityList extends Component {
         <header className="App-header">
           <div className="App-intro">
             <div className="float-right">
-              <Button color="success" tag={Link} to="/activities/new">Add Activity</Button>
-            </div>
-            <h2>Activities</h2>
-            <table>
-              <tr>
-                <th>Name of Activity</th>
-                <th>Child's Name</th>
-                <th>Date of Activity</th>
-                <th>Type of Activity</th>
-                <th>Duration of Activity</th>
-                <th>Mood of Child</th>
-                <th>Action</th>
-              </tr>
+                    <Button color="success" tag={Link} to="/activities/new">Add Activity</Button>
+                </div>
+              <h2>Activities</h2>
+                    <table>
+                      <tr>
+                        <th>Name of Activity</th>
+                        <th>Child's Name</th>
+                        <th>Date of Activity</th>
+                        <th>Type of Activity</th>
+                        <th>Duration of Activity</th>
+                        <th>Mood of Child</th>
+                        <th>Action</th>
+                       </tr>
+                       
+                        {activities.map(activity =>
+                          <tr key={activity.id}>
+                            <td>{activity.nameOfActivity}</td>
+                            <td>{activity.child}</td>
+                            <td>{activity.date}</td>
+                            <td>{activity.typeOfActivity}</td>
+                            <td>{activity.durationOfActivity}</td>
+                            <td>{activity.mood}</td>
+                            <td>
+                            <ButtonGroup>
+                                <Button size="sm" color="primary" tag={Link} to={"/activities/" + activity.id}>Edit</Button>
+                                <Button size="sm" color="danger" onClick={() => this.remove(activity.id)}>Delete</Button>
+                            </ButtonGroup>
+                            </td>
+                       </tr>
+                        )}
+                    </table>
+                  </div>
+              <div className='charts'><img src={chartUrl}></img></div>
+          </header>
+        </div>
 
-              {activities.map(activity =>
-                <tr key={activity.id}>
-                  <td>{activity.name}</td>
-                  <td>{activity.child}</td>
-                  <td>{activity.month}/{activity.day}/{activity.year}</td>
-                  <td>{activity.typeOfActivity}</td>
-                  <td>{activity.durationOfActivity}</td>
-                  <td>{activity.mood}</td>
-                  <td>
-                    <ButtonGroup>
-                      <Button size="sm" color="primary" tag={Link} to={"/activities/" + activity.id}>Edit</Button>
-                      <Button size="sm" color="danger" onClick={() => this.remove(activity.id)}>Delete</Button>
-                    </ButtonGroup>
-                  </td>
-                </tr>
-              )}
-            </table>
-          </div>
-          <div className='charts'><img src={chartUrl}></img></div>
-        </header>
-      </div>
     );
   }
 }
