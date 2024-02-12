@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 public class Child {
@@ -52,5 +53,25 @@ public class Child {
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+
+    @Override
+    public String toString(){
+        return childName;
+    }
+
+
+    @Override
+    public boolean equals(Object o){
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Child that = (Child) o;
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(id);
     }
 }
