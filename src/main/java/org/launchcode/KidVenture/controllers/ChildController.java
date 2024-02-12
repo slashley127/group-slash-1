@@ -34,7 +34,7 @@ public class ChildController {
     @PostMapping
     public ResponseEntity createChild(@RequestBody Child child) throws URISyntaxException {
         Child savedChild = childRepository.save(child);
-        return ResponseEntity.created(new URI("/user/" + savedChild.getId())).body(savedChild);
+        return ResponseEntity.created(new URI("/child/" + savedChild.getId())).body(savedChild);
     }
 
     @PutMapping("/{id}")
