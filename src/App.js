@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import ActivityList from './activities/ActivityList';
 import ActivityEdit from "./activities/ActivityInputForm";
-
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
 import Enrichment from './randomGenerator/RandomGenerator';
-
 import Navbar from "./components/Navbar";
 import Home from "./components/pages/Home"
 import Profile from "./components/pages/Profile"
@@ -24,7 +21,7 @@ class App extends Component {
           <Navbar />
         </div>
       <div>
-
+     
       <Routes>
         <Route path='/' exact={true} element = { <Home/>}/>
         <Route path='/activities' exact={true} element={<ActivityList/>}/>
@@ -34,11 +31,11 @@ class App extends Component {
         <Route path='/profile' element = {<Profile/>}/>
         <Route path='/child' element = {<Child/>}/>
       </Routes>
-
+  
     </div>
     </div>
     );
   }
-}
+  }
 
 export default App;

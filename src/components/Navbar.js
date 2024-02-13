@@ -27,13 +27,20 @@ const Navbar = () => {
                         <Link to ="/child" class="nav-link">Child</Link>
                     </li>
                     <li>
-                        <Link to ="/activities" class="nav-link">Activities</Link>
+                        <Link to ="/activities" class="nav-link">Activities List</Link>
                     </li>
+                    <li>
+                        <Link to ="/activities/new" class="nav-link">Add Activity</Link>
+                    </li>
+
                     <li>
                         <Link to ="/analyzer" class="nav-link">Analyzer</Link>
                     </li>
                     <li>
                         <Link to ="/about" class="nav-link">About</Link>
+                    </li>
+                    <li>
+                        <Link to ="/enrichment/random" class="nav-link">Activity Generator</Link>
                     </li>
                 </ul>
             </div>

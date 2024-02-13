@@ -145,6 +145,7 @@ class ActivityEdit extends React.Component {
             }
     
     }
-    export default withParams(withNavigateHook(ActivityEdit));
+    export default ActivityEdit;
+
 
 
