@@ -12,8 +12,8 @@ function withParams(Component) {
 class ProfileInput extends Component{
 
     emptyItem = {
-        name:"",
-        birthday:""
+        childName:"",
+        dateOfBirth:""
     };
 
     constructor(props) {
@@ -74,13 +74,13 @@ class ProfileInput extends Component{
                 {title}
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup>
-                        <Label for="name">Name</Label>
-                        <Input type="text" name="name" id="name" value={item.name || ''}
-                        onChange={this.handleChange} autoComplete="name"/>
+                        <Label for="childName">Name</Label>
+                        <Input type="text" name="childName" id="childName" value={item.childName || ''}
+                        onChange={this.handleChange} autoComplete="childName"/>
                     </FormGroup>
                     <FormGroup>
-                        <Label for="birthday">Date Of Birth</Label>
-                        <Input type="text" name="birthday" id="birthday" value={item.birthday || ''}
+                        <Label for="dateOfBirth">Date Of Birth</Label>
+                        <Input type="text" name="dateOfBirth" id="dateOfBirth" value={item.dateOfBirth || ''}
                         onChange={this.handleChange} placeholder="MM/DD/YYYY"/> 
                     </FormGroup>
                     <FormGroup>
