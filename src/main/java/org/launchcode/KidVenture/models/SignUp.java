@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class SignIn {
+public class SignUp {
 
     @Id
     @GeneratedValue
@@ -26,10 +26,10 @@ public class SignIn {
 //    @Size(min = 5, message = "Password must be at least 5 characters.")
     private String password;
 
-    public SignIn(){
+    public SignUp(){
     }
 
-    public SignIn(String username, String email, String password){
+    public SignUp(String username, String email, String password){
         super();
         this.username = username;
         this.email = email;
@@ -79,7 +79,7 @@ public class SignIn {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        SignIn that = (SignIn) o;
+        SignUp that = (SignUp) o;
         return id == that.id;
     }
 
