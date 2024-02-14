@@ -7,16 +7,12 @@ import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "emergency-contact")
-public class EmergencyContact {
+public class EmergencyContact extends AbstractEntity {
 
     //Many-to-one relationship with child profile
 //    @ManyToOne
 //    private Child child;
 
-    //IDs
-    @Id
-    @GeneratedValue
-    private int id;
 
     //required variables
 //    @NotBlank
@@ -162,11 +158,6 @@ public class EmergencyContact {
 
     public void setNotes(String notes) {
         this.notes = notes;
-    }
-
-
-    public int getId() {
-        return id;
     }
 
 
