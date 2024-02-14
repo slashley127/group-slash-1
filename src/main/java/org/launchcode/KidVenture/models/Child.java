@@ -19,7 +19,6 @@ public class Child {
     @GeneratedValue
     private int id;
 
-
     private String childName;
 
 
@@ -30,12 +29,10 @@ public class Child {
 
 
     public Child(){
-
-
     }
 
 
-    public Child(String childName, Date dateOfBirth){
+    public Child( String childName, Date dateOfBirth){
         super();
         this.childName = childName;
         this.dateOfBirth = dateOfBirth;
@@ -50,8 +47,6 @@ public class Child {
     public void setId(int id) {
         this.id = id;
     }
-
-
     public String getChildName() {
         return childName;
     }

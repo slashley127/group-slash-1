@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Label, Form, FormGroup, Input, Button } from "reactstrap";
+import { Container, Label, Form, FormGroup, Input, Button, FormText } from "reactstrap";
 import { useParams } from "react-router-dom";
 import goNavigate from "./Navigate";
 
@@ -12,6 +12,7 @@ function withParams(Component) {
 class ProfileInput extends Component{
 
     emptyItem = {
+        childPicture:"",
         childName:"",
         dateOfBirth:""
     };
@@ -73,6 +74,11 @@ class ProfileInput extends Component{
             <Container>
                 {title}
                 <Form onSubmit={this.handleSubmit}>
+                    <FormGroup>
+                        <Label for="childPicture">Upload Child Photo</Label>
+                        <Input type="file" nname='file' id="childPicture" 
+                        onChange={this.handleChange}/>
+                    </FormGroup>
                     <FormGroup>
                         <Label for="childName">Name</Label>
                         <Input type="text" name="childName" id="childName" value={item.childName || ''}
