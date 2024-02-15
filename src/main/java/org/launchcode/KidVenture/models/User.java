@@ -3,39 +3,40 @@ package org.launchcode.KidVenture.models;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Objects;
 
 @Entity
-public class SignUp {
-
+public class User {
     @Id
     @GeneratedValue
     private int id;
-
-//    @NotNull(message = "Username is required.")
-//    @Size(min = 3, message = "Username is required")
     private String username;
 
-//    @NotNull(message = "Email is required")
-//    @Size(min = 1, message = "Email is required")
-//    @Email(message = "Email must be correctly formatted")
     private String email;
 
-//    @NotNull(message = "Password is required")
-//    @Size(min = 5, message = "Password must be at least 5 characters.")
-    private String password;
+    private String pwHash;
 
-    public SignUp(){
+    private String verifyPassword;
+
+    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+    public User(){
     }
 
-    public SignUp(String username, String email, String password){
+    public User(String username, String email, String password, String verifyPassword){
         super();
         this.username = username;
         this.email = email;
-        this.password = password;
+        this.pwHash = encoder.encode(password);
+        this.verifyPassword = verifyPassword;
     }
 
+
+    public boolean isMatchingPassword(String password){
+        return encoder.matches(password, pwHash);
+    }
 
     public int getId() {
         return id;
@@ -61,14 +62,14 @@ public class SignUp {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+
+    public String getVerifyPassword() {
+        return verifyPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setVerifyPassword(String verifyPassword) {
+        this.verifyPassword = verifyPassword;
     }
-
 
     @Override
     public String toString(){
@@ -79,7 +80,7 @@ public class SignUp {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        SignUp that = (SignUp) o;
+        User that = (User) o;
         return id == that.id;
     }
 
@@ -87,4 +88,5 @@ public class SignUp {
     public int hashCode(){
         return Objects.hash(id);
     }
+
 }

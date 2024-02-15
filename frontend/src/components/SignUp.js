@@ -16,7 +16,8 @@ class SignUp extends Component {
     emptyItem = {
         username:"",
         email:"",
-        password:""
+        password:"",
+        verifyPassword:""
     };
 
     constructor(props){
@@ -66,7 +67,7 @@ class SignUp extends Component {
                 body: JSON.stringify(item)
             });
         }
-        this.props.navigation("/welcome");
+        this.props.navigation("/profile");
     }
 
     render() {
@@ -89,8 +90,13 @@ class SignUp extends Component {
                     </FormGroup>
                     <FormGroup>
                         <Label for="password">Password</Label>
-                        <Input type="text" name="password" id="password" value={item.password || ''}
+                        <Input type="password" name="password" id="password" value={item.password || ''}
                         onChange={this.handleChange} autoComplete="password"/>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="verifyPassword">Verify Password</Label>
+                        <Input type='password' name='verifyPassword' id='verifyPassword' value={item.verifyPassword || ''}
+                        onChange={this.handleChange} autoComplete='verifyPassword' />
                     </FormGroup>
                     <FormGroup>
                         <Button color='primary' type='submit'>Submit</Button>

@@ -1,8 +1,8 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import SignUp from "./components/SignUp";
-import Welcome from './components/Welcome';
 import React, { Component } from 'react';
+import Profile from './components/Profile';
 
 class App extends Component {
   render() {
@@ -11,7 +11,7 @@ class App extends Component {
         <Router>
           <Routes>
             <Route path='/' exact={true} element={<SignUp />}/>
-            <Route path='/welcome' exact={true} element={<Welcome />}/>
+            <Route path='/profile' exact={true} element={<Profile />}/>
           </Routes>
         </Router>
       </div>
