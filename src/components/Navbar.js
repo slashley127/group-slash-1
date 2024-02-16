@@ -40,7 +40,7 @@ const Navbar = () => {
                         <Link to ="/about" class="nav-link">About</Link>
                     </li>
                     <li>
-                        <Link to ="/enrichment/random" class="nav-link">Activity Generator</Link>
+                        <Link to ="/enrichment/filtered" class="nav-link">Activity Suggestions</Link>
                     </li>
                 </ul>
             </div>

@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background: linear-gradient(180deg, #38C7F5 0%, #06D6A6 100%);
+  background: white;
   width: 108rem;
   height: 123.5625rem;
 }
@@ -49,19 +49,16 @@
 .blue-rectangle {
   z-index: 1;
   position:relative;
-  padding-top: 6.69rem;
-  padding-bottom: 92.9rem;
-  width: 108rem;
-  height: 23.9375rem;
+  width: 1728px;
+  height: 300px;
   flex-shrink: 0;
   background: linear-gradient(180deg, #38C7F5 0%, #06D6A6 100%);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .orange-rectangle{
-  padding-top: 96.1rem;
-  width: 108rem;
-  height: 27.4rem;
+  width: 1728px;
+  height: 439px;
   flex-shrink: 0;
   background: linear-gradient(180deg, #EF476F 0%, #FFDD85 100%);
 }

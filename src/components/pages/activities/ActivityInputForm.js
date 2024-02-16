@@ -3,10 +3,6 @@ import { Link, useParams, withRouter, useNavigate } from 'react-router-dom';
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
 import withNavigateHook from './NavigateHook';
 
-
-
-
-
 function withParams(Component) {
   return props => 
 
@@ -145,7 +141,7 @@ class ActivityEdit extends React.Component {
             }
     
     }
-    export default ActivityEdit;
+    export default withParams(withNavigateHook(ActivityEdit));
 
 
 

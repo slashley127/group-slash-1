@@ -1,10 +1,14 @@
 
+.home-nav-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+}
+
 .view-activities-rectangle{
-    position: absolute;
-    padding: 686px 963px 1022px 192px;
     border: 0.94rem;
-    width: 50px;
-    height: 50px;
+    width: 300px;
+    height: 300px;
     flex-shrink: 0;
     border-radius: 0.9375rem;
     background: rgba(239, 71, 111, 0.80);
@@ -23,10 +27,9 @@
 }
  
 .add-activities-rectangle{
-    padding: 42.9rem 11.9rem 63.9rem 60.3rem;
     border: 0.94rem;
-    width: 50px;
-    height: 50px;
+    width: 300px;
+    height: 300px;
     flex-shrink: 0;
     border-radius: 0.9375rem;
     background: rgba(255, 209, 102, 0.80);
@@ -47,10 +50,9 @@
 }
 
 .suggest-activities-rectangle{
-    padding: 63.6rem 60.1rem 43.2rem 12.1rem;
     border: 0.94rem;
-    width: 50px;
-    height: 50px;
+    width: 300px;
+    height: 300px;
     flex-shrink: 0;
     border-radius: 0.9375rem;
     background: rgba(56, 199, 245, 0.80);
@@ -70,10 +72,9 @@
 }
 
 .my-child-rectangle{
-    padding: 63.6rem 12.3rem 43.2rem 60.3rem;
     border: 0.94rem;
-    width: 50px;
-    height: 50px;
+    width: 300px;
+    height: 300px;
     flex-shrink: 0;
     border-radius: 0.9375rem;
     background: #1280A5;

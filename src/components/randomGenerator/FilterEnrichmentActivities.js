@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Checkbox from "./CheckBox";
-import EnrichmentActivityList from './EnrichmentActivityList';
+import Checkbox from "./CheckBox.js";
+import EnrichmentActivityList from './EnrichmentActivityList.js';
 import data from "./enrichmentActivities.json";
 import Enrichment from './RandomGenerator.js';
 import './randomGenerator.css';
