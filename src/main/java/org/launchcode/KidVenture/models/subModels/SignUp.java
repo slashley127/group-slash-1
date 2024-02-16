@@ -6,11 +6,7 @@ import jakarta.persistence.Id;
 
 import java.util.Objects;
 
-@Entity
 public class SignUp{
-    @Id
-    @GeneratedValue
-    private int id;
     private String username;
 
     private String email;
@@ -28,14 +24,6 @@ public class SignUp{
         this.email = email;
         this.password = password;
         this.verifyPassword = verifyPassword;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getUsername() {
@@ -70,23 +58,6 @@ public class SignUp{
         this.verifyPassword = verifyPassword;
     }
 
-    @Override
-    public String toString(){
-        return username;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SignUp that = (SignUp) o;
-        return id == that.id;
-    }
-
-    @Override
-    public int hashCode(){
-        return Objects.hash(id);
-    }
 
 }
 

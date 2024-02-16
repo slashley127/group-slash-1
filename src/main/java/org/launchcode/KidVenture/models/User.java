@@ -22,7 +22,7 @@ public class User {
 
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    public User(){
+    public User(String username, String password){
     }
 
     public User(String username, String email, String password, String verifyPassword){
