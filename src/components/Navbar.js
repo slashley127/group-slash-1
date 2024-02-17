@@ -1,55 +1,98 @@
 import React from "react";
-
+import { useState } from "react";
 import './Navbar.css';
 import { ReactComponent as Brand } from './icons/logo.svg';
 import { Link } from 'react-router-dom';
+import Dropdown from './Dropdown';
+
+
 
 const Navbar = () => {
+
+    //For Dropdown menu on Activities
+    const [click, setClick] = useState(false);
+    const [dropdown, setDropdown] = useState(false);
+  
+    const handleClick = () => setClick(!click);
+    const closeMobileMenu = () => setClick(false);
+
+
+    // Changes Menu style based on width of browswer window for mobile
+    const onMouseEnter = () => {
+        if (window.innerWidth < 960) {
+          setDropdown(false);
+        } else {
+          setDropdown(true);
+        }
+      };
+    
+      const onMouseLeave = () => {
+        if (window.innerWidth < 960) {
+          setDropdown(false);
+        } else {
+          setDropdown(false);
+        }
+      };
+
+
+
+
+
     return (
         <nav class ="navbar">
             <div class = "container">
+                
 
-                {/* This is just a placeholder logo from logoipsumdolor.com */}
-                <div class="logo">
+                {/* Logo from Figma Design Proposal */}
+                {/* <div class="logo">
                     <Brand />
+                </div> */}
+
+                {/* Hamburger Menu style icon from fontawesome.come for smaller window or mobile */}
+                <div class = "menu-icon" onClick = {handleClick}>
+                    <i className= {click ? 'fas fa-times' : 'fas fa-bars'} /> 
                 </div>
 
                 {/* Navigation links */}
             <div>
-                <ul class="nav-links">
-                    <li>
-                        <Link to ="/">Home</Link>
-                    </li>
-                    <li>
-                        <Link to ="/profile" class="nav-link">Profile</Link>
-                    </li>
-                    <li>
-                        <Link to ="/child" class="nav-link">Child</Link>
-                    </li>
-                    <li>
-                        <Link to ="/activities" class="nav-link">Activities List</Link>
-                    </li>
-                    <li>
-                        <Link to ="/activities/new" class="nav-link">Add Activity</Link>
+                <ul class= {click ? 'nav-menu active' : 'nav-menu'} >
+                    <li class = "nav-item">
+                        <Link to ="/" class="nav-links" onClick={closeMobileMenu}>
+                            Home
+                        </Link>
                     </li>
 
-                    <li>
-                        <Link to ="/analyzer" class="nav-link">Analyzer</Link>
+                    <li class = "nav-item">
+                        <Link to ="/profile" class="nav-links" onClick={closeMobileMenu}>
+                            My Profile
+                        </Link>
                     </li>
-                    <li>
-                        <Link to ="/about" class="nav-link">About</Link>
+
+                    <li class = "nav-item">
+                        <Link to ="/child" class="nav-links" onClick={closeMobileMenu}>
+                            My Child
+                        </Link>
                     </li>
-                    <li>
-                        <Link to ="/enrichment/random" class="nav-link">Activity Generator</Link>
+
+                    <li class = "nav-item" onMouseEnter = {onMouseEnter} onMouseLeave = {onMouseLeave}>
+                        <Link to ="/activities" class="nav-links" onClick={closeMobileMenu}>
+                            Activities <i className='fas fa-caret-down' /> 
+                        </Link>
+                        {dropdown && <Dropdown />}
+                    </li>
+
+                    <li class = "nav-item">
+                        <Link to ="/about" class="nav-links" onClick={closeMobileMenu}>
+                            About
+                        </Link>
                     </li>
                 </ul>
             </div>
-
         </div>
     </nav>
-    );
 
     
+    );
 };
 
 export default Navbar
