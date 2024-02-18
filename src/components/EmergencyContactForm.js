@@ -76,33 +76,35 @@ async handleSubmit(event) {
 
         return (
             <div>
-<h1>Emergency Contact Form</h1>
+                <h1>Emergency Contact Form</h1>
+
                 <Container>
                     <Form onSubmit={this.handleSubmit}>
+                        
                     {/* Required fields */}
-                        <FormGroup>
+                         <FormGroup>
                             <Label htmlFor="firstName">First name:</Label>
                                 <Input type="text" name="firstName" id="firstName" placeholder="Required"
                                 value ={item.firstName || ''}
-                                onChange = {this.handleChange} autoComplete="firstName"/>
+                                onChange = {this.handleChange} autoComplete="given-name" required/>
                         </FormGroup>
                         <FormGroup>
                             <Label htmlFor="lastName">Last name:</Label>
                                 <Input type="text" name="lastName" id="lastName" placeholder="Required"
                                 value ={item.lastName || ''}
-                                onChange = {this.handleChange} autoComplete="lastName"/>
+                                onChange = {this.handleChange} autoComplete="family-name" required/>
                         </FormGroup>
                         <FormGroup>
                             <Label htmlFor="phoneNumber">Phone Number:</Label>
                                 <Input type="text" name="phoneNumber" id="phoneNumber" placeholder="Required"
                                 value ={item.phoneNumber || ''}
-                                onChange = {this.handleChange} autoComplete="phoneNumber"/>
+                                onChange = {this.handleChange} autoComplete="tel" required/>
                         </FormGroup>
                         <FormGroup>
                             <Label htmlFor="relationship">Relationship: </Label>
                                 <Input type="text" name="relationship" id="relationship" placeholder="Required"
                                 value ={item.relationship || ''}
-                                onChange = {this.handleChange} autoComplete="relationship"/>
+                                onChange = {this.handleChange} autoComplete="relationship" required/>
                         </FormGroup>
 
 
@@ -125,7 +127,7 @@ async handleSubmit(event) {
                             <Label htmlFor="address">Address: </Label>
                                 <Input type="text" name="address" id="address" placeholder="Optional"
                                 value ={item.address || ''}
-                                onChange = {this.handleChange} autoComplete="address"/>
+                                onChange = {this.handleChange} autoComplete="street-address"/>
                         </FormGroup>
                         <FormGroup>
                             <Label htmlFor="city">City: </Label>
@@ -135,9 +137,13 @@ async handleSubmit(event) {
                         </FormGroup>
                         <FormGroup>
                             <Label htmlFor="state">State: </Label>
-                                <Input type="text" name="state" placeholder="Optional"
+                                <select class="form-select" type="text" name="state" placeholder="Optional"
                                 value ={item.state || ''}
-                                onChange = {this.handleChange} autoComplete="state"/>
+                                onChange = {this.handleChange} autoComplete="state">
+                                    {
+                                        States.map(opt => <option> {opt} </option>)
+                                    }
+                                </select>
                         </FormGroup>
                         <FormGroup>
                             <Label htmlFor="zip">Zip: </Label>
@@ -149,11 +155,11 @@ async handleSubmit(event) {
                             <Label htmlFor="notes">Notes: </Label>
                                 <Input type="textarea" name="notes"
                                     value ={item.notes || ''}
-                                    onChange = {this.handleChange} autoComplete="notes"/>
+                                    onChange = {this.handleChange} />
                         </FormGroup>
                         
                         <FormGroup>
-                            <Button type="submit">Submit</Button>
+                            <Button type="submit" onSubmit={this.handleSubmit}>Submit</Button>
                             <Button tag={Link} to="/emergencycontacts">Cancel</Button>
                         </FormGroup>
 

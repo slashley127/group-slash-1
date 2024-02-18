@@ -23,7 +23,7 @@ class EmergencyContact extends Component {
                 'Content-Type': 'application/json'
             }
         }).then(() => {
-            let updatedEmergencyContacts = [...this.state.emergencycontacts].filter(i => i.id !== id);
+            let updatedEmergencyContacts = [...this.state.emergencyContacts].filter(i => i.id !== id);
             this.setState({emergencyContacts: updatedEmergencyContacts});
         });
     }
