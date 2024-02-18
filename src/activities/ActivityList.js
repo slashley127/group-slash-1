@@ -9,52 +9,12 @@ class ActivityList extends Component {
     activities: [],
     chartUrl: ""
   };
-  /*state = {
-    activities: [
-      {
-        id: 1,
-        name: "Xyz",
-        child: "Oliver",
-        month: "Septemeber",
-        day: "Friday",
-        year: "2024",
-        typeOfActivity: "Coloring",
-        durationOfActivity: 20,
-        mood: "calm",
-
-
-
-        id: 2,
-        name: "Xyz",
-        child: "Alex",
-        month: "May",
-        day: "Saturday",
-        year: "2023",
-        typeOfActivity: "Spelling",
-        durationOfActivity: 30,
-        mood: "happy",
-
-
-
-        id: 3,
-        name: "Xyz",
-        child: "Molly",
-        month: "October",
-        day: "Sunday",
-        year: "2022",
-        typeOfActivity: "Watching TV",
-        durationOfActivity: 40,
-        mood: "excited",
-      }]
-  }
-  */
-
 
   async componentDidMount() {
-    this.getCharts();
-    const response = await fetch("/activities");
+    const response = await fetch("http://localhost:8080/activities");
     const body = await response.json();
     this.setState({ activities: body });
+    this.getCharts();
 
   }
 
@@ -71,14 +31,22 @@ class ActivityList extends Component {
   async getCharts() {
     const apiURL = 'https://quickchart.io/chart/create'
 
+
+    const dates = this.state.activities.map(item => item?.month + "/" + item?.day);
+    const durations = this.state.activities.map(item => item?.durationOfActivity);
+
+    console.log(dates);
+    console.log(durations)
+
     const chartData = {
       chart: {
         type: 'bar',
         data: {
-          labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+          labels:dates,
+         // Select the month and day from activities into an array ['9/5', '9/6']
           datasets: [{
             label: 'Screen Time in Minutes',
-            data: [60, 50, 30, 45, 15, 80, 10],
+            data: durations, // Select the durations from the activities
           }],
         },
         options: {
@@ -128,7 +96,6 @@ class ActivityList extends Component {
     });
     const parsedResponse = await response.json();
 
-    console.log(parsedResponse.url)
     this.setState({ chartUrl: parsedResponse.url });
   }
 
@@ -170,7 +137,7 @@ class ActivityList extends Component {
                 <th>Action</th>
               </tr>
 
-              {activities.map(activity =>
+              {activities?.map(activity =>
                 <tr key={activity.id}>
                   <td>{activity.name}</td>
                   <td>{activity.child}</td>
