@@ -1,52 +1,43 @@
-
 import React, { Component } from 'react';
 import './App.css';
 import ActivityList from './activities/ActivityList';
 import ActivityEdit from "./activities/ActivityInputForm";
+import { Route, Routes } from 'react-router-dom';
 import Navbar from "./components/Navbar";
 import Home from "./components/pages/Home"
 import Profile from "./components/pages/Profile"
 import Child from "./components/pages/Child"
 import Analyzer from "./components/pages/Analyzer"
-import Activities from "./components/pages/Activities"
 import About from "./components/pages/About"
 import EmergencyContact from './components/EmergencyContact';
-import { Route, Routes } from 'react-router-dom';
+import EmergencyContactForm from './components/EmergencyContactForm';
+
+
 
 class App extends Component {
   render() {
     return (
-<>
-  <div>
-      <Navbar />
-  </div>
-
-  <div className = "navbar-container">
-    <Routes>
-      <Route path="/" element={<Home/>} />   {/* Moved Home.js into the pages folder */}
-      <Route path="/profile" element={<Profile/>} />
-      <Route path="/child" element={<Child/>} />
-      <Route path="/activities" element={<Activities/>} />
-      <Route path="/analyzer" element={<Analyzer/>} />
-      <Route path="/activities" element={<About/>} />
-    </Routes>
-  </div>
-
-  {/* <div>
-    <Routes>
-      <Route path='/' exact={true} element = { <Home/>}/>
-      <Route path='/api/activities' exact={true} element={<ActivityList/>}/>
-      <Route path='/api/activities/id' element={<ActivityEdit/>}/>
-    </Routes>
-  </div> */}
-
-{/* Just here for testing. Remove Later. */}
-<div>
-    <EmergencyContact />
-</div>
-</>
+      <div>
+        <div className ="navbar-container">
+          <Navbar />
+        </div>
+      <div>
+     
+      <Routes>
+        <Route path='/' exact={true} element = { <Home/>}/>
+        <Route path='/activities' exact={true} element={<ActivityList/>}/>
+        <Route path='/activities/:id' element={<ActivityEdit/>}/>
+        <Route path= '/about' element = {<About/>}/>
+        <Route path='/profile' element = {<Profile/>}/>
+        <Route path='/child' element = {<Child/>}/>
+        <Route path="/emergencycontacts" element={<EmergencyContact/>}/>
+        <Route path="/emergencycontacts/:id" element = {<EmergencyContactForm/>}/>
+      </Routes>
+  
+    </div>
+    </div>
     );
   }
-}
+  }
 
 export default App;
