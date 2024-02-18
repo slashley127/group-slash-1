@@ -1,13 +1,10 @@
 package org.launchcode.KidVenture.models.subModels;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-import java.util.Objects;
 
 public class SignUp{
 
@@ -27,17 +24,6 @@ public class SignUp{
     private String password;
 
     private String verifyPassword;
-
-    public SignUp(){
-    }
-
-    public SignUp(String username, String email, String password, String verifyPassword){
-        super();
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.verifyPassword = verifyPassword;
-    }
 
     public String getUsername() {
         return username;

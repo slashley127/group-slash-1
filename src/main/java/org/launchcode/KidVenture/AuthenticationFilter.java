@@ -8,6 +8,7 @@ import jakarta.transaction.UserTransaction;
 import org.launchcode.KidVenture.controllers.AuthenticationController;
 import org.launchcode.KidVenture.models.User;
 import org.launchcode.KidVenture.models.data.UserRepository;
+import org.launchcode.KidVenture.models.subModels.Login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -22,7 +23,7 @@ public class AuthenticationFilter implements HandlerInterceptor {
     @Autowired
     AuthenticationController authenticationController;
 
-    private static final List<String> whitelist = Arrays.asList("/login", "/signup", "logout");
+    private static final List<String> whitelist = Arrays.asList(/*"/login",*/ "/signup"/*, "/logout"*/);
 
     private static boolean isWhitelisted(String path){
         for (String pathRoot : whitelist){
@@ -47,7 +48,7 @@ public class AuthenticationFilter implements HandlerInterceptor {
             return true;
         }
 
-        response.sendRedirect("/login");
+//        response.sendRedirect(Login);
         return false;
     }
 }

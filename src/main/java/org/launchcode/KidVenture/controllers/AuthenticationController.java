@@ -42,53 +42,61 @@ public class AuthenticationController {
         session.setAttribute(userSessionKey, user.getId());
     }
 
-//    @PostMapping
-//    public ResponseEntity createUser(@RequestBody SignUp signUp) throws URISyntaxException {
-//        return ResponseEntity.created(new URI("/user/")).build();
-//    }
 
     @GetMapping("/signUp")
-    public String displaySignUp(Model model){
+    public User displaySignUp(Model model, @PathVariable int id){
         model.addAttribute(new SignUp());
         model.addAttribute("title", "SignUp");
-        return "signup";
+        return userRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
-    @PostMapping("/signUp")
-    public String processSignUp(@ModelAttribute @Valid SignUp signUp, Errors errors,
-                                HttpServletRequest request, Model model) {
-        if(errors.hasErrors()){
-            model.addAttribute("title", "SignUp");
-            return "signup";
-        }
-        User existingUser = userRepository.findByUsername(signUp.getUsername());
-
-        if (existingUser != null){
-            errors.rejectValue("username", "username.alreadyexists", "A user with that username already exists.");
-            model.addAttribute("title", "SignUp");
-            return "signup";
-        }
-        String password = signUp.getPassword();
-        String verifyPassword = signUp.getVerifyPassword();
-        if (!password.equals(verifyPassword)) {
-            errors.rejectValue("password", "passwords.mismatch", "Passwords do not match.");
-            model.addAttribute("title", "SignUp");
-            return "signup";
-        }
-
-        User newUser = new User(signUp.getUsername(), signUp.getPassword(), signUp.getEmail());
-        userRepository.save(newUser);
-        setUserInSession(request.getSession(), newUser);
-
-        return "redirect";
-    }
-
+////    @PostMapping
+////    public ResponseEntity createUser(@RequestBody SignUp signUp) throws URISyntaxException {
+////        return ResponseEntity.created(new URI("/user/")).build();
+////    }
 //
+//    @GetMapping("/signUp")
+//    public String displaySignUp(Model model){
+//        model.addAttribute(new SignUp());
+//        model.addAttribute("title", "SignUp");
+//        return "signUp";
+//    }
+//
+//    @PostMapping("/signUp")
+//    public String processSignUp(@ModelAttribute @Valid SignUp signUp, Errors errors,
+//                                HttpServletRequest request, Model model) {
+//        if(errors.hasErrors()){
+//            model.addAttribute("title", "SignUp");
+//            return "signUp";
+//        }
+//        User existingUser = userRepository.findByUsername(signUp.getUsername());
+//
+//        if (existingUser != null){
+//            errors.rejectValue("username", "username.alreadyexists", "A user with that username already exists.");
+//            model.addAttribute("title", "SignUp");
+//            return "signUp";
+//        }
+//        String password = signUp.getPassword();
+//        String verifyPassword = signUp.getVerifyPassword();
+//        if (!password.equals(verifyPassword)) {
+//            errors.rejectValue("password", "passwords.mismatch", "Passwords do not match.");
+//            model.addAttribute("title", "SignUp");
+//            return "signUp";
+//        }
+//
+//        User newUser = new User(signUp.getUsername(), signUp.getPassword(), signUp.getEmail());
+//        userRepository.save(newUser);
+//        setUserInSession(request.getSession(), newUser);
+//
+//        return "redirect";
+//    }
+//
+
 //
 //    @GetMapping("/login")
 //    public String displayLogin(Model model){
 //        model.addAttribute(new Login());
-//        model.addAttribute("title", "Login");
+//        model.addAttribute("title", "Log In");
 //        return "login";
 //    }
 //
@@ -96,14 +104,14 @@ public class AuthenticationController {
 //    @PostMapping("/login")
 //    public String processLogin(@ModelAttribute @Valid Login login, Errors errors, HttpServletRequest request, Model model){
 //        if(errors.hasErrors()){
-//            model.addAttribute("title", "Login");
+//            model.addAttribute("title", "Log In");
 //            return "login";
 //        }
 //        User theUser = userRepository.findByUsername(login.getUsername());
 //
 //        if(theUser == null) {
 //            errors.rejectValue("username", "user.invalid", "The username does not exist");
-//            model.addAttribute("title", "Login");
+//            model.addAttribute("title", "Log In");
 //            return "login";
 //        }
 //
@@ -111,7 +119,7 @@ public class AuthenticationController {
 //
 //        if(!theUser.isMatchingPassword(password)) {
 //            errors.rejectValue("password", "password.invalid", "Invalid password");
-//            model.addAttribute("title", "Login");
+//            model.addAttribute("title", "Log In");
 //            return "login";
 //        }
 //        setUserInSession(request.getSession(), theUser);

@@ -65,10 +65,10 @@ public class User {
     }
 
 
-    @Override
-    public String toString(){
-        return username;
-    }
+//    @Override
+//    public String toString(){
+//        return username;
+//    }
 
     @Override
     public boolean equals(Object o) {
