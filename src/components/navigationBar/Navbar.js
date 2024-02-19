@@ -10,32 +10,9 @@ const Navbar = () => {
 
     //For Dropdown menu on Activities
     const [click, setClick] = useState(false);
-    const setDropdown = useState(false);
   
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
-
-
-    // Changes Menu style based on width of browswer window for mobile
-    const onMouseEnter = () => {
-        if (window.innerWidth < 960) {
-          setDropdown(false);
-        } else {
-          setDropdown(true);
-        }
-      };
-    
-      const onMouseLeave = () => {
-        if (window.innerWidth < 960) {
-          setDropdown(false);
-        } else {
-          setDropdown(false);
-        }
-      };
-
-
-
-
 
     return (
         <nav class ="navbar">
@@ -74,7 +51,7 @@ const Navbar = () => {
                     </li>
 
                     <li class = "nav-item dropdown">
-                        <Link class='nav-links dropdown-toggle' href="/activities" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onClick={closeMobileMenu}>
+                        <Link class='nav-links dropdown-toggle' href="/activities" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Activities
                         </Link>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
