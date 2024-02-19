@@ -3,6 +3,7 @@ package org.launchcode.KidVenture.models;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -18,6 +19,7 @@ public class User {
     private String username;
 
     @NotNull
+    @Email
     private String email;
 
     @NotNull
@@ -64,8 +66,15 @@ public class User {
         this.email = email;
     }
 
+    public String getPwHash() {
+        return pwHash;
+    }
 
-//    @Override
+    public void setPwHash(String pwHash) {
+        this.pwHash = pwHash;
+    }
+
+    //    @Override
 //    public String toString(){
 //        return username;
 //    }

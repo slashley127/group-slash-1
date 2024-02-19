@@ -8,10 +8,13 @@ import org.launchcode.KidVenture.models.data.UserRepository;
 import org.launchcode.KidVenture.models.subModels.Login;
 import org.launchcode.KidVenture.models.subModels.SignUp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -22,6 +25,7 @@ import java.util.Optional;
 public class AuthenticationController {
     @Autowired
     UserRepository userRepository;
+
 
     private static final String userSessionKey = "user";
 
@@ -44,54 +48,48 @@ public class AuthenticationController {
 
 
     @GetMapping("/signUp")
-    public User displaySignUp(Model model, @PathVariable int id){
+    public String displaySignUp(Model model){
         model.addAttribute(new SignUp());
-        model.addAttribute("title", "SignUp");
-        return userRepository.findById(id).orElseThrow(RuntimeException::new);
+        model.addAttribute("title", "Sign Up");
+        return "register";
     }
 
-////    @PostMapping
-////    public ResponseEntity createUser(@RequestBody SignUp signUp) throws URISyntaxException {
-////        return ResponseEntity.created(new URI("/user/")).build();
-////    }
-//
-//    @GetMapping("/signUp")
-//    public String displaySignUp(Model model){
-//        model.addAttribute(new SignUp());
-//        model.addAttribute("title", "SignUp");
-//        return "signUp";
+//    @PostMapping
+//    public ResponseEntity createUser(@RequestBody SignUp signUp) throws URISyntaxException {
+//        return ResponseEntity.created(new URI("/user/")).build();
 //    }
-//
-//    @PostMapping("/signUp")
-//    public String processSignUp(@ModelAttribute @Valid SignUp signUp, Errors errors,
-//                                HttpServletRequest request, Model model) {
-//        if(errors.hasErrors()){
-//            model.addAttribute("title", "SignUp");
-//            return "signUp";
-//        }
-//        User existingUser = userRepository.findByUsername(signUp.getUsername());
-//
-//        if (existingUser != null){
-//            errors.rejectValue("username", "username.alreadyexists", "A user with that username already exists.");
-//            model.addAttribute("title", "SignUp");
-//            return "signUp";
-//        }
-//        String password = signUp.getPassword();
-//        String verifyPassword = signUp.getVerifyPassword();
-//        if (!password.equals(verifyPassword)) {
-//            errors.rejectValue("password", "passwords.mismatch", "Passwords do not match.");
-//            model.addAttribute("title", "SignUp");
-//            return "signUp";
-//        }
-//
-//        User newUser = new User(signUp.getUsername(), signUp.getPassword(), signUp.getEmail());
-//        userRepository.save(newUser);
-//        setUserInSession(request.getSession(), newUser);
-//
-//        return "redirect";
-//    }
-//
 
+
+    @PostMapping("/signUp")
+    public String processSignUp(@ModelAttribute @Valid SignUp signUp, Errors errors,
+                                HttpServletRequest request, Model model) {
+        if(errors.hasErrors()){
+            model.addAttribute("title", "SignUp");
+            return "signUp";
+        }
+        User existingUser = userRepository.findByUsername(signUp.getUsername());
+
+        if (existingUser != null){
+            errors.rejectValue("username", "username.alreadyexists", "A user with that username already exists.");
+            model.addAttribute("title", "SignUp");
+            return "signUp";
+        }
+        String password = signUp.getPassword();
+        String verifyPassword = signUp.getVerifyPassword();
+        if (!password.equals(verifyPassword)) {
+            errors.rejectValue("password", "passwords.mismatch", "Passwords do not match.");
+            model.addAttribute("title", "SignUp");
+            return "signUp";
+        }
+
+        User newUser = new User(signUp.getUsername(), signUp.getPassword(), signUp.getEmail());
+        userRepository.save(newUser);
+        setUserInSession(request.getSession(), newUser);
+
+        return "redirect";
+    }
+
+//
 //
 //    @GetMapping("/login")
 //    public String displayLogin(Model model){
