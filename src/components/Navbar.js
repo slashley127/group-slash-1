@@ -81,10 +81,14 @@ const Navbar = () => {
                         {dropdown && <Dropdown />}
                     </li>
 
+
                     <li class = "nav-item">
                         <Link to ="/about" class="nav-links" onClick={closeMobileMenu}>
                             About
                         </Link>
+
+                    <li>
+                        <Link to ="/enrichment/filtered" class="nav-link">Activity Suggestions</Link>
                     </li>
                 </ul>
             </div>

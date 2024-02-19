@@ -1,3 +1,4 @@
+
 .navbar {
   background: #FFF;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -6,8 +7,7 @@
   justify-content: center;
   align-items: center;
   font-size: 1.2rem;
-}
-
+  
 .navbar-logo {
   color: #fff;
   justify-self: start;
@@ -16,6 +16,7 @@
   text-decoration: none;
   font-size: 2rem;
 }
+
 
 .fa-firstdraft {
   margin-left: 0.5rem;
@@ -66,6 +67,8 @@
 .menu-icon {
   display: none;
 }
+
+
 
 @media screen and (max-width: 960px) {
   .NavbarItems {

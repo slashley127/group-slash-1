@@ -1,0 +1,764 @@
+{
+    "enrichmentActivities": [
+      {
+        "id": 1,
+        "activity": "Go to the local library and checkout some books",
+        "benefits": "early literacy, community engagement",
+        "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": true
+        }
+      },
+      {
+        "id": 2,
+        "activity": "Bake a treat together",
+        "benefits": "cooking skills, measuring/math",
+        "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": true
+        }
+      },
+      {
+        "id": 3,
+        "activity": "Do a scavenger hunt around the house",
+        "benefits": "attention to details",
+        "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": false
+        }
+      },
+      {
+        "id": 4,
+        "activity": "Build a pillow fort",
+        "benefits": "creativity, engineering",
+        "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": false
+        }
+      },
+      {
+        "id": 5,
+        "activity": "Fly a kite",
+        "benefits": "science, enjoying nature",
+        "categories": {
+          "indoor": false,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": true
+        }
+      },
+      {
+        "id": 6,
+        "activity": "Have a tea party with stuffed animals",
+        "benefits": "imaginative play",
+        "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": false,
+          "teenager": false
+        }
+      },
+      {
+        "id": 7,
+        "activity": "Talk about a new family tradition you could start",
+        "benefits": "family bonding",
+        "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": true
+        }
+      },
+      {
+        "id": 8,
+        "activity": "Plan a playdate with friends",
+        "benefits": "socialization",
+        "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": false
+        }
+      },
+      {
+        "id": 9,
+        "activity": "Have an egg race",
+        "benefits": "science, exercise",
+        "categories": {
+          "indoor": false,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": false
+        }
+      },
+      {
+        "id": 10,
+        "activity": "Make paper dolls",
+        "benefits": "creativity, art",
+        "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": false
+        }
+      },
+      {
+        "id": 11,
+        "activity": "Learn some simple vocabulary in a language neither of you know",
+        "benefits": "language building, culture",
+        "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": true
+        }
+      },
+      {
+        "id": 12,
+        "activity": "Tell your child about your favorite holiday traditions growing up",
+        "benefits": "family bonding, culture",
+        "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": true
+        }
+      },
+      {
+        "id": 13,
+        "activity": "See who can say the alphabet backwards the fastest",
+        "benefits": "family bonding, literacy",
+        "categories": {
+          "indoor": true,
+          "toddler": false,
+          "bigKid": true,
+          "teenager": true
+        }
+      },
+      {
+        "id": 14,
+        "activity": "Play a board game",
+        "benefits": "strategic thinking",
+        "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": true
+        }
+      },
+      {
+        "id": 15,
+        "activity": "Do a puzzle",
+        "benefits": "spatial skills",
+        "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": true
+        }
+      },
+      {
+        "id": 16,
+        "activity": "Take a walk around the neighborhood",
+        "benefits": "enjoying nature, exercise",
+        "categories": {
+          "indoor": false,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": true
+        }
+      },
+      {
+        "id": 17,
+        "activity": "Draw pictures of your favorite animals together",
+        "benefits": "creativity, art, natural world",
+        "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": false
+        }
+      },
+      {
+        "id": 18,
+        "activity": "Play \"I spy\" ",
+        "benefits": "family bonding, attention to detail",
+        "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": false
+        }
+      },
+      {
+        "id": 19,
+        "activity": "Play charades",
+        "benefits": "family bonding, creativity",
+        "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": true
+        }
+      },
+      {
+        "id": 20,
+        "activity": "Paint your hands and make handprint art",
+        "benefits": "creativity, art",
+        "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": false
+        }
+      },
+      {
+        "id": 21,
+        "activity": "Jump rope",
+        "benefits": "exercise",
+        "categories": {
+          "indoor": false,
+          "toddler": false,
+          "bigKid": true,
+          "teenager": false
+        }
+      },
+      {
+        "id": 22,
+        "activity": "Learn a clapping and rhyming game",
+        "benefits": "music, family bonding, language",
+        "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": false
+        }
+      },
+      {
+        "id": 23,
+        "activity": "Read your favorite book from when you were a child to your child",
+        "benefits": "early literacy, family bonding",
+        "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": false
+        }
+      },
+      {
+        "id": 24,
+        "activity": "Make paper airplanes",
+        "benefits": "engineering, creativity",
+        "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": true
+        }
+      },
+      {
+        "id": 25,
+        "activity": "Build a sculpture with clay",
+        "benefits": "creativity, art, sensory activity",
+        "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": true
+        }
+      },
+      {
+        "id": 26,
+        "activity": "Sing your favorite songs ",
+        "benefits": "music, self-expression",
+        "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": true
+        }
+      },
+      {
+        "id": 27,
+        "activity": "Play catch outside ",
+        "benefits": "exercise",
+        "categories": {
+          "indoor": false,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": true
+        }
+      },
+      {
+        "id": 28,
+        "activity": "Plant some seeds in a little pot to grow on a windowsill",
+        "benefits": "enjoying nature",
+        "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": true
+        }
+      },
+      {
+        "id": 29,
+        "activity": "Play \"Simon Says\"",
+        "benefits": "family bonding, attention to detail",
+        "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": false
+        }
+      },
+      {
+        "id": 30,
+        "activity": "Write and illustrate a storybook together",
+        "benefits": "creativity, literacy, art",
+        "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": false
+        }
+      },
+      {
+        "id": 31,
+        "activity": "See who can make the silliest face",
+        "benefits": "family bonding",
+        "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": false
+        }
+      },
+      {
+        "id": 32,
+        "activity": "Learn tongue twisters",
+        "benefits": "language building",
+        "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": false
+        }
+      },
+      {
+        "id": 33,
+        "activity": "Race toy cars",
+        "benefits": "family bonding, science",
+        "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": false
+        }
+      },
+      {
+        "id": 34,
+        "activity": "Make lemonade together",
+        "benefits": "cooking skills, family bonding",
+        "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": false
+        }
+      },
+      {
+        "id": 35,
+        "activity": "Blow bubbles",
+        "benefits": "enjoying nature",
+        "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": false
+        }
+      },
+      {
+        "id": 36,
+        "activity": "At night, look at the sky and find constellations",
+        "benefits": "enjoying nature, science",
+        "categories": {
+          "indoor": false,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": true
+        }
+      },
+      {
+        "id": 37,
+        "activity": "Play Hide n' Seek",
+        "benefits": "family bonding, attention to detail",
+        "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": false
+        }
+      },
+      {
+        "id": 38,
+        "activity": "Have a picnic.",
+        "benefits": "enjoying nature, family bonding",
+        "categories": {
+          "indoor": false,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": true
+        }
+      },
+      {
+        "id": 39,
+        "activity": "Create sensory bins full of beans, cotton balls, coins, etc.",
+        "benefits": "sensory development",
+        "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": false,
+          "teenager": false
+        }
+      },
+      {
+        "id": 40,
+        "activity": "Make a scrapbook of favorite memories together",
+        "benefits": "family bonding, creativity",
+        "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": true
+        }
+      },
+      {
+        "id": 41,
+      "activity": "Learn to juggle with scarves or soft balls",
+      "benefits": "hand-eye coordination, perseverance",
+      "categories": {
+          "indoor": true,
+          "toddler": false,
+          "bigKid": true,
+          "teenager": true
+      }
+  },
+  {
+      "id": 42,
+      "activity": "Create a DIY bird feeder",
+      "benefits": "enjoying nature, creativity",
+      "categories": {
+          "indoor": true,
+          "toddler": false,
+          "bigKid": true,
+          "teenager": true
+      }
+  },
+  {
+      "id": 43,
+      "activity": "Have a movie night with homemade tickets and snacks",
+      "benefits": "family bonding, creativity",
+      "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": true
+      }
+  },
+  {
+      "id": 44,
+      "activity": "Learn to play a simple musical instrument together",
+      "benefits": "music, coordination",
+      "categories": {
+          "indoor": true,
+          "toddler": false,
+          "bigKid": true,
+          "teenager": true
+      }
+  },
+  {
+      "id": 45,
+      "activity": "Set up an indoor treasure hunt",
+      "benefits": "problem-solving, creativity",
+      "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": true
+      }
+  },
+  {
+      "id": 46,
+      "activity": "Learn a magic trick together",
+      "benefits": "hand-eye coordination, confidence",
+      "categories": {
+          "indoor": true,
+          "toddler": false,
+          "bigKid": true,
+          "teenager": true
+      }
+  },
+  {
+      "id": 47,
+      "activity": "Have a dance party",
+      "benefits": "exercise, music, creativity",
+      "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": true
+      }
+  },
+  {
+      "id": 48,
+      "activity": "Create a time capsule",
+      "benefits": "family bonding, reflection",
+      "categories": {
+          "indoor": true,
+          "toddler": false,
+          "bigKid": true,
+          "teenager": true
+      }
+  },
+  {
+      "id": 49,
+      "activity": "Build a fort with blankets and pillows",
+      "benefits": "creativity, engineering",
+      "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": true
+      }
+  },
+  {
+      "id": 50,
+      "activity": "Learn origami",
+      "benefits": "creativity, patience",
+      "categories": {
+          "indoor": true,
+          "toddler": false,
+          "bigKid": true,
+          "teenager": true
+      }
+  },
+  {
+      "id": 51,
+      "activity": "Have a themed costume day",
+      "benefits": "creativity, imaginative play",
+      "categories": {
+          "indoor": true,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": true
+      }
+  },
+  {
+      "id": 52,
+      "activity": "Go on a nature scavenger hunt",
+      "benefits": "enjoying nature, attention to details",
+      "categories": {
+          "indoor": false,
+          "toddler": true,
+          "bigKid": true,
+          "teenager": true
+      }
+  },
+  {
+      "id": 53,
+      "activity": "Create a DIY puzzle",
+      "benefits": "creativity, problem-solving",
+      "categories": {
+          "indoor": true,
+          "toddler": false,
+          "bigKid": true,
+          "teenager": true
+      }
+  },
+  {
+      "id": 54,
+      "activity": "Learn a new card game",
+      "benefits": "strategic thinking, family bonding",
+      "categories": {
+          "indoor": true,
+          "toddler": false,
+          "bigKid": true,
+          "teenager": true
+      }
+  },
+  {
+      "id": 55,
+      "activity": "Have a family book club",
+      "benefits": "literacy, family bonding",
+      "categories": {
+          "indoor": true,
+          "toddler": false,
+          "bigKid": true,
+          "teenager": true
+      }
+  },
+  {
+      "id": 56,
+      "activity": "Create a DIY puzzle",
+      "benefits": "creativity, problem-solving",
+      "categories": {
+          "indoor": true,
+          "toddler": false,
+          "bigKid": true,
+          "teenager": true
+      }
+  },
+  {
+      "id": 57,
+      "activity": "Have a family book club",
+      "benefits": "literacy, family bonding",
+      "categories": {
+          "indoor": true,
+          "toddler": false,
+          "bigKid": true,
+          "teenager": true
+      }
+  },
+  {
+      "id": 58,
+      "activity": "Create a DIY puzzle",
+      "benefits": "creativity, problem-solving",
+      "categories": {
+          "indoor": true,
+          "toddler": false,
+          "bigKid": true,
+          "teenager": true
+      }
+  },
+  {
+      "id": 59,
+      "activity": "Have a family book club",
+      "benefits": "literacy, family bonding",
+      "categories": {
+          "indoor": true,
+          "toddler": false,
+          "bigKid": true,
+          "teenager": true
+      }
+  },
+  {
+      "id": 60,
+      "activity": "Create a DIY puzzle",
+      "benefits": "creativity, problem-solving",
+      "categories": {
+          "indoor": true,
+          "toddler": false,
+          "bigKid": true,
+          "teenager": true
+      }
+  },
+  {
+      "id": 61,
+      "activity": "Have a family book club",
+      "benefits": "literacy, family bonding",
+      "categories": {
+          "indoor": true,
+          "toddler": false,
+          "bigKid": true,
+          "teenager": true
+      }
+  },
+  {
+      "id": 62,
+      "activity": "Create a DIY puzzle",
+      "benefits": "creativity, problem-solving",
+      "categories": {
+          "indoor": true,
+          "toddler": false,
+          "bigKid": true,
+          "teenager": true
+      }
+  },
+  {
+      "id": 63,
+      "activity": "Have a family book club",
+      "benefits": "literacy, family bonding",
+      "categories": {
+          "indoor": true,
+          "toddler": false,
+          "bigKid": true,
+          "teenager": true
+      }
+  },
+  {
+      "id": 64,
+      "activity": "Create a DIY puzzle",
+      "benefits": "creativity, problem-solving",
+      "categories": {
+          "indoor": true,
+          "toddler": false,
+          "bigKid": true,
+          "teenager": true
+      }
+  },
+  {
+      "id": 65,
+      "activity": "Have a family book club",
+      "benefits": "literacy, family bonding",
+      "categories": {
+          "indoor": true,
+          "toddler": false,
+          "bigKid": true,
+          "teenager": true
+      }
+  },
+  {
+      "id": 66,
+      "activity": "Create a DIY puzzle",
+      "benefits": "creativity, problem-solving",
+      "categories": {
+          "indoor": true,
+          "toddler": false,
+          "bigKid": true,
+          "teenager": true
+      }
+  },
+  {
+      "id": 67,
+      "activity": "Have a family book club",
+      "benefits": "literacy, family bonding",
+      "categories": {
+          "indoor": true,
+          "toddler": false,
+          "bigKid": true,
+          "teenager": true
+      }
+  },
+  {
+      "id": 68,
+      "activity": "Create a DIY puzzle",
+      "benefits": "creativity, problem-solving",
+      "categories": {
+          "indoor": true,
+          "toddler": false,
+          "bigKid": true,
+          "teenager": true
+      }
+  },
+  {
+      "id": 69,
+      "activity": "Have a family book club",
+      "benefits": "literacy, family bonding",
+      "categories": {
+          "indoor": true,
+          "toddler": false,
+          "bigKid": true,
+          "teenager": true
+      }
+  }
+    ]
+  }
+  
