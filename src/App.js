@@ -10,7 +10,8 @@ import Child from "./components/pages/Child"
 import About from "./components/pages/About"
 import EmergencyContact from './emergencyContact/EmergencyContact';
 import EmergencyContactForm from './emergencyContact/EmergencyContactForm';
-
+import ChildProfileForm from './components/childProfile/childProfileForm';
+import ChildProfile from './components/childProfile/childProfile';
 
 
 class App extends Component {
@@ -31,6 +32,8 @@ class App extends Component {
         <Route path='/child' element = {<Child/>}/>
         <Route path="/emergencycontacts" element={<EmergencyContact/>}/>
         <Route path="/emergencycontacts/:id" element = {<EmergencyContactForm/>}/>
+        <Route path="/childprofile" element = {<ChildProfile/>}/>
+        <Route path="/childprofile/:id" element = {<ChildProfileForm/>}/>
       </Routes>
   
     </div>
