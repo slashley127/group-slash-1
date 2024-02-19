@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import withNavigateHook from './NavigateHook';
+import withNavigateHook from '../components/NavigateHook';
 import { Link, useParams } from 'react-router-dom';
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
+import { States } from './States';
 
 function withParams(Component) {
     return props => 

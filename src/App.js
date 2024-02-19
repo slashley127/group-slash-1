@@ -3,14 +3,13 @@ import './App.css';
 import ActivityList from './activities/ActivityList';
 import ActivityEdit from "./activities/ActivityInputForm";
 import { Route, Routes } from 'react-router-dom';
-import Navbar from "./components/Navbar";
+import Navbar from "./components/navigationBar/Navbar";
 import Home from "./components/pages/Home"
 import Profile from "./components/pages/Profile"
 import Child from "./components/pages/Child"
-import Analyzer from "./components/pages/Analyzer"
 import About from "./components/pages/About"
-import EmergencyContact from './components/EmergencyContact';
-import EmergencyContactForm from './components/EmergencyContactForm';
+import EmergencyContact from './emergencyContact/EmergencyContact';
+import EmergencyContactForm from './emergencyContact/EmergencyContactForm';
 
 
 
