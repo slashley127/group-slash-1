@@ -149,3 +149,31 @@
     display: none;
   }
 }
+
+.dropdown-menu {
+  background: white;
+  width: 150px;
+  position: absolute;
+  top: 80px;
+  list-style: none;
+  text-align: start;
+}
+
+.dropdown-menu li {
+  background: white;
+  cursor: pointer;
+}
+
+.dropdown-menu li:hover {
+  background: #ef476f;
+}
+
+.dropdown-menu.clicked {
+  display: none;
+}
+
+@media screen and (max-width: 960px) {
+  .fa-caret-down {
+    display: none;
+  }
+}

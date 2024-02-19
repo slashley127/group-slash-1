@@ -3,7 +3,6 @@ import { useState } from "react";
 import './Navbar.css';
 import { ReactComponent as Brand } from './icons/logo.svg';
 import { Link } from 'react-router-dom';
-import Dropdown from './Dropdown';
 
 
 
@@ -11,7 +10,7 @@ const Navbar = () => {
 
     //For Dropdown menu on Activities
     const [click, setClick] = useState(false);
-    const [dropdown, setDropdown] = useState(false);
+    const setDropdown = useState(false);
   
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
@@ -74,11 +73,17 @@ const Navbar = () => {
                         </Link>
                     </li>
 
-                    <li class = "nav-item" onMouseEnter = {onMouseEnter} onMouseLeave = {onMouseLeave}>
-                        <Link to ="/activities" class="nav-links" onClick={closeMobileMenu}>
-                            Activities <i className='fas fa-caret-down' /> 
+                    <li class = "nav-item dropdown">
+                        <Link class='nav-links dropdown-toggle' href="/activities" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onClick={closeMobileMenu}>
+                            Activities
                         </Link>
-                        {dropdown && <Dropdown />}
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <ul>
+                                <Link to="/activities" class="dropdown-item">Activities</Link>
+                                <Link to="/activities/new" class="dropdown-item">Add Activity</Link>
+                                <Link to="/enrichment/random" class="dropdown-item">Activity Generator</Link>
+                                </ul>
+                            </div>
                     </li>
 
                     <li class = "nav-item">
