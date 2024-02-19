@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';
+import './pages.css'
 
 const ContactForm = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -37,7 +38,8 @@ const ContactForm = () => {
     };
     return (
       <div className = "App">
-      <h1>Contact us!</h1>
+        <div className="contact-form">
+      <h2>Contact us!</h2>
       <p>We'd love to hear how you like our app and any suggestions you have!</p>
       <form onSubmit={sendEmail}>
         <label>Name</label>
@@ -49,6 +51,7 @@ const ContactForm = () => {
         <input type="submit" value="Send" disabled={isSubmitting} />
         {stateMessage && <p>{stateMessage}</p>}
       </form>
+      </div>
       </div>
     );
   };

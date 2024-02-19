@@ -24,7 +24,7 @@ class App extends Component {
       <div className= "blue-rectangle">
         <h1>Welcome!</h1>
       </div>
-     
+  
       <Routes>
         <Route path='/' exact={true} element = { <Home/>}/>
         <Route path='/activities' exact={true} element={<ActivityList/>}/>
@@ -36,8 +36,8 @@ class App extends Component {
         <Route path='/child' element = {<Child/>}/>
         <Route path='/contact' element = {<ContactForm/>}/>
       </Routes>
-      <div className="orange-rectangle"></div>
-    </div>
+        <footer className="orange-rectangle"></footer>
+      </div>
     </div>
     </div>
     );

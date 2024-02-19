@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, useParams, withRouter, useNavigate } from 'react-router-dom';
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
 import withNavigateHook from './NavigateHook';
+import "../pages.css"
 
 function withParams(Component) {
   return props => 
@@ -93,9 +94,9 @@ class ActivityEdit extends React.Component {
                 const title = <h2>{info.id ? 'Edit Activity' : 'Add Activity'}</h2>;
             
                 return <div>
-                    <Container>
-                        {title}
-                        <Form onSubmit={this.handleSubmit}>
+                    <Container className="activity-input-container">
+                        <h2 className ="header-add-activity">Add Activity</h2>
+                        <Form onSubmit={this.handleSubmit} className="activity-form">
                             <FormGroup>
                                 <Label for="nameOfActivity">Name of Activity</Label>
                                 <Input type="text" name="nameOfActivity" id="nameOfActivity" value={info.nameOfActivity || ''}

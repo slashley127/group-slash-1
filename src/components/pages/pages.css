@@ -10,3 +10,96 @@ h1 {
     letter-spacing: -3.2px;
 }
 
+.activities-table{
+    padding-top: 10px;
+    background: rgba(239, 71, 111, 0.80);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    align-self: left;
+}
+
+.activities-table-text-spacing-headers {
+    color:  #FFF;
+    font-family: Poppins;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 60px; /* 62.5% */
+}
+
+th{
+    padding-right: 50px;
+}
+
+.header-table {
+    color:  #FFF;
+    font-family: Poppins;
+    font-size: 46px;
+    font-style: bold;
+    font-weight: 400;
+    line-height: 60px; /* 62.5% */
+}
+
+.activities-table-body{
+    color:  #FFF;
+    font-family: Poppins;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 60px; /* 62.5% */
+    padding: 20px;
+}
+
+.float-right {
+    background: #06D6A6;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    color:  #FFF;
+    font-family: Poppins;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 60px; /* 62.5% */
+}
+
+.activity-form{
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 30px;
+    align-items: center;
+    align-content: center;
+    font-family: Poppins;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 60px; /* 62.5% */
+    
+}
+.header-add-activity{
+    font-family: Poppins;
+    font-size: 46px;
+    font-style: bold;
+    font-weight: 400;
+    line-height: 60px; /* 62.5% */
+    text-align: left;
+}
+
+Label {
+    display: block;
+    
+}
+
+.contact-form{
+
+    font-family: Poppins;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 60px; /* 62.5% */
+
+}
+
+textarea {
+    width: 500px;
+    height: 300px;
+}

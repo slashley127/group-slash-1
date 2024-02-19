@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { Button, ButtonGroup } from 'reactstrap';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
+import '../pages.css';
 
 
 class ActivityList extends Component {
@@ -123,38 +124,40 @@ render() {
       <div className="App">
         <header className="App-header">
           <div className="App-intro">
-            <div className="float-right">
-                    <Button color="success" tag={Link} to="/activities/new">Add Activity</Button>
-                </div>
-              <h2>Activities</h2>
-                    <table>
-                      <tr>
-                        <th>Name of Activity</th>
-                        <th>Name of Child</th>
-                        <th>Date of Activity</th>
-                        <th>Type of Activity</th>
-                        <th>Duration of Activity</th>
-                        <th>Mood of Child</th>
-                        <th>Action</th>
+                <div className="activities-table">
+              <h2 className="header-table">Activities</h2>
+                    <table >
+                      <tr className="activities-table-text-spacing-headers">
+                        <th>Date</th>
+                        <th>Activity</th>
+                        <th>Child</th>
+                        <th>Type</th>
+                        <th>Duration</th>
+                        <th>Mood</th>
                        </tr>
                        
                         {activities.map(activity =>
-                          <tr key={activity.id}>
+                          <tr key={activity.id} className="activities-table-body">
+                            <td>{activity.date}</td>
                             <td>{activity.nameOfActivity}</td>
                             <td>{activity.child}</td>
-                            <td>{activity.date}</td>
                             <td>{activity.typeOfActivity}</td>
                             <td>{activity.durationOfActivity}</td>
                             <td>{activity.mood}</td>
                             <td>
                             <ButtonGroup>
                                 <Button size="sm" color="primary" tag={Link} to={"/activities/" + activity.id}>Edit</Button>
-                                <Button size="sm" color="danger" onClick={() => this.remove(activity.id)}>Delete</Button>
+                                <Button size="sm" color="primary" onClick={() => this.remove(activity.id)}>Delete</Button>
                             </ButtonGroup>
                             </td>
                        </tr>
                         )}
                     </table>
+                   
+                    </div>
+                    <div className="float-right">
+                    <Button  tag={Link} to="/activities/new">Add Activity</Button>
+                </div>
                   </div>
               <div className='charts'><img src={chartUrl}></img></div>
           </header>

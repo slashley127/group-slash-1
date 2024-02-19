@@ -86,9 +86,13 @@ const Navbar = () => {
                         <Link to ="/about" class="nav-links" onClick={closeMobileMenu}>
                             About
                         </Link>
+                        </li>
 
-                    <li>
-                        <Link to ="/enrichment/filtered" class="nav-link">Activity Suggestions</Link>
+                    <li class = "nav-item">
+                        <Link to ="/enrichment/filtered" class="nav-links" onClick={closeMobileMenu}>Activity Suggestions</Link>
+                    </li>
+                    <li class = "nav-item">
+                        <Link to ="/contact" class="nav-links" onClick={closeMobileMenu}>Contact Us</Link>
                     </li>
                 </ul>
             </div>
