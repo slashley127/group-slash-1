@@ -9,9 +9,12 @@ import jakarta.validation.constraints.Size;
 @Table(name = "emergency-contact")
 public class EmergencyContact extends AbstractEntity {
 
+
+
     //Many-to-one relationship with child profile
-//    @ManyToOne
-//    private Child child;
+    @ManyToOne
+    @JoinColumn(name ="child_id", referencedColumnName = "id") //foreign key
+    private Child child;
 
 
     //required variables
@@ -160,5 +163,7 @@ public class EmergencyContact extends AbstractEntity {
         this.notes = notes;
     }
 
-
+    public Child getChild() {
+        return child;
+    }
 }

@@ -1,7 +1,9 @@
 package org.launchcode.KidVenture.controllers;
 import jakarta.validation.Valid;
+import org.launchcode.KidVenture.models.Child;
 import org.launchcode.KidVenture.models.EmergencyContact;
 import org.launchcode.KidVenture.models.data.EmergencyContactRepository;
+import org.launchcode.KidVenture.models.data.ChildRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/emergencycontacts")
@@ -24,17 +27,18 @@ public class EmergencyContactController {
         this.emergencyContactRepository = emergencyContactRepository;
     }
 
-    //list all emergencies contacts
+    //list all emergencies contacts - added relationship between child and emergencycontacts
     @GetMapping
     public List<EmergencyContact> getAllEmergencyContacts() {
-        return emergencyContactRepository.findAll();
+            return emergencyContactRepository.findAll();
     }
 
     // get a specific emergency contact or else create a new one
     @GetMapping("/{id}")
-    public EmergencyContact getEmergencyContact(@PathVariable Integer id) {
+    public EmergencyContact getEmergencyContact(@PathVariable int id) {
         return emergencyContactRepository.findById(id).orElseThrow(RuntimeException :: new);
     }
+
 
     // create a new emergency contact
     @PostMapping
@@ -45,7 +49,7 @@ public class EmergencyContactController {
 
     // update/edit emergency contact
     @PutMapping("/{id}")
-    public ResponseEntity updateEmergencyContact(@PathVariable Integer id, @RequestBody EmergencyContact emergencyContact) {
+    public ResponseEntity updateEmergencyContact(@PathVariable int id, @RequestBody EmergencyContact emergencyContact) {
         EmergencyContact currentEmergencyContact = emergencyContactRepository.findById(id).orElseThrow(RuntimeException::new);
         currentEmergencyContact.setFirstName(emergencyContact.getFirstName());
         currentEmergencyContact.setLastName(emergencyContact.getLastName());
@@ -65,7 +69,7 @@ public class EmergencyContactController {
 
     // delete emergency contact
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteEmergencyContact(@PathVariable Integer id) {
+    public ResponseEntity deleteEmergencyContact(@PathVariable int id) {
         emergencyContactRepository.deleteById(id);
         return ResponseEntity.ok().build();
     }
