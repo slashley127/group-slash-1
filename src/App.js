@@ -25,7 +25,7 @@ class App extends Component {
       <Route path="/" element={<Home/>} />   {/* Moved Home.js into the pages folder */}
       <Route path="/profile" element={<Profile/>} />
       <Route path="/child" element={<Child/>} />
-      <Route path="/activities" element={<Activities/>} />
+      <Route path="/activities" element={<ActivityList/>} />
       <Route path="/analyzer" element={<Analyzer/>} />
       <Route path="/activities" element={<About/>} />
     </Routes>
@@ -34,8 +34,8 @@ class App extends Component {
   <div>
     <Routes>
       <Route path='/' exact={true} element = { <Home/>}/>
-      <Route path='/api/activities' exact={true} element={<ActivityList/>}/>
-      <Route path='/api/activities/id' element={<ActivityEdit/>}/>
+      <Route path='/activities' exact={true} element={<ActivityList/>}/>
+      <Route path='/activities/id' element={<ActivityEdit/>}/>
     </Routes>
   </div>
 

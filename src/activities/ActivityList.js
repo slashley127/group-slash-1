@@ -2,7 +2,6 @@ import { toHaveDisplayValue } from '@testing-library/jest-dom/matchers';
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { Button, ButtonGroup } from 'reactstrap';
-import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 class ActivityList extends Component {
   state = {
@@ -46,18 +45,11 @@ class ActivityList extends Component {
 
 
   async componentDidMount() {
+    console.log("her")
     const response = await fetch("/api/activities");
+    console.log(response)
     const body = await response.json();
     this.setState({ activities: body });
-  }
-
-  showGoalReachedAlert(activities) {
-    for (let activity of activities) {
-
-      return true; // TODO add in if statements for measurements
-
-    }
-
   }
 
   async remove(id) {
@@ -75,14 +67,6 @@ class ActivityList extends Component {
 
   render() {
     const { activities } = this.state;
- if (this.showGoalReachedAlert(activities)) {
-      Swal.fire({
-        title: 'Goal Reached',
-        text: 'You have reached your daily goal!',
-        icon: 'check',
-        confirmButtonText: 'Awesome!'
-      })
-    }
 
     return (
       <div className="App">

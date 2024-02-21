@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import {React, Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 class ActivityEdit extends Component {
 
@@ -51,8 +52,19 @@ class ActivityEdit extends Component {
                 },
                 body: JSON.stringify(activity),
             });
-            this.props.history.push('/api/activities');
+            Swal.fire({
+                title: 'Activity Logged',
+                text: 'You successfully logged and activity!',
+                icon: 'check',
+                confirmButtonText: 'Awesome!',
+            }).then((result) => {
+                this.props.history.push('/api/activities');
+                return true;
+            
+                });
         }
+        
+    
 
             render() {
                 const {activity} = this.state;
@@ -109,8 +121,8 @@ class ActivityEdit extends Component {
                     </Container>
                 </div>
             }
+        }
     
-    }
     export default ActivityEdit;
 
 
