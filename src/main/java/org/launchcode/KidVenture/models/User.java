@@ -2,30 +2,30 @@ package org.launchcode.KidVenture.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Objects;
 
 @Entity
 public class User {
-    @Id
-    @GeneratedValue
-    private int id;
 
-    @NotNull
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String username;
 
-    @NotNull
-    @Email
     private String email;
 
-    @NotNull
-    private String pwHash;
 
-    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    private String password;
+
 
     public User(){
     }
@@ -34,19 +34,16 @@ public class User {
         super();
         this.username = username;
         this.email = email;
-        this.pwHash = encoder.encode(password);
+        this.password = password;
     }
 
 
-    public boolean isMatchingPassword(String password){
-        return encoder.matches(password, pwHash);
-    }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -66,12 +63,13 @@ public class User {
         this.email = email;
     }
 
-    public String getPwHash() {
-        return pwHash;
+
+    public String getPassword() {
+        return password;
     }
 
-    public void setPwHash(String pwHash) {
-        this.pwHash = pwHash;
+    public void setPassword(String password) {
+        this.password = new BCryptPasswordEncoder().encode(password);
     }
 
     //    @Override

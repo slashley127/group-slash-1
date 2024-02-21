@@ -8,22 +8,23 @@ import jakarta.validation.constraints.Size;
 
 public class SignUp{
 
-    @NotNull
-    @NotBlank
-    @Size(min = 3, max = 20, message = "Username must be between 3 and 20 characters.")
     private String username;
 
-    @NotNull
-    @NotBlank
-    @Size(min = 3, message = "Email must be at least 3 characters long.")
     private String email;
 
-    @NotNull
-    @NotBlank
-    @Size(min = 5, max = 30, message = "Password must be between 5 and 30 characters.")
     private String password;
 
-    private String verifyPassword;
+//    private String verifyPassword;
+
+    public SignUp(){
+
+    }
+    public SignUp(String username, String email, String password, String verifyPassword){
+        this.username = username;
+        this.email = email;
+        this.password = password;
+//        this.verifyPassword = verifyPassword;
+    }
 
     public String getUsername() {
         return username;
@@ -49,13 +50,13 @@ public class SignUp{
         this.password = password;
     }
 
-    public String getVerifyPassword() {
-        return verifyPassword;
-    }
-
-    public void setVerifyPassword(String verifyPassword) {
-        this.verifyPassword = verifyPassword;
-    }
+//    public String getVerifyPassword() {
+//        return verifyPassword;
+//    }
+//
+//    public void setVerifyPassword(String verifyPassword) {
+//        this.verifyPassword = verifyPassword;
+//    }
 
 
 }

@@ -1,27 +1,76 @@
 package org.launchcode.KidVenture.controllers;
 
-import jakarta.validation.Valid;
 import org.launchcode.KidVenture.models.User;
 import org.launchcode.KidVenture.models.data.UserRepository;
+import org.launchcode.KidVenture.models.data.UserService;
 import org.launchcode.KidVenture.models.subModels.Login;
 import org.launchcode.KidVenture.models.subModels.SignUp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
-import java.util.HashMap;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Collections;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")
-public class AuthenticationController {
+public class UserController {
     @Autowired
-    UserRepository userRepository;
+    private UserService userService;
 
+    @GetMapping("/signup")
+    public String getSignUpURI(){
+        return "http://localhost:8080/user/signup";
+    }
 
+    @GetMapping("/login")
+    public String getLoginURI(){
+        return "http://localhost:8080/user/login";
+    }
 
+    @PostMapping("/signup")
+    public ResponseEntity<User> signUp(@RequestBody SignUp signUp){
+        Optional<User> existingUser = userService.findByUsername(signUp.getUsername());
+        if(existingUser.isPresent()){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username is already taken");
+        }
+        User user = new User();
+        user.setUsername(signUp.getUsername());
+        user.setEmail(signUp.getEmail());
+        user.setPassword(signUp.getPassword());
+
+        User savedUser = userService.save(user);
+
+        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+    }
+//
+//    @PostMapping("/login")
+//    public ResponseEntity<?> login(@RequestBody Login login){
+//        boolean loggedIn = userService.login(login);
+//        if(loggedIn){
+//            return ResponseEntity.ok().build();
+//        } else{
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+//        }
+//    }
+//
+//    @GetMapping("/profile")
+//    public ResponseEntity<SignUp> getUserProfile(Authentication authentication){
+//        SignUp signUp = userService.getUserProfile(authentication.getName());
+//        return ResponseEntity.ok(signUp);
+//    }
+//
+//    @PutMapping("/profile")
+//    public ResponseEntity<?> updateUserProfile(Authentication authentication, @RequestBody SignUp signUp){
+//        userService.updateUserProfile(authentication.getName(), signUp);
+//        return ResponseEntity.ok().build();
+//    }
 
 
 //
