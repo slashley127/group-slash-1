@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, useParams, withRouter, useNavigate } from 'react-router-dom';
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
-import Swal from 'sweetalert2/dist/sweetalert2.js';
+import Swal from 'sweetalert2';
 
 import withNavigateHook from './NavigateHook';
 
@@ -20,6 +20,7 @@ function withParams(Component) {
 
 
 class ActivityEdit extends React.Component {
+
 
     emptyInfo = {
         name:"",
@@ -62,8 +63,9 @@ class ActivityEdit extends React.Component {
         async handleSubmit(e) {
             e.preventDefault();
             const {info} = this.state;
+
             if (!info.id) {
-                await fetch ('/activities', {
+                await fetch ('/api/activities', {
                     method: "POST",
                     headers: {
                         'Accept': "application/json",
@@ -72,7 +74,7 @@ class ActivityEdit extends React.Component {
                     body: JSON.stringify(info)
                 });
             } else {
-                await fetch(`/activities/${info.id}`, {
+                await fetch(`/api/activities/${info.id}`, {
                     method: "PUT",
                     headers: {
                         'Accept': "application/json",
@@ -84,10 +86,10 @@ class ActivityEdit extends React.Component {
             Swal.fire({
                 title: 'Activity Logged',
                 text: 'You successfully logged and activity!',
-                icon: 'check',
+                icon: 'success',
                 confirmButtonText: 'Awesome!',
             }).then((result) => {
-                this.props.history.push('/api/activities');
+                this.props.navigation("/activities");
                 return true;
             
                 });
@@ -153,7 +155,7 @@ class ActivityEdit extends React.Component {
             }
         }
     
-    }
+    
     export default withParams(withNavigateHook(ActivityEdit));
 
 

@@ -11,11 +11,16 @@ class ActivityList extends Component {
   };
 
   async componentDidMount() {
-    const response = await fetch("http://localhost:8080/activities");
+  this.resetPage();
+
+  }
+
+  async resetPage(){
+
+    const response = await fetch("/api/activities");
     const body = await response.json();
     this.setState({ activities: body });
     this.getCharts();
-
   }
 
   /* showGoalReachedAlert(activities) {
@@ -28,6 +33,16 @@ class ActivityList extends Component {
    }
    */
 
+   async toggleFavorite(id) {
+    await fetch('/api/activities/' + id + '/favorite', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
+    await this.resetPage();
+}
+
   async getCharts() {
     const apiURL = 'https://quickchart.io/chart/create'
 
@@ -35,15 +50,12 @@ class ActivityList extends Component {
     const dates = this.state.activities.map(item => item?.month + "/" + item?.day);
     const durations = this.state.activities.map(item => item?.durationOfActivity);
 
-    console.log(dates);
-    console.log(durations)
-
     const chartData = {
       chart: {
         type: 'bar',
         data: {
-          labels:dates,
-         // Select the month and day from activities into an array ['9/5', '9/6']
+          labels: dates,
+          // Select the month and day from activities into an array ['9/5', '9/6']
           datasets: [{
             label: 'Screen Time in Minutes',
             data: durations, // Select the durations from the activities
@@ -112,8 +124,8 @@ class ActivityList extends Component {
     });
   }
   render() {
-    const { activities, isLoading, chartUrl} = this.state;
-  
+    const { activities, isLoading, chartUrl } = this.state;
+
 
     if (isLoading) {
       return <p>Loading...</p>;
@@ -149,6 +161,9 @@ class ActivityList extends Component {
                     <ButtonGroup>
                       <Button size="sm" color="primary" tag={Link} to={"/activities/" + activity.id}>Edit</Button>
                       <Button size="sm" color="danger" onClick={() => this.remove(activity.id)}>Delete</Button>
+                      <button onClick={() => this.toggleFavorite(activity.id)}>
+                        {activity.isFavorite ? 'Unfavorite' : 'Favorite'}
+                      </button>
                     </ButtonGroup>
                   </td>
                 </tr>
