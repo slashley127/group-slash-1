@@ -1,102 +1,47 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { Container, Label, Form, FormGroup, Input, Button, FormText } from "reactstrap";
 import { useParams } from "react-router-dom";
 import goNavigate from "./Navigate";
 
 
-function withParams(Component) {
-    return props => 
-    <Component {...props} params={useParams()} />;
-}
 
-class ProfileInput extends Component{
+function ProfileInput (){
+    const [childName, setChildName] = useState('');
+    const [dateOfBirth, setDateOfBirth] = useState('');
+    const [profilePictureUrl, setProfilePictureUrl] = useState('');
 
-    emptyItem = {
-        childPicture:"",
-        childName:"",
-        dateOfBirth:""
-    };
-
-    constructor(props) {
-        super(props);
-        this.state={item: this.emptyItem};
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    };
-
-    async componentDidMount() {
-        const {id} = this.props.params;
-        if (id !== 'new') {
-            const child = await(await fetch(`/child/${id}`)).json();
-            this.setState({item: child});
-        }
-    };
-
-    handleChange(e) {
-        const target = e.target;
-        const value = target.value;
-        const name = target.name;
-        let item = {...this.state.item};
-        item[name] = value;
-        this.setState({item});
-    };
-
-    async handleSubmit(e) {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const {item} = this.state;
-        if (!item.id) {
-            await fetch('/child', {
-                method: "POST", 
-                headers: {
-                    'Accept': "application/json",
-                    'Content-Type': "application/json"
-                },
-                body: JSON.stringify(item)
-            });
-        } else {
-            await fetch(`/child/${item.id}`, {
-                method: "PUT",
-                headers: {
-                    'Accept': "application/json",
-                    'Content-Type': "application/json"
-                },
-                body: JSON.stringify(item)
-            });
-        }
-        this.props.navigation("/profile");
-    }
 
-    render() {
-        const {item} = this.state;
-        const title = <h2>Child Profile</h2>;
+        setChildName('');
+        setDateOfBirth('');
+        setProfilePictureUrl('');
+    };
 
-        return<div>
+    return (
+        <div>
             <Container>
-                {title}
-                <Form onSubmit={this.handleSubmit}>
+                <h2>Add Child Profile</h2>
+                <Form onSubmit={handleSubmit}>
                     <FormGroup>
-                        <Label for="childPicture">Upload Child Photo</Label>
-                        <Input type="file" nname='file' id="childPicture" 
-                        onChange={this.handleChange}/>
+                        <Label for="childName">Child Name:</Label>
+                        <Input type="text" id="childName" value={childName} onChange={(e) => setChildName(e.target.value)} />
                     </FormGroup>
                     <FormGroup>
-                        <Label for="childName">Name</Label>
-                        <Input type="text" name="childName" id="childName" value={item.childName || ''}
-                        onChange={this.handleChange} autoComplete="childName"/>
+                        <Label for="dateOfBirth">Date of Birth:</Label>
+                        <Input type="date" id="dateOfBirth" value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} />
                     </FormGroup>
                     <FormGroup>
-                        <Label for="dateOfBirth">Date Of Birth</Label>
-                        <Input type="text" name="dateOfBirth" id="dateOfBirth" value={item.dateOfBirth || ''}
-                        onChange={this.handleChange} placeholder="MM/DD/YYYY"/> 
+                        <Label for="profilePictureUrl">Profile Picture:</Label>
+                        <Input type="text" id="profilePictureUrl" value={profilePictureUrl} onChange={(e) => setProfilePictureUrl(e.target.value)} />
                     </FormGroup>
-                    <FormGroup>
-                        <Button color="primary" type="submit">Submit</Button>
-                    </FormGroup>
+                    <Button type="submit" color="primary">Submit</Button>
                 </Form>
             </Container>
         </div>
-    }
+    )
+
 
 }
 
-export default withParams(goNavigate(ProfileInput));
+export default ProfileInput;

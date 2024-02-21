@@ -6,6 +6,9 @@ package org.launchcode.KidVenture.controllers;
 import org.apache.coyote.Response;
 import org.launchcode.KidVenture.models.Child;
 import org.launchcode.KidVenture.models.data.ChildRepository;
+import org.launchcode.KidVenture.models.data.ChildService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -20,48 +24,38 @@ import java.util.List;
 public class ChildController {
 
 
-    private final ChildRepository childRepository;
-
-
-    public ChildController(ChildRepository childRepository){
-        this.childRepository = childRepository;
-    }
+    @Autowired
+    private ChildService childService;
 
 
     @GetMapping
-    public List<Child> getChildren(){
-        return childRepository.findAll();
+    public ResponseEntity<List<Child>> getAllChildProfiles(){
+        List<Child> childProfiles = childService.getAllChild();
+        return new ResponseEntity<>(childProfiles, HttpStatus.OK);
     }
-
 
     @GetMapping("/{id}")
-    public Child getChild(@PathVariable int id){
-        return childRepository.findById(id).orElseThrow(RuntimeException::new);
+    public ResponseEntity<Child> getChildById(@PathVariable Long id){
+        Optional<Child> childProfile = childService.getChildById(id);
+        return childProfile.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
-
 
     @PostMapping
-    public ResponseEntity createChild(@RequestBody Child child) throws URISyntaxException {
-        Child savedChild = childRepository.save(child);
-        return ResponseEntity.created(new URI("/child/" + savedChild.getId())).body(savedChild);
+    public ResponseEntity<Child> createChild(@RequestBody Child child){
+        Child createdChild = childService.createChild(child);
+        return new ResponseEntity<>(createdChild, HttpStatus.CREATED);
     }
 
-
-    @PutMapping("/{id}")
-    public ResponseEntity updateChild(@PathVariable int id, @RequestBody Child child){
-        Child currentChild = childRepository.findById(id).orElseThrow(RuntimeException::new);
-        currentChild.setChildName(child.getChildName());
-        currentChild.setDateOfBirth(child.getDateOfBirth());
-        currentChild = childRepository.save(child);
-
-
-        return ResponseEntity.ok(currentChild);
+    @PutMapping
+    public ResponseEntity<Child> updateChild(@PathVariable Long id, @RequestBody Child child){
+        Child updatedChildProfile = childService.updateChild(id, child);
+        return new ResponseEntity<>(updatedChildProfile, HttpStatus.OK);
     }
-
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteChild(@PathVariable int id){
-        childRepository.deleteById(id);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<Void> deleteChild(@PathVariable Long id){
+        childService.deleteChild(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

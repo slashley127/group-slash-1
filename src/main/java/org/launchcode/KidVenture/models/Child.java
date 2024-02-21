@@ -4,9 +4,11 @@ package org.launchcode.KidVenture.models;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -16,14 +18,14 @@ public class Child {
 
 
     @Id
-    @GeneratedValue
-    private int id;
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String childName;
 
+    @JsonFormat(pattern = "MM/dd/yyyy")
+    private LocalDate dateOfBirth;
 
-    @JsonFormat(pattern="MM/dd/yyyy")
-    private Date dateOfBirth;
+    private String profilePictureUrl;
 
 
 
@@ -32,19 +34,20 @@ public class Child {
     }
 
 
-    public Child( String childName, Date dateOfBirth){
+    public Child( String childName, LocalDate dateOfBirth, String profilePictureUrl){
         super();
         this.childName = childName;
         this.dateOfBirth = dateOfBirth;
+        this.profilePictureUrl = profilePictureUrl;
     }
 
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public String getChildName() {
@@ -57,16 +60,23 @@ public class Child {
     }
 
 
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
 
+    public String getProfilePictureUrl(){
+        return profilePictureUrl;
+    }
+
+    public void setProfilePictureUrl(String profilePictureUrl){
+        this.profilePictureUrl = profilePictureUrl;
+    }
 
 
     @Override
