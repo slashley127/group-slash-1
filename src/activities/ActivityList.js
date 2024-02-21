@@ -3,57 +3,104 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { Button, ButtonGroup } from 'reactstrap';
 
+
 class ActivityList extends Component {
   state = {
-    activities: [
-      {
-        id: 1,
-        name: "Xyz",
-        child: "Oliver",
-        month: "Septemeber",
-        day: "Friday",
-        year: "2024",
-        typeOfActivity: "Coloring",
-        durationOfActivity: 20,
-        mood: "calm",
-
-
-
-        id: 2,
-        name: "Xyz",
-        child: "Alex",
-        month: "May",
-        day: "Saturday",
-        year: "2023",
-        typeOfActivity: "Spelling",
-        durationOfActivity: 30,
-        mood: "happy",
-
-
-
-        id: 3,
-        name: "Xyz",
-        child: "Molly",
-        month: "October",
-        day: "Sunday",
-        year: "2022",
-        typeOfActivity: "Watching TV",
-        durationOfActivity: 40,
-        mood: "excited",
-      }]
-  }
-
+    activities: [],
+    chartUrl: ""
+  };
 
   async componentDidMount() {
-    console.log("her")
-    const response = await fetch("/api/activities");
-    console.log(response)
+    const response = await fetch("http://localhost:8080/activities");
     const body = await response.json();
     this.setState({ activities: body });
+    this.getCharts();
+
+  }
+
+  /* showGoalReachedAlert(activities) {
+     for (let activity of activities) {
+ 
+       return true; // TODO add in if statements for measurements
+ 
+     }
+ 
+   }
+   */
+
+  async getCharts() {
+    const apiURL = 'https://quickchart.io/chart/create'
+
+
+    const dates = this.state.activities.map(item => item?.month + "/" + item?.day);
+    const durations = this.state.activities.map(item => item?.durationOfActivity);
+
+    console.log(dates);
+    console.log(durations)
+
+    const chartData = {
+      chart: {
+        type: 'bar',
+        data: {
+          labels:dates,
+         // Select the month and day from activities into an array ['9/5', '9/6']
+          datasets: [{
+            label: 'Screen Time in Minutes',
+            data: durations, // Select the durations from the activities
+          }],
+        },
+        options: {
+          legend: {
+            labels: {
+              fontSize: 14,
+              fontStyle: 'bold',
+              fontColor: '#E71D06',
+            }
+          },
+          title: {
+            display: true,
+            text: 'Screen Time Tracker',
+            fontSize: 20,
+            fontColor: '#066CE7',
+          },
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true,
+                  fontFamily: 'sans-serif',
+                  fontColor: '#FAFDF8',
+                },
+              },
+            ],
+            xAxes: [
+              {
+                ticks: {
+                  fontFamily: 'sans-serif',
+                  fontStyle: 'bold',
+                  fontColor: '#0CC6DD',
+                },
+              },
+            ],
+          },
+        }
+      }
+    };
+
+    const response = await fetch(apiURL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(chartData),
+    });
+    const parsedResponse = await response.json();
+
+    this.setState({ chartUrl: parsedResponse.url });
   }
 
   async remove(id) {
-    await fetch(`/api/activities/${id}`, {
+    await fetch(`/activities/${id}`, {
       method: 'DELETE',
       headers: {
         'Accept': 'application/json',
@@ -64,14 +111,20 @@ class ActivityList extends Component {
       this.setState({ activities: updatedActivities });
     });
   }
-
   render() {
-    const { activities } = this.state;
+    const { activities, isLoading, chartUrl} = this.state;
+  
 
+    if (isLoading) {
+      return <p>Loading...</p>;
+    }
     return (
       <div className="App">
         <header className="App-header">
           <div className="App-intro">
+            <div className="float-right">
+              <Button color="success" tag={Link} to="/activities/new">Add Activity</Button>
+            </div>
             <h2>Activities</h2>
             <table>
               <tr>
@@ -84,7 +137,7 @@ class ActivityList extends Component {
                 <th>Action</th>
               </tr>
 
-              {activities.map(activity =>
+              {activities?.map(activity =>
                 <tr key={activity.id}>
                   <td>{activity.name}</td>
                   <td>{activity.child}</td>
@@ -94,7 +147,7 @@ class ActivityList extends Component {
                   <td>{activity.mood}</td>
                   <td>
                     <ButtonGroup>
-                      <Button size="sm" color="primary" tag={Link} to={"/api/activities/" + activity.id}>Edit</Button>
+                      <Button size="sm" color="primary" tag={Link} to={"/activities/" + activity.id}>Edit</Button>
                       <Button size="sm" color="danger" onClick={() => this.remove(activity.id)}>Delete</Button>
                     </ButtonGroup>
                   </td>
@@ -102,6 +155,7 @@ class ActivityList extends Component {
               )}
             </table>
           </div>
+          <div className='charts'><img src={chartUrl}></img></div>
         </header>
       </div>
     );

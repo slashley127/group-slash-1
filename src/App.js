@@ -35,7 +35,7 @@ class App extends Component {
     <Routes>
       <Route path='/' exact={true} element = { <Home/>}/>
       <Route path='/activities' exact={true} element={<ActivityList/>}/>
-      <Route path='/activities/id' element={<ActivityEdit/>}/>
+      <Route path='/activities/:id' element={<ActivityEdit/>}/>
     </Routes>
   </div>
 
