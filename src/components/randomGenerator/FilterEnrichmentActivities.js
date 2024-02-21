@@ -41,32 +41,33 @@ export default class FilteredEnrichmentActivities extends Component {
     return (
       <div className="randomGenerator">
         <Enrichment />
-        <p>Or, filter </p>
+        <div className= "filtered-activity-container">
+        <h3 className= "filter-activities-heading">Show Me Activities For:</h3>
         <div className = "checkbox-wrapper">
         <Checkbox
           id="indoor"
-          title="Show me indoor activities!"
+          title="indoors"
           name="indoor"
           checked={this.state.categories.indoor}
           handleChange={this.handleChange}
         />
         <Checkbox
           id="toddler"
-          title="Show me activities for toddlers!"
+          title="toddlers"
           name="toddler"
           checked={this.state.categories.toddler}
           handleChange={this.handleChange}
         />
         <Checkbox
           id="bigKid"
-          title="Show me activities for big kids!"
+          title="big kids"
           name="bigKid"
           checked={this.state.categories.bigKid}
           handleChange={this.handleChange}
         />
         <Checkbox
           id="teenager"
-        title="Show me activities for teenagers!"
+        title="teenagers"
           name="teenager"
           checked={this.state.categories.teenager}
           handleChange={this.handleChange}
@@ -79,6 +80,7 @@ export default class FilteredEnrichmentActivities extends Component {
               : filteredActivities
           }
         />
+      </div>
       </div>
     );
   }

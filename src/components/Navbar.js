@@ -40,7 +40,10 @@ const Navbar = () => {
 
     return (
         <nav class ="navbar">
+            <p className="brand">KidVenture</p>
+            <img class="brand-pic" src='https://s3-alpha-sig.figma.com/img/36b3/0f6f/cdb9fdcca52ac723e2f1f2984929e22c?Expires=1709510400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=SYoXG6uDIBbonNgkag9JyrlXAx9LLC7rOtaGQXKVqBQDe2IVMyKRNx7W2CjUsi-CstcbFCoO5fTb64tl2XRDDfUGQjZ7uFHorfLuQz66vfyMjZKfjGU4TaqtQU~b3vpBsVPmshoGE-hHqybAIiCyZEQZTzFvdKPbGnds6IzzfbLdXvI-9VXxXHED8pBcUxW0r9yxdHv2BaNNgrjiaVz1yrefX-K0QFpSySGKwAZaMgUucM4u2QOiLHwlcDTlRmvDAffG67r7OToIwft9gVMNULENEmkXWGsZC9BvaUM93iwoJ-gMsPZoCSBC~PMQBczvrGTL3tBvdKF6LvudQrzaVA__'/>
             <div class = "container">
+               
                 
 
                 {/* Logo from Figma Design Proposal */}
@@ -52,7 +55,7 @@ const Navbar = () => {
                 <div class = "menu-icon" onClick = {handleClick}>
                     <i className= {click ? 'fas fa-times' : 'fas fa-bars'} /> 
                 </div>
-
+            
                 {/* Navigation links */}
             <div>
                 <ul class= {click ? 'nav-menu active' : 'nav-menu'} >

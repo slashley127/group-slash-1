@@ -24,13 +24,12 @@ function Enrichment() {
 
 
     return (
-        <div>
-            <h1>Random Activity Generator</h1>
-            <p> Cannot think of what activity to do with your children that does not involve screens? Click below for a random idea!</p>
+        <div className= "random">
+            <h1 className= "random-generator-header-text">Random Activity Generator</h1>
             <div>
                 {enrichment && <Card enrichment = {enrichment}/>}
             </div>
-            <Button onClick ={getActivity}>Generate Random Activity</Button>
+            <Button className="generate-button" onClick ={getActivity}>Generate</Button>
         </div>
     )
 

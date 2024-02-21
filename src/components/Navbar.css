@@ -8,6 +8,21 @@
   align-items: center;
   font-size: 1.2rem;
 }
+.brand{
+  color: #000;
+ font-family: Montserrat;
+ font-size: 30px;
+ font-style: normal;
+ font-weight: 800;
+ line-height: 60px; /* 150% */
+ letter-spacing: -2px;
+ justify-self: start;
+
+}
+.brand-pic {
+  max-width:50px;
+  padding: 10px
+}
   
 .navbar-logo {
   color: #fff;

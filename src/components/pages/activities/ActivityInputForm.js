@@ -16,8 +16,8 @@ class ActivityEdit extends React.Component {
 
     emptyInfo = {
         nameOfActivity:"",
-        child:"",
         date:"",
+        child: "",
         durationOfActivity:"",
         typeOfActivity:"",
         mood: ""
@@ -26,7 +26,7 @@ class ActivityEdit extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            info: this.emptyInfo
+            info: this.emptyInfo,
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);

@@ -8,10 +8,11 @@ import FilteredEnrichmentActivities from './components/randomGenerator/FilterEnr
 import Navbar from "./components/Navbar";
 import Home from "./components/pages/Home"
 import Profile from "./components/pages/Profile"
-import Child from "./components/pages/Child"
+import Child from "./components/pages/Child/Child"
 import Analyzer from "./components/pages/Analyzer"
 import About from "./components/pages/About"
 import ContactForm from './components/pages/ContactForm';
+import ProfileInput from './components/pages/Child/ProfileInput';
 
 
 class App extends Component {
@@ -22,18 +23,19 @@ class App extends Component {
        <Navbar/>
       <div>
       <div className= "blue-rectangle">
-        <h1>Welcome!</h1>
+        <h1 className="welcome-text">Hello, KidVenturer!</h1>
+        <img className ="profile-pic" src= "https://source.unsplash.com/smiling-woman-wearing-turban-i2hoD-C2RUA"/>
       </div>
   
       <Routes>
         <Route path='/' exact={true} element = { <Home/>}/>
         <Route path='/activities' exact={true} element={<ActivityList/>}/>
-        <Route path='/activities/:id' element={<ActivityEdit/>}/>
+        <Route path='/activities/new' element={<ActivityEdit/>}/>
+        <Route path='/activities/:id' element = {<ActivityEdit/>}/>
         <Route path= '/enrichment/random' element = { <Enrichment/>}/>
         <Route path='/enrichment/filtered' element ={ <FilteredEnrichmentActivities/>}/>
         <Route path= '/about' element = {<About/>}/>
         <Route path='/profile' element = {<Profile/>}/>
-        <Route path='/child' element = {<Child/>}/>
         <Route path='/contact' element = {<ContactForm/>}/>
       </Routes>
         <footer className="orange-rectangle"></footer>

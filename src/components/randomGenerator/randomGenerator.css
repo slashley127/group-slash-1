@@ -5,25 +5,115 @@
     list-style: none;
     align-items: center;
     justify-content:left;
-    background-color: salmon;
     border-color: black;
-    padding: 10px;
+    padding: 20px;
+    color: black;
+    font-family: Montserrat;
+    font-size: 2rem;
+    border-radius:1%;
+    text-align: center;
+    
 }
 
-article {
+.filtered-activity-container {
+  border-radius: 15px;
+  background: rgba(255, 209, 102, 0.80);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  padding: 30px;
+  margin-top: 30px;
+}
+
+.filtered-activities {
     padding: 10px;
-    background-color: CornflowerBlue;
-    color: white;
+    background-color: white;
+    border-radius: 1%;
+    color: black;
     text-align: center;
+    border-radius: 25%;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border:gray;
+    font-family: Montserrat;
+    font-size: 1rem;
   }
+  .random-activity-main {
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 1.3rem;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 3.75rem; /* 150% */
+    background-color: none;
+
+  }
+  .filter-activities-heading {
+    padding: 30px;
+    color: black;
+    font-family: Montserrat;
+    font-size: 3rem;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 3.75rem; /* 150% */
+    background-color: none;
+
+  }
+.random{
+  background:  rgba(239, 71, 111, 0.80);;
+  border-radius: 1%;
+  align-items: center;
+
+}
+.random-generator-header-text{
+  color: #FFF;
+    font-family: Montserrat;
+    font-size: 2.5rem;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 3.75rem; /* 150% */
+    letter-spacing: -0.125rem;
+}
+.filter-activities{
+  color: white;
+  font-family: Montserrat;
+  font-size: 2.5rem;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 3.75rem; /* 150% */
+  letter-spacing: -0.125rem;
+
+}
+
+.random-generator-text{
+  color: #FFF;
+  font-family: Montserrat;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 3.75rem; /* 150% */
+  letter-spacing: -0.125rem;
+
+}
 .random-generator {
     max-width: 160px;
     max-height: fit-content;
     background-color: CornflowerBlue;
     color: white;
     text-align: center;
+    border-radius: 5%;
 }
   
+.generate-button{
+  border-radius: 15px;
+  background: #06D6A6;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  max-width: 200px;
+  max-height:fit-content;
+  color: #FFF;
+  font-family: Montserrat;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 800;
+  
+}
   ul {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
