@@ -93,7 +93,7 @@ class ActivityEdit extends React.Component {
                 const {info} = this.state;
                 const title = <h2>{info.id ? 'Edit Activity' : 'Add Activity'}</h2>;
             
-                return <div>
+                return <div className= "body-container">
                     <Container className="activity-input-container">
                         <h2 className ="header-add-activity">Add Activity</h2>
                         <Form onSubmit={this.handleSubmit} className="activity-form">

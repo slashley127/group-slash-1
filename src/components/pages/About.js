@@ -4,7 +4,7 @@ import './pages.css'
 class About extends Component {
     render() {
         return (
-            <div className = "App">
+            <div className = "body-container">
                 
         
                 <h1>What we're about</h1>

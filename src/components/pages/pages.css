@@ -115,3 +115,9 @@ textarea {
     width: 500px;
     height: 300px;
 }
+
+.body-container {
+    max-width: 1000px;
+    align-self: center;
+    margin-left: 300px;
+}

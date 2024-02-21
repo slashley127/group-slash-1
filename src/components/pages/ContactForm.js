@@ -1,20 +1,23 @@
 import { useState } from 'react';
+import React, { useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import './pages.css'
 
 const ContactForm = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [stateMessage, setStateMessage] = useState(null);
+    const form = useRef();
     const sendEmail = (e) => {
       e.persist();
       e.preventDefault();
       setIsSubmitting(true);
       emailjs
         .sendForm(
-          process.env.REACT_APP_SERVICE_ID,
-          process.env.REACT_APP_TEMPLATE_ID,
-          e.target,
-          process.env.REACT_APP_PUBLIC_KEY
+          'service_9vc5qsi',
+          'template_whwdgzo',
+          form.current, 
+          '7SWplZP2GBIcqp_I3',
+
         )
         .then(
           (result) => {
@@ -37,11 +40,11 @@ const ContactForm = () => {
       e.target.reset();
     };
     return (
-      <div className = "App">
+      <div className = "body-container">
         <div className="contact-form">
       <h2>Contact us!</h2>
       <p>We'd love to hear how you like our app and any suggestions you have!</p>
-      <form onSubmit={sendEmail}>
+      <form ref={form} onSubmit={sendEmail}>
         <label>Name</label>
         <input type="text" name="user_name" />
         <label>Email</label>
