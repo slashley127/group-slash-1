@@ -8,14 +8,17 @@ import java.util.Optional;
 
 @Service
 public class ChildService {
-    @Autowired ChildRepository childRepository;
+    @Autowired
+    private ChildRepository childRepository;
+
+    public Optional<Child> getChildProfileById(Long id){
+        return childRepository.findById(id);
+    }
+
+
 
     public List<Child> getAllChild(){
         return childRepository.findAll();
-    }
-
-    public Optional<Child> getChildById(Long id){
-        return childRepository.findById(id);
     }
 
 
@@ -23,12 +26,25 @@ public class ChildService {
         return childRepository.save(child);
     }
 
-    public Child updateChild(Long id, Child child){
-        child.setId(id);
-        return childRepository.save(child);
+    public Optional<Child> updateChild(Long id, Child updatedChild){
+        Optional<Child> existingChildProfileOptional = childRepository.findById(id);
+        if(existingChildProfileOptional.isPresent()) {
+            Child existingChild = existingChildProfileOptional.get();
+            existingChild.setChildName(updatedChild.getChildName());
+            existingChild.setDateOfBirth(updatedChild.getDateOfBirth());
+            existingChild.setProfilePictureUrl(updatedChild.getProfilePictureUrl());
+            return Optional.of(childRepository.save(existingChild));
+        }else {
+            return Optional.empty();
+        }
     }
 
-    public void deleteChild(Long id){
-        childRepository.deleteById(id);
+    public boolean deleteChild(Long id){
+        if(childRepository.existsById(id)) {
+            childRepository.deleteById(id);
+            return true;
+        }else {
+            return false;
+        }
     }
 }

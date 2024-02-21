@@ -1,37 +1,19 @@
-import React, { Component } from "react";
-import { Button } from "reactstrap";
+import React, { Component, useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom/dist";
+import { Button, Container, ListGroup, ListGroupItem } from "reactstrap";
 
 
-class Profile extends Component {
+function Profile() {
+    const [createdChildId, setCreatedChildId] = useState(null);
+    const {id} = useParams('');
+    return (
+      <div>
+        <h1>User Profile</h1>
+        <p>This is the user profile page.</p>
+        <Link to={`/profile/${createdChildId}`}>View Profile</Link>
+      </div>
+    );
+  }
 
-    state = {
-        child: []
-    };
-
-
-    async componentDidMount() {
-        const response = await fetch("/child");
-        const body = await response.json();
-        this.setState({child: body});
-    }
-
-
-    render(){
-        const {child} = this.state;
-
-        return<div>
-            <header>
-                <h2>My Child</h2>
-            </header>
-            <body>
-                {child.map(child => 
-                <h5 key={child.id}>{child.childName}</h5>
-                )}
-            </body>
-            <Button color='primary' type='submit'>Edit</Button>
-        </div>
-    }
-
-}
 
 export default Profile;

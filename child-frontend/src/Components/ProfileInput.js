@@ -1,21 +1,36 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import { Container, Label, Form, FormGroup, Input, Button, FormText } from "reactstrap";
-import { useParams } from "react-router-dom";
-import goNavigate from "./Navigate";
+import { Link } from "react-router-dom";
 
 
 
 function ProfileInput (){
+    const [createdChildId, setCreatedChildId] = useState(null);
     const [childName, setChildName] = useState('');
     const [dateOfBirth, setDateOfBirth] = useState('');
     const [profilePictureUrl, setProfilePictureUrl] = useState('');
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        setChildName('');
-        setDateOfBirth('');
-        setProfilePictureUrl('');
+        console.log('Form submitted');
+
+        const response = await fetch('/child', {
+            method:"POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({childName, dateOfBirth, profilePictureUrl})
+        });
+
+        if(response.ok){
+            const child = await response.json();
+            setCreatedChildId(child.id);
+            // window.location.href = '/profile';
+        } else {
+            console.error('Failed to add child profile');
+        }
     };
 
     return (
@@ -29,17 +44,24 @@ function ProfileInput (){
                     </FormGroup>
                     <FormGroup>
                         <Label for="dateOfBirth">Date of Birth:</Label>
-                        <Input type="date" id="dateOfBirth" value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} />
+                        <Input type="text" id="dateOfBirth" value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} />
                     </FormGroup>
                     <FormGroup>
                         <Label for="profilePictureUrl">Profile Picture:</Label>
                         <Input type="text" id="profilePictureUrl" value={profilePictureUrl} onChange={(e) => setProfilePictureUrl(e.target.value)} />
                     </FormGroup>
                     <Button type="submit" color="primary">Submit</Button>
+                    {createdChildId && (
+                        <div>
+                            <p>Child created with Id: {createdChildId}</p>
+                            <Link to={`/child/${createdChildId}`}>View Profile</Link>
+                        </div>
+                    )}
+                    <Link to='/profile' color='secondary'>Cancel</Link>
                 </Form>
             </Container>
         </div>
-    )
+    );
 
 
 }

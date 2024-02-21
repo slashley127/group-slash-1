@@ -29,33 +29,31 @@ public class ChildController {
 
 
     @GetMapping
-    public ResponseEntity<List<Child>> getAllChildProfiles(){
-        List<Child> childProfiles = childService.getAllChild();
-        return new ResponseEntity<>(childProfiles, HttpStatus.OK);
+    public List<Child> getAllChildProfiles(){
+        return childService.getAllChild();
     }
 
+
     @GetMapping("/{id}")
-    public ResponseEntity<Child> getChildById(@PathVariable Long id){
-        Optional<Child> childProfile = childService.getChildById(id);
-        return childProfile.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    public ResponseEntity<Child> getChildById(@PathVariable("id") Long id){
+        Optional<Child> childProfileOptional = childService.getChildProfileById(id);
+        return childProfileOptional.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
     public ResponseEntity<Child> createChild(@RequestBody Child child){
         Child createdChild = childService.createChild(child);
-        return new ResponseEntity<>(createdChild, HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdChild);
     }
 
-    @PutMapping
-    public ResponseEntity<Child> updateChild(@PathVariable Long id, @RequestBody Child child){
-        Child updatedChildProfile = childService.updateChild(id, child);
-        return new ResponseEntity<>(updatedChildProfile, HttpStatus.OK);
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateChild(@PathVariable("id") Long id, @RequestBody Child updatedChild){
+        Optional<Child> updatedChildProfileOptional = childService.updateChild(id, updatedChild);
+        return updatedChildProfileOptional.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteChild(@PathVariable Long id){
-        childService.deleteChild(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+
 }
