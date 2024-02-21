@@ -14,6 +14,7 @@ public class Activity extends AbstractEntity {
     private String child;
 
 
+    private boolean isFavorite;
 
     private int month;
 
@@ -59,10 +60,14 @@ public class Activity extends AbstractEntity {
         this.isEnrichmentActivity = isEnrichmentActivity;
     }
 
+    public boolean getIsFavorite() {return isFavorite;}
+
     public boolean getIsScreenTime() {
         return isScreenTime;
     }
-
+    public void setIsFavorite(boolean favorite) {
+        this.isFavorite = favorite;
+    }
     public void setIsScreenTime(boolean isScreenTime) {
         this.isScreenTime = isScreenTime;
     }

@@ -10,7 +10,8 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/activities")
+@RequestMapping("/api/activities")
+@CrossOrigin(origins = "*")
 public class ActivityController {
 
     private final ActivityRepository activityRepository;
@@ -62,6 +63,14 @@ public class ActivityController {
     public ResponseEntity deleteActivity(@PathVariable int id) {
         activityRepository.deleteById(id);
         return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/{id}/favorite")
+    public ResponseEntity favoriteFeature(@PathVariable int id) {
+        Activity currentActivity = activityRepository.findById(id).orElseThrow(RuntimeException::new);
+        currentActivity.setIsFavorite(!currentActivity.getIsFavorite());
+        activityRepository.save(currentActivity);
+        return ResponseEntity.ok(currentActivity);
     }
 
 }
