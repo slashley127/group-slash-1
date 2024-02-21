@@ -49,7 +49,7 @@ class EmergencyContact extends Component {
                     <ButtonGroup>
                         <Button tag={Link} to="/emergencycontacts/new
                         +">Add Emergency Contact</Button>
-                        <Button size="sm" color="primary" tag={Link} to={"/emergencyContacts/" + emergencyContact.id}>Edit</Button>
+                        <Button size="sm" color="primary" tag={Link} to={"/emergencycontacts/" + emergencyContact.id}>Edit</Button>
                         <Button size="sm" color="danger" onClick={() => this.remove(emergencyContact.id)}>Delete</Button>
                     </ButtonGroup>
                 </td>

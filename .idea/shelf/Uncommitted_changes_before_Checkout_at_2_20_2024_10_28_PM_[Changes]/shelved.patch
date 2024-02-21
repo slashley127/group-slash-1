@@ -1,0 +1,171 @@
+Index: src/emergencyContact/EmergencyContact.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React, { Component } from 'react';\r\nimport { Button, ButtonGroup, Container, Table } from 'reactstrap';\r\nimport { Link } from 'react-router-dom';\r\n\r\nclass EmergencyContact extends Component {\r\n\r\n    constructor(props) {\r\n        super(props);\r\n        this.state = {emergencyContacts: []};\r\n        this.remove = this.remove.bind(this);\r\n    }\r\n\r\n    componentDidMount() {\r\n        fetch('/emergencycontacts')\r\n            .then(response => response.json())\r\n            .then(data => this.setState({emergencycontacts: data}));\r\n    }\r\n    async remove(id) {\r\n        await fetch(`/emergencycontacts/${id}`, {\r\n            method: 'DELETE',\r\n            headers: {\r\n                'Accept': 'application/json',\r\n                'Content-Type': 'application/json'\r\n            }\r\n        }).then(() => {\r\n            let updatedEmergencyContacts = [...this.state.emergencyContacts].filter(i => i.id !== id);\r\n            this.setState({emergencyContacts: updatedEmergencyContacts});\r\n        });\r\n    }\r\n\r\n    render() {\r\n        const {emergencyContacts} = this.state;\r\n\r\n        const emergencyContactBody = emergencyContacts.map(emergencyContact => {\r\n            return <tr key={emergencyContact.id}>\r\n                <td>{emergencyContact.firstName}</td>\r\n                <td>{emergencyContact.lastName}</td>\r\n                <td>{emergencyContact.phoneNumber}</td>\r\n                <td>{emergencyContact.relationship}</td>\r\n                <td>{emergencyContact.workplace}</td>\r\n                <td>{emergencyContact.age}</td>\r\n                <td>{emergencyContact.address}</td>\r\n                <td>{emergencyContact.city}</td>\r\n                <td>{emergencyContact.state}</td>\r\n                <td>{emergencyContact.zip}</td>\r\n                <td>{emergencyContact.notes}</td>\r\n\r\n                <td>\r\n                    <ButtonGroup>\r\n                        <Button tag={Link} to=\"/emergencycontacts/new\r\n                        +\">Add Emergency Contact</Button>\r\n                        <Button size=\"sm\" color=\"primary\" tag={Link} to={\"/emergencyContacts/\" + emergencyContact.id}>Edit</Button>\r\n                        <Button size=\"sm\" color=\"danger\" onClick={() => this.remove(emergencyContact.id)}>Delete</Button>\r\n                    </ButtonGroup>\r\n                </td>\r\n            </tr>\r\n    });\r\n\r\n        return (\r\n            <div>\r\n                <Container>\r\n                    <div>\r\n                        <Button color=\"success\" tag={Link} to=\"/emergencycontacts/new\">Add Emergency Contact</Button>\r\n                    </div>\r\n                    <h2>Emergency Contacts</h2>\r\n\r\n                    <Table>\r\n                        <thead>\r\n                        <tr>\r\n                            <th>First Name</th>\r\n                            <th>Last Name</th>\r\n                            <th>Phone Number</th>\r\n                            <th>Relationship</th>\r\n                            <th>Workplace</th>\r\n                            <th>Age</th>\r\n                            <th>Address</th>\r\n                            <th>City</th>\r\n                            <th>State</th>\r\n                            <th>Zip</th>\r\n                            <th>Notes</th>\r\n                        </tr>\r\n                        </thead>\r\n\r\n                        <tbody>\r\n                        {emergencyContactBody}\r\n                        </tbody>\r\n\r\n                        \r\n                    </Table>\r\n\r\n                </Container>\r\n            </div>\r\n        );\r\n    }\r\n}\r\n\r\nexport default EmergencyContact;
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/emergencyContact/EmergencyContact.js b/src/emergencyContact/EmergencyContact.js
+--- a/src/emergencyContact/EmergencyContact.js	(revision 296174b363ff68a509bd6cd01cacd546d421aad2)
++++ b/src/emergencyContact/EmergencyContact.js	(date 1708484967022)
+@@ -49,7 +49,7 @@
+                     <ButtonGroup>
+                         <Button tag={Link} to="/emergencycontacts/new
+                         +">Add Emergency Contact</Button>
+-                        <Button size="sm" color="primary" tag={Link} to={"/emergencyContacts/" + emergencyContact.id}>Edit</Button>
++                        <Button size="sm" color="primary" tag={Link} to={"/emergencycontacts/" + emergencyContact.id}>Edit</Button>
+                         <Button size="sm" color="danger" onClick={() => this.remove(emergencyContact.id)}>Delete</Button>
+                     </ButtonGroup>
+                 </td>
+Index: src/emergencyContact/EmergencyContactForm.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React, { Component } from 'react';\r\nimport withNavigateHook from '../components/NavigateHook';\r\nimport { Link, useParams } from 'react-router-dom';\r\nimport { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';\r\nimport { States } from './States';\r\n\r\nfunction withParams(Component) {\r\n    return props => \r\n  \r\n    <Component {...props} params={useParams()} />;\r\n  \r\n    \r\n  }\r\n\r\nclass EmergencyContactForm extends Component {\r\n\r\n    emptyItem = {\r\n        firstName: '',\r\n        lastName: '',\r\n        phoneNumber: '',\r\n        relationship: '',\r\n        workplace: '',\r\n        age: '',\r\n        address: '',\r\n        city: '',\r\n        state: '',\r\n        zip: '',\r\n        notes: ''\r\n    };\r\n\r\n    constructor(props) {\r\n        super(props);\r\n        this.state = {\r\n            item: this.emptyItem\r\n        };\r\n        this.handleChange = this.handleChange.bind(this);\r\n        this.handleSubmit = this.handleSubmit.bind(this);\r\n    }\r\n\r\n    async componentDidMount() {\r\n        const { id } = this.props.params;\r\n        if (id !== 'new') {\r\n            const emergencyContact = await (await fetch(`/emergencycontacts/${id}`)).json();\r\n            this.setState({item: emergencyContact});\r\n        }\r\n    }\r\n\r\n    handleChange(event) {\r\n        const target = event.target;\r\n        const value = target.value;\r\n        const name = target.name;\r\n        let item = {...this.state.item};\r\n        item[name] = value;\r\n        this.setState({item});\r\n    }\r\n\r\nasync handleSubmit(event) {\r\n    event.preventDefault();\r\n    const {item} = this.state;\r\n\r\n    await fetch('/emergencyContacts' + (item.id ? '/' + item.id : ''), {\r\n        method: (item.id) ? 'PUT' : 'POST',\r\n        headers: {\r\n            'Accept': 'application/json',\r\n            'Content-Type': 'application/json'\r\n        },\r\n        body: JSON.stringify(item),\r\n    });\r\n    this.props.navigation('/emergencycontacts');\r\n}\r\n\r\n\r\n    render () {\r\n        const {item} = this.state;\r\n        const title = <h2>{item.id ? 'Edit Emergency Contact' : 'Add Emergency Contact'}</h2>;\r\n\r\n\r\n        return (\r\n            <div>\r\n                <h1>Emergency Contact Form</h1>\r\n\r\n                <Container>\r\n                    <Form onSubmit={this.handleSubmit}>\r\n                        \r\n                    {/* Required fields */}\r\n                         <FormGroup>\r\n                            <Label htmlFor=\"firstName\">First name:</Label>\r\n                                <Input type=\"text\" name=\"firstName\" id=\"firstName\" placeholder=\"Required\"\r\n                                value ={item.firstName || ''}\r\n                                onChange = {this.handleChange} autoComplete=\"given-name\" required/>\r\n                        </FormGroup>\r\n                        <FormGroup>\r\n                            <Label htmlFor=\"lastName\">Last name:</Label>\r\n                                <Input type=\"text\" name=\"lastName\" id=\"lastName\" placeholder=\"Required\"\r\n                                value ={item.lastName || ''}\r\n                                onChange = {this.handleChange} autoComplete=\"family-name\" required/>\r\n                        </FormGroup>\r\n                        <FormGroup>\r\n                            <Label htmlFor=\"phoneNumber\">Phone Number:</Label>\r\n                                <Input type=\"text\" name=\"phoneNumber\" id=\"phoneNumber\" placeholder=\"Required\"\r\n                                value ={item.phoneNumber || ''}\r\n                                onChange = {this.handleChange} autoComplete=\"tel\" required/>\r\n                        </FormGroup>\r\n                        <FormGroup>\r\n                            <Label htmlFor=\"relationship\">Relationship: </Label>\r\n                                <Input type=\"text\" name=\"relationship\" id=\"relationship\" placeholder=\"Required\"\r\n                                value ={item.relationship || ''}\r\n                                onChange = {this.handleChange} autoComplete=\"relationship\" required/>\r\n                        </FormGroup>\r\n\r\n\r\n\r\n\r\n                    {/* Optional fields */}\r\n                        <FormGroup>\r\n                            <Label htmlFor=\"workplace\">Workplace:</Label>\r\n                                <Input type=\"text\" name=\"workplace\" id=\"workplace\" placeholder=\"Optional\"\r\n                                value ={item.workplace || ''}\r\n                                onChange = {this.handleChange} autoComplete=\"workplace\"/>\r\n                        </FormGroup>\r\n                        <FormGroup>\r\n                            <Label htmlFor=\"age\">Age:</Label>\r\n                                <Input type=\"text\" name=\"age\" id=\"age\" placeholder=\"Optional\"\r\n                                value ={item.age || ''}\r\n                                onChange = {this.handleChange} autoComplete=\"age\"/>\r\n                        </FormGroup>\r\n                        <FormGroup>\r\n                            <Label htmlFor=\"address\">Address: </Label>\r\n                                <Input type=\"text\" name=\"address\" id=\"address\" placeholder=\"Optional\"\r\n                                value ={item.address || ''}\r\n                                onChange = {this.handleChange} autoComplete=\"street-address\"/>\r\n                        </FormGroup>\r\n                        <FormGroup>\r\n                            <Label htmlFor=\"city\">City: </Label>\r\n                                <Input type=\"text\" name=\"city\" id=\"city\" placeholder=\"Optional\"\r\n                                value ={item.city || ''}\r\n                                onChange = {this.handleChange} autoComplete=\"city\"/>\r\n                        </FormGroup>\r\n                        <FormGroup>\r\n                            <Label htmlFor=\"state\">State: </Label>\r\n                                <select class=\"form-select\" type=\"text\" name=\"state\" placeholder=\"Optional\"\r\n                                value ={item.state || ''}\r\n                                onChange = {this.handleChange} autoComplete=\"state\">\r\n                                    {\r\n                                        States.map(opt => <option> {opt} </option>)\r\n                                    }\r\n                                </select>\r\n                        </FormGroup>\r\n                        <FormGroup>\r\n                            <Label htmlFor=\"zip\">Zip: </Label>\r\n                                <Input type=\"text\" name=\"zip\" placeholder=\"Optional\"\r\n                                value ={item.zip || ''}\r\n                                onChange = {this.handleChange} autoComplete=\"zip\"/>\r\n                        </FormGroup>\r\n                        <FormGroup>\r\n                            <Label htmlFor=\"notes\">Notes: </Label>\r\n                                <Input type=\"textarea\" name=\"notes\"\r\n                                    value ={item.notes || ''}\r\n                                    onChange = {this.handleChange} />\r\n                        </FormGroup>\r\n                        \r\n                        <FormGroup>\r\n                            <Button type=\"submit\" onSubmit={this.handleSubmit}>Submit</Button>\r\n                            <Button tag={Link} to=\"/emergencycontacts\">Cancel</Button>\r\n                        </FormGroup>\r\n\r\n                    </Form>\r\n                </Container>\r\n             </div>\r\n    );\r\n\r\n    }\r\n}\r\n\r\n    export default withParams (withNavigateHook(EmergencyContactForm));\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/emergencyContact/EmergencyContactForm.js b/src/emergencyContact/EmergencyContactForm.js
+--- a/src/emergencyContact/EmergencyContactForm.js	(revision 296174b363ff68a509bd6cd01cacd546d421aad2)
++++ b/src/emergencyContact/EmergencyContactForm.js	(date 1708486279101)
+@@ -54,19 +54,31 @@
+         this.setState({item});
+     }
+ 
+-async handleSubmit(event) {
+-    event.preventDefault();
+-    const {item} = this.state;
+-
+-    await fetch('/emergencyContacts' + (item.id ? '/' + item.id : ''), {
+-        method: (item.id) ? 'PUT' : 'POST',
+-        headers: {
+-            'Accept': 'application/json',
+-            'Content-Type': 'application/json'
+-        },
+-        body: JSON.stringify(item),
+-    });
+-    this.props.navigation('/emergencycontacts');
++    async handleSubmit(e) {
++        e.preventDefault();
++        const {item} = this.state;
++        if (!item.id) {
++            await fetch('/emergencycontacts', {
++                method: "POST", 
++                mode: 'cors',
++                headers: {
++                    'Accept': "application/json",
++                    'Content-Type': "application/json"
++                },
++                body: JSON.stringify(item)
++            });
++        } else {
++            await fetch(`/emergencycontacts/${item.id}`, {
++                method: "PUT",
++                mode: 'cors',
++                headers: {
++                    'Accept': "application/json",
++                    'Content-Type': "application/json"
++                },
++                body: JSON.stringify(item)
++            });
++        }
++        this.props.navigation("/emergencycontacts");
+ }
+ 
+ 
+@@ -158,18 +170,4 @@
+                                     value ={item.notes || ''}
+                                     onChange = {this.handleChange} />
+                         </FormGroup>
+-                        
+-                        <FormGroup>
+-                            <Button type="submit" onSubmit={this.handleSubmit}>Submit</Button>
+-                            <Button tag={Link} to="/emergencycontacts">Cancel</Button>
+-                        </FormGroup>
+-
+-                    </Form>
+-                </Container>
+-             </div>
+-    );
+-
+-    }
+-}
+-
+-    export default withParams (withNavigateHook(EmergencyContactForm));
++                     
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"f93c2318-9dc5-4cab-846a-5073d700693a\" name=\"Changes\" comment=\"\">\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/org/launchcode/KidVenture/KidVentureApplication.java\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/org/launchcode/KidVenture/controllers/UserController.java\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/org/launchcode/KidVenture/models/AbstractEntity.java\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/org/launchcode/KidVenture/models/User.java\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/org/launchcode/KidVenture/models/data/UserRepository.java\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/resources/application.properties\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/resources/application.properties\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ExternalProjectsData\">\r\n    <projectState path=\"$PROJECT_DIR$\">\r\n      <ProjectState />\r\n    </projectState>\r\n  </component>\r\n  <component name=\"ExternalProjectsManager\">\r\n    <system id=\"GRADLE\">\r\n      <state>\r\n        <task path=\"$PROJECT_DIR$\">\r\n          <activation />\r\n        </task>\r\n        <projects_view>\r\n          <tree_state>\r\n            <expand>\r\n              <path>\r\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\r\n                <item name=\"KidVenture\" type=\"f1a62948:ProjectNode\" />\r\n              </path>\r\n            </expand>\r\n            <select />\r\n          </tree_state>\r\n        </projects_view>\r\n      </state>\r\n    </system>\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Interface\" />\r\n        <option value=\"AnnotationType\" />\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"CRUD-features-react-frontend\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2bCEQMlyz7z3F7HDYqzvsAFcXFa\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;C:/Users/cooki/Desktop/LaunchCode Capstone/group-slash-1&quot;,\r\n    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,\r\n    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,\r\n    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,\r\n    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CreateClassDialog.RecentsKey\">\r\n      <recent name=\"org.launchcode.KidVenture.controllers\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"Gradle.group-slash-1 [bootRun]\">\r\n    <configuration name=\"group-slash-1 [bootRun]\" type=\"GradleRunConfiguration\" factoryName=\"Gradle\">\r\n      <ExternalSystemSettings>\r\n        <option name=\"executionName\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"externalSystemIdString\" value=\"GRADLE\" />\r\n        <option name=\"scriptParameters\" />\r\n        <option name=\"taskDescriptions\">\r\n          <list />\r\n        </option>\r\n        <option name=\"taskNames\">\r\n          <list>\r\n            <option value=\"bootRun\" />\r\n          </list>\r\n        </option>\r\n        <option name=\"vmOptions\" />\r\n      </ExternalSystemSettings>\r\n      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>\r\n      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>\r\n      <DebugAllEnabled>false</DebugAllEnabled>\r\n      <ForceTestExec>false</ForceTestExec>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"group-slash-1\" type=\"GradleRunConfiguration\" factoryName=\"Gradle\" nameIsGenerated=\"true\">\r\n      <ExternalSystemSettings>\r\n        <option name=\"env\">\r\n          <map>\r\n            <entry key=\"APP_DB_HOST\" value=\"127.0.0.1\" />\r\n            <entry key=\"APP_DB_NAME\" value=\"kid-venture\" />\r\n            <entry key=\"APP_DB_PASS\" value=\"LaunchCode1!\" />\r\n            <entry key=\"APP_DB_PORT\" value=\"3306\" />\r\n            <entry key=\"APP_DB_USER\" value=\"kid-venture\" />\r\n          </map>\r\n        </option>\r\n        <option name=\"executionName\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"externalSystemIdString\" value=\"GRADLE\" />\r\n        <option name=\"scriptParameters\" value=\"\" />\r\n        <option name=\"taskDescriptions\">\r\n          <list />\r\n        </option>\r\n        <option name=\"taskNames\">\r\n          <list />\r\n        </option>\r\n        <option name=\"vmOptions\" />\r\n      </ExternalSystemSettings>\r\n      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>\r\n      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>\r\n      <DebugAllEnabled>false</DebugAllEnabled>\r\n      <ForceTestExec>false</ForceTestExec>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"JetRunConfigurationType\">\r\n      <module name=\"group-slash-1\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"KotlinStandaloneScriptRunConfigurationType\">\r\n      <module name=\"group-slash-1\" />\r\n      <option name=\"filePath\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"f93c2318-9dc5-4cab-846a-5073d700693a\" name=\"Changes\" comment=\"\" />\r\n      <created>1705710646601</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1705710646601</updated>\r\n    </task>\r\n    <servers />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 296174b363ff68a509bd6cd01cacd546d421aad2)
++++ b/.idea/workspace.xml	(date 1708481460579)
+@@ -5,12 +5,7 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="f93c2318-9dc5-4cab-846a-5073d700693a" name="Changes" comment="">
+-      <change beforePath="$PROJECT_DIR$/src/main/java/org/launchcode/KidVenture/KidVentureApplication.java" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/org/launchcode/KidVenture/controllers/UserController.java" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/org/launchcode/KidVenture/models/AbstractEntity.java" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/org/launchcode/KidVenture/models/User.java" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/org/launchcode/KidVenture/models/data/UserRepository.java" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -34,6 +29,23 @@
+               <path>
+                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                 <item name="KidVenture" type="f1a62948:ProjectNode" />
++              </path>
++              <path>
++                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
++                <item name="KidVenture" type="f1a62948:ProjectNode" />
++                <item name="Tasks" type="e4a08cd1:TasksNode" />
++              </path>
++              <path>
++                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
++                <item name="KidVenture" type="f1a62948:ProjectNode" />
++                <item name="Tasks" type="e4a08cd1:TasksNode" />
++                <item name="application" type="c8890929:TasksNode$1" />
++              </path>
++              <path>
++                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
++                <item name="KidVenture" type="f1a62948:ProjectNode" />
++                <item name="Tasks" type="e4a08cd1:TasksNode" />
++                <item name="build" type="c8890929:TasksNode$1" />
+               </path>
+             </expand>
+             <select />
+@@ -67,17 +79,17 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;last_opened_file_path&quot;: &quot;C:/Users/cooki/Desktop/LaunchCode Capstone/group-slash-1&quot;,
+-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "RunOnceActivity.OpenProjectViewOnStart": "true",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "last_opened_file_path": "C:/Users/cooki/Desktop/LaunchCode Capstone/practice-before-branching",
++    "project.structure.last.edited": "Modules",
++    "project.structure.proportion": "0.15",
++    "project.structure.side.proportion": "0.0",
++    "run.code.analysis.last.selected.profile": "pProject Default"
+   }
+-}</component>
++}]]></component>
+   <component name="RecentsManager">
+     <key name="CreateClassDialog.RecentsKey">
+       <recent name="org.launchcode.KidVenture.controllers" />

@@ -58,7 +58,7 @@ async handleSubmit(event) {
     event.preventDefault();
     const {item} = this.state;
 
-    await fetch('/emergencyContacts' + (item.id ? '/' + item.id : ''), {
+    await fetch('/emergencycontacts' + (item.id ? '/' + item.id : ''), {
         method: (item.id) ? 'PUT' : 'POST',
         headers: {
             'Accept': 'application/json',
@@ -80,7 +80,7 @@ async handleSubmit(event) {
                 <h1>Emergency Contact Form</h1>
 
                 <Container>
-                    <Form onSubmit={this.handleSubmit}>
+                    <Form onSubmit={this.handleSubmit} action = "/emergencycontacts" method="POST">
                         
                     {/* Required fields */}
                          <FormGroup>
