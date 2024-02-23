@@ -1,6 +1,6 @@
 import React, { Component, useEffect, useState } from "react";
 import { useParams } from "react-router-dom/dist";
-import { Button, Container, ListGroup, ListGroupItem } from "reactstrap";
+import { Button, CardImg, Container, ListGroup, ListGroupItem, Media } from "reactstrap";
 
 
 function ViewChildProfile() {
@@ -38,8 +38,10 @@ function ViewChildProfile() {
     return (
         <div>
             <Container>
+                <CardImg src={`data:image/jpeg;base64, ${child.profilePicture.photo}`} alt="Child Photo"/>
                 <h2>Child Profile</h2>
                 <div>Name: {child.childName}</div>
+                <div>Date of Birth: {child.dateOfBirth}</div>
             </Container>
         </div>
     );

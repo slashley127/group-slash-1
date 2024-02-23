@@ -32,7 +32,7 @@ public class ChildService {
             Child existingChild = existingChildProfileOptional.get();
             existingChild.setChildName(updatedChild.getChildName());
             existingChild.setDateOfBirth(updatedChild.getDateOfBirth());
-            existingChild.setProfilePictureUrl(updatedChild.getProfilePictureUrl());
+            existingChild.setProfilePicture(updatedChild.getProfilePicture());
             return Optional.of(childRepository.save(existingChild));
         }else {
             return Optional.empty();

@@ -2,10 +2,7 @@ package org.launchcode.KidVenture.models;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 
 import java.time.LocalDate;
@@ -25,7 +22,8 @@ public class Child {
     @JsonFormat(pattern = "MM/dd/yyyy")
     private LocalDate dateOfBirth;
 
-    private String profilePictureUrl;
+    @Lob
+    private byte[] profilePicture;
 
 
 
@@ -34,11 +32,11 @@ public class Child {
     }
 
 
-    public Child( String childName, LocalDate dateOfBirth, String profilePictureUrl){
+    public Child( String childName, LocalDate dateOfBirth, byte[] profilePicture){
         super();
         this.childName = childName;
         this.dateOfBirth = dateOfBirth;
-        this.profilePictureUrl = profilePictureUrl;
+        this.profilePicture = profilePicture;
     }
 
 
@@ -70,12 +68,12 @@ public class Child {
     }
 
 
-    public String getProfilePictureUrl(){
-        return profilePictureUrl;
+    public byte[] getProfilePicture(){
+        return profilePicture;
     }
 
-    public void setProfilePictureUrl(String profilePictureUrl){
-        this.profilePictureUrl = profilePictureUrl;
+    public void setProfilePicture(byte[] profilePicture){
+        this.profilePicture = profilePicture;
     }
 
 
