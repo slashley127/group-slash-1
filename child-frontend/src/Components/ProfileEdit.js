@@ -79,7 +79,7 @@ const ProfileEdit = () => {
                     <Input type="text" id="dateOfBirth" name="dateOfBirth" value={editedChild.dateOfBirth} onChange={handleChange} placeholder="MM/dd/yyyy"/>
                 </FormGroup>
                 <Button type='submit' color='primary'>Save Changes</Button>
-                <Link to='/viewAll' color='secondary'>Cancel</Link>
+                <Link to='/' color='secondary'>Cancel</Link>
                 </Form>
             </Container>
         </div>

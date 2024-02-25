@@ -7,10 +7,10 @@ const AllChildren = () => {
     const [child, setChild] = useState([]);
 
     useEffect(() => {
-        fetchChildren();
+        fetchChild();
     }, []);
 
-    const fetchChildren = async () => {
+    const fetchChild = async () => {
         try {
             const response = await fetch('/child');
             if(response.ok) {
@@ -25,6 +25,22 @@ const AllChildren = () => {
     };
 
 
+    const handleDeleteChild = async (id) => {
+        try {
+            const response = await fetch(`/child/${id}`, {
+                method: 'DELETE',
+            });
+            if(response.ok) {
+                fetchChild();
+            } else {
+                console.error('Failed to delete child');
+            }
+        }catch (error){
+            console.error('Error deleting child:', error);
+        }
+    };
+
+
     return (
         <div>
             <h2>My Children</h2>
@@ -32,9 +48,13 @@ const AllChildren = () => {
                 {child.map(child => (
                     <li key={child.id}>
                         <Link to={`/child/${child.id}`}>{child.childName}</Link>
+                        <Button onClick={() => handleDeleteChild(child.id)}>Delete</Button>
                     </li>
                 ))}
             </ul>
+            <Link to="/addChild">
+                <Button>Add Child</Button>
+            </Link>
         </div>
     )
 

@@ -13,10 +13,10 @@ class App extends Component {
       <div>
         <Router>
           <Routes>
-            <Route path='/' exact={true} element={<ProfileInput />} />
+            <Route path='/' exact={true} element={<AllChildren />} />
             <Route path="/child/:id" exact={true} element={<ViewChildProfile />}/>
-            <Route path='/edit' exact={true} element={<ProfileEdit />} />
-            <Route path='/viewAll' element={<AllChildren />} />
+            <Route path='/edit/:id' exact={true} element={<ProfileEdit />} />
+            <Route path='/addChild' element={<ProfileInput />} />
           </Routes>
         </Router>
       </div>

@@ -25,7 +25,7 @@ function ProfileInput (){
         if(response.ok){
             const child = await response.json();
             setCreatedChildId(child.id);
-            window.location.href = '/viewAll'
+            window.location.href = '/'
         } else {
             console.error('Failed to add child profile');
         }
@@ -45,6 +45,7 @@ function ProfileInput (){
                         <Input type="text" id="dateOfBirth" value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} placeholder="MM/dd/yyyy"/>
                     </FormGroup>
                         <Button type="submit" color="primary">Submit</Button>
+                        <Link to="/" color="secondary">Cancel</Link>
                 </Form>
             </Container>
         </div>

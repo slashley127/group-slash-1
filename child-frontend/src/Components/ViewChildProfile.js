@@ -45,6 +45,7 @@ function ViewChildProfile() {
                 <Link to={`/edit/${id}`}>
                     <Button color="primary">Edit Child</Button>
                 </Link>
+                <Link to='/'>Back</Link>
             </Container>
         </div>
     );
