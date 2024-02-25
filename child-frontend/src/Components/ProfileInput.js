@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Label, Form, FormGroup, Input, Button, FormText } from "reactstrap";
+import { Container, Label, Form, FormGroup, Input, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 
 
@@ -7,9 +7,7 @@ import { Link } from "react-router-dom";
 function ProfileInput (){
     const [createdChildId, setCreatedChildId] = useState(null);
     const [childName, setChildName] = useState('');
-    const [dateOfBirth, setDateOfBirth] = useState('');
-    const [profilePicture, setProfilePicture] = useState('');
-    
+    const [dateOfBirth, setDateOfBirth] = useState('');    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -21,13 +19,13 @@ function ProfileInput (){
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({childName, dateOfBirth, profilePicture})
+            body: JSON.stringify({childName, dateOfBirth})
         });
 
         if(response.ok){
             const child = await response.json();
             setCreatedChildId(child.id);
-            // window.location.href = '/profile';
+            window.location.href = '/viewAll'
         } else {
             console.error('Failed to add child profile');
         }
@@ -46,17 +44,7 @@ function ProfileInput (){
                         <Label for="dateOfBirth">Date of Birth:</Label>
                         <Input type="text" id="dateOfBirth" value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} placeholder="MM/dd/yyyy"/>
                     </FormGroup>
-                    <FormGroup>
-                        <Label for="profilePicture">Profile Picture:</Label>
-                        <Input type="file" id="profilePicture" value={profilePicture} onChange={(e) => setProfilePicture(e.target.value)} />
-                    </FormGroup>
-                    <Button type="submit" color="primary">Submit</Button>
-                    {createdChildId && (
-                        <div>
-                            <p>Child created with Id: {createdChildId}</p>
-                            <Link to={`/child/${createdChildId}`}>View Profile</Link>
-                        </div>
-                    )}
+                        <Button type="submit" color="primary">Submit</Button>
                 </Form>
             </Container>
         </div>

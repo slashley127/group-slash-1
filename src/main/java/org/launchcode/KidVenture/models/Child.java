@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Objects;
 
 
@@ -22,21 +21,17 @@ public class Child {
     @JsonFormat(pattern = "MM/dd/yyyy")
     private LocalDate dateOfBirth;
 
-    @Lob
-    private byte[] profilePicture;
-
-
 
 
     public Child(){
     }
 
 
-    public Child( String childName, LocalDate dateOfBirth, byte[] profilePicture){
+    public Child( String childName, LocalDate dateOfBirth){
         super();
         this.childName = childName;
         this.dateOfBirth = dateOfBirth;
-        this.profilePicture = profilePicture;
+
     }
 
 
@@ -68,34 +63,26 @@ public class Child {
     }
 
 
-    public byte[] getProfilePicture(){
-        return profilePicture;
+
+    @Override
+    public String toString(){
+        return childName;
     }
 
-    public void setProfilePicture(byte[] profilePicture){
-        this.profilePicture = profilePicture;
+
+
+
+    @Override
+    public boolean equals(Object o){
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Child that = (Child) o;
+        return id == that.id;
     }
 
 
-//    @Override
-//    public String toString(){
-//        return childName;
-//    }
-
-
-
-
-//    @Override
-//    public boolean equals(Object o){
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        Child that = (Child) o;
-//        return id == that.id;
-//    }
-
-
-//    @Override
-//    public int hashCode(){
-//        return Objects.hash(id);
-//    }
+    @Override
+    public int hashCode(){
+        return Objects.hash(id);
+    }
 }

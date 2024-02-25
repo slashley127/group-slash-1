@@ -17,7 +17,7 @@ public class ChildService {
 
 
 
-    public List<Child> getAllChild(){
+    public List<Child> getAllChildren(){
         return childRepository.findAll();
     }
 
@@ -32,7 +32,6 @@ public class ChildService {
             Child existingChild = existingChildProfileOptional.get();
             existingChild.setChildName(updatedChild.getChildName());
             existingChild.setDateOfBirth(updatedChild.getDateOfBirth());
-            existingChild.setProfilePicture(updatedChild.getProfilePicture());
             return Optional.of(childRepository.save(existingChild));
         }else {
             return Optional.empty();

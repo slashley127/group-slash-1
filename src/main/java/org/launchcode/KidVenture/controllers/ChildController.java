@@ -3,9 +3,7 @@ package org.launchcode.KidVenture.controllers;
 
 
 
-import org.apache.coyote.Response;
 import org.launchcode.KidVenture.models.Child;
-import org.launchcode.KidVenture.models.data.ChildRepository;
 import org.launchcode.KidVenture.models.data.ChildService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,8 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,8 +25,8 @@ public class ChildController {
 
 
     @GetMapping
-    public List<Child> getAllChildProfiles(){
-        return childService.getAllChild();
+    public List<Child> getAllChildren(){
+        return childService.getAllChildren();
     }
 
 
@@ -53,6 +49,12 @@ public class ChildController {
         Optional<Child> updatedChildProfileOptional = childService.updateChild(id, updatedChild);
         return updatedChildProfileOptional.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteChild(@PathVariable("id") Long id) {
+        childService.deleteChild(id);
+        return ResponseEntity.noContent().build();
     }
 
 

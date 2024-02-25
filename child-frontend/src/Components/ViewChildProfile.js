@@ -1,12 +1,13 @@
-import React, { Component, useEffect, useState } from "react";
-import { useParams } from "react-router-dom/dist";
-import { Button, CardImg, Container, ListGroup, ListGroupItem, Media } from "reactstrap";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom/dist";
+import { Button, Container } from "reactstrap";
 
 
 function ViewChildProfile() {
+    const {id} = useParams();
     const [child, setChild] = useState(null);
     const [error, setError] = useState(null);
-    const {id} = useParams();
+
 
 
     useEffect(() => {
@@ -38,10 +39,12 @@ function ViewChildProfile() {
     return (
         <div>
             <Container>
-                <CardImg src={`data:image/jpeg;base64, ${child.profilePicture.photo}`} alt="Child Photo"/>
                 <h2>Child Profile</h2>
                 <div>Name: {child.childName}</div>
                 <div>Date of Birth: {child.dateOfBirth}</div>
+                <Link to={`/edit/${id}`}>
+                    <Button color="primary">Edit Child</Button>
+                </Link>
             </Container>
         </div>
     );
