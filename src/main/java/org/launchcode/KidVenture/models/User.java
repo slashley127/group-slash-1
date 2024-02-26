@@ -5,15 +5,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import java.util.Objects;
 
 @Entity
 public class User {
+
+    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,11 +19,10 @@ public class User {
 
     private String username;
 
+    @Email
     private String email;
 
-
-    private String password;
-
+    private String pwHash;
 
     public User(){
     }
@@ -34,10 +31,8 @@ public class User {
         super();
         this.username = username;
         this.email = email;
-        this.password = password;
+        this.pwHash = encoder.encode(password);
     }
-
-
 
     public Long getId() {
         return id;
@@ -63,31 +58,15 @@ public class User {
         this.email = email;
     }
 
-
-    public String getPassword() {
-        return password;
+    public boolean isMatchingPassword(String password){
+        return encoder.matches(password, pwHash);
     }
 
-    public void setPassword(String password) {
-        this.password = new BCryptPasswordEncoder().encode(password);
+    public String getPwHash() {
+        return pwHash;
     }
 
-    //    @Override
-//    public String toString(){
-//        return username;
-//    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User that = (User) o;
-        return id == that.id;
+    public void setPwHash(String pwHash) {
+        this.pwHash = pwHash;
     }
-
-    @Override
-    public int hashCode(){
-        return Objects.hash(id);
-    }
-
 }

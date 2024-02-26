@@ -10,20 +10,21 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
-
-
-    public User save(User user){
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+    public UserService(UserRepository userRepository){
+        this.userRepository = userRepository;
     }
 
-//    public Optional<User> findByUsername(String username){
-////        return userRepository.findByUsername(username);
-////    }
+    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
+    public Optional<User> getUserById(Long id){
+        return userRepository.findById(id);
+    }
+
+    public User createUser(User user){
+        user.setPwHash(encoder.encode(user.getPwHash()));
+        return userRepository.save(user);
+    }
 }
