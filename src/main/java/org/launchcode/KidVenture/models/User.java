@@ -9,14 +9,10 @@ import jakarta.validation.constraints.Email;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
-
-
 @Entity
 public class User {
 
-
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -78,7 +74,6 @@ public class User {
     public boolean isMatchingPassword(String password){
         return encoder.matches(password, pwHash);
     }
-
 
     public String getPwHash() {
         return pwHash;
