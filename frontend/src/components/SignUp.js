@@ -1,69 +1,58 @@
-import React, { Component, useState } from 'react';
-import { useParams, useNavigate, withRouter, Link } from 'react-router-dom';
-import { Container, Label, Form, FormGroup, Input, Button, Alert } from 'reactstrap';
-import goNavigate from './Navigate';
+import React, { useState } from 'react';
+import { Container, Label, Form, Input, Button, FormGroup } from 'reactstrap';
 
 
 
-const SignUp = ({history}) => {
-
+function SignUp() {
+    const [createdUserId, setCreatedUserId] = useState(null);
     const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
-    const[error, setError] = useState('');
+    const [pwHash, setPwHash] = useState('');
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-    const handleSubmit = async () => {
-        try {
-            const response = await fetch('/user/signup', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({username, email, password}),
-            });
-            if(!response.ok) {
-                throw new Error('Sign up failed');
-            }
+        console.log('Form submitted');
 
-            setUsername('');
-            setPassword('');
-            setEmail('');
-            setError('');
+        const response = await fetch('/user', {
+            method:"POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({username, email, pwHash})
+        });
 
-            history.push('/profile');
-        } catch (error){
-            setError('Sign up failed. Please try again.');
+        if(response.ok){
+            const user = await response.json();
+            setCreatedUserId(user.id);
+            window.location.href = `/home`
+        } else {
+            console.error('Failed to add user');
         }
-    }
-
-        return (<div>
+    };
+    
+    return (
+        <div>
             <Container>
                 <h2>Sign Up</h2>
-                {error && <Alert color="danger">{error}</Alert>}
-                <Form>
+                <Form onSubmit={handleSubmit}>
                     <FormGroup>
-                        <Label for="username">Username</Label>
-                        <Input type="text" name="username" id="username" value={username}
-                        onChange={(e) => setUsername(e.target.value)}/>
+                        <Label for="username">Username:</Label>
+                        <Input type='text' id='username' value={username} onChange={(e) => setUsername(e.target.value)} />
                     </FormGroup>
                     <FormGroup>
-                        <Label for="email">Email</Label>
-                        <Input type="email" name="email" id="email" value={email}
-                        onChange={(e) => setEmail(e.target.value)}/>
+                        <Label for="email">Email:</Label>
+                        <Input type='email' id='email' value={email} onChange={(e) => setEmail(e.target.value)} />
                     </FormGroup>
                     <FormGroup>
-                        <Label for="password">Password</Label>
-                        <Input type="password" name="password" id="password" value={password}
-                        onChange={(e) => setPassword(e.target.value)}/>
+                        <Label for="pwHash">Password:</Label>
+                        <Input type='password' id='pwHash' value={pwHash} onChange={(e) => setPwHash(e.target.value)} />
                     </FormGroup>
-                    <FormGroup>
-                        <Button color='primary' onClick={handleSubmit}>Submit</Button>
-                    </FormGroup>
+                    <Button type="submit" color="primary">Submit</Button>
                 </Form>
-                <p>Already have an account? <Link to="/login">Login here</Link></p>
             </Container>
         </div>
-        );
-    }
+    )
+
+}
 export default SignUp;

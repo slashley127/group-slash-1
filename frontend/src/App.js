@@ -3,16 +3,15 @@ import { BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-do
 import SignUp from "./components/SignUp";
 import React, { Component } from 'react';
 import Profile from './components/Profile';
-import Login from './components/Login';
+import Home from './components/Home';
 
 function App() {
     return(
         <Router>
           <Routes>
-            <Route path='/login' exact={true} element={<Login />}/>
-            <Route path='/signup' exact={true} element={<SignUp />}/>
-            <Route path='/profile' exact={true} element={<Profile />}/>
-            <Route path='/' element={<Navigate to="/login" />}/>
+            <Route path='/' exact={true} element={<SignUp />}/>
+            <Route path='/home' element={<Home />} />
+            <Route path='/profile/:id' exact={true} element={<Profile />}/>
           </Routes>
         </Router>
     )
