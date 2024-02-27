@@ -1,43 +1,51 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Container } from "reactstrap";
 
-function Profile(){
-    const {id} = useParams();
+function Profile({id}){
     const [user, setUser] = useState(null);
-    const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchUser = async () => {
             try {
                 const response = await fetch(`/user/${id}`);
                 if (response.ok){
-                    const data = await response.json();
-                    setUser(data);
+                    const userData = await response.json();
+                    setUser(userData);
                 } else {
-                    setError(`Failed to fetch user with id ${id}`);
+                    console.error(`Failed to fetch user with id ${id}`);
                 }
             } catch (error){
-                setError('Failed');
+                console.error('Failed');
             }
         }
         fetchUser();
     }, [id]);
 
-    if(error){
-        return <div> Error: {error}</div>
-    }
+    // if(error){
+    //     return <div> Error: {error}</div>
+    // }
 
-    if(!user){
-        return <div>Loading...</div>
-    }
+    // if(!user){
+    //     return <div>Loading...</div>
+    // }
 
     return(
-        <div>
-            <Container>
-                <h2>{user.username}'s Profile</h2>
-                <div>Email: {user.email}</div>
-            </Container>
+        <div >
+            <Link to="/">Logout</Link>
+            {user ? (
+                <div>
+                    <h2>My Profile</h2>
+                    <p>Username: {user.username}</p>
+                    <p>Email: {user.email}</p>
+                    <p>My Children:</p>
+                    <ul>
+                        <li>Add Later</li>
+                    </ul>
+                </div>
+            ) : (
+                <p>Loading user profile...</p>
+            )}
         </div>
     )
 

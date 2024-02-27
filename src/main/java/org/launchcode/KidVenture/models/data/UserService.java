@@ -17,6 +17,7 @@ public class UserService {
 
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
+
     public List<User> getAllUsers(){
         return userRepository.findAll();
     }
@@ -28,6 +29,22 @@ public class UserService {
     public User createUser(User user){
         user.setPwHash(encoder.encode(user.getPwHash()));
         return userRepository.save(user);
+    }
+
+    public Optional<User> findByEmail(String email){
+        return userRepository.findByEmail(email);
+    }
+
+    public boolean existsByUsername(String username) {
+        return userRepository.existsByUsername(username);
+    }
+
+    public boolean existsByEmail(String email){
+        return userRepository.existsByEmail(email);
+    }
+
+    public boolean isMatchingPassword(String rawPassword, String encodedPassword){
+        return encoder.matches(rawPassword, encodedPassword);
     }
 }
 

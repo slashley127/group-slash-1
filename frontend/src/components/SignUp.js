@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Container, Label, Form, Input, Button, FormGroup } from 'reactstrap';
 
 
@@ -24,8 +25,9 @@ function SignUp() {
 
         if(response.ok){
             const user = await response.json();
+            console.log("Sign-up response:", user);
             setCreatedUserId(user.id);
-            window.location.href = `/home`
+            window.location.href = `/home/${user.id}`
         } else {
             console.error('Failed to add user');
         }
@@ -50,6 +52,7 @@ function SignUp() {
                     </FormGroup>
                     <Button type="submit" color="primary">Submit</Button>
                 </Form>
+                <p>Already have an account? <Link to="/">Login</Link></p>
             </Container>
         </div>
     )
