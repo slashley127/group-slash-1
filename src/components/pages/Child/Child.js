@@ -1,4 +1,4 @@
-/*import React, { Component } from "react";
+import React, { Component } from "react";
 
 
 class Child extends Component {
@@ -31,5 +31,3 @@ class Child extends Component {
 
 
 export default Child;
-
-*/

@@ -1,4 +1,4 @@
-/*import React, { Component } from "react";
+import React, { Component } from "react";
 import { Container, Label, Form, FormGroup, Input, Button } from "reactstrap";
 import { useParams } from "react-router-dom";
 import withNavigateHook from "../activities/NavigateHook";
@@ -100,4 +100,3 @@ class ProfileInput extends Component{
 
 export default withParams(withNavigateHook(ProfileInput));
 
-*/

@@ -1,12 +1,10 @@
-/*import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../pages.css';
 import { Link, useParams, withRouter, useNavigate } from 'react-router-dom';
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
 
 const ActivityForm = () => {
-    
-  const { id } = useParams();
- const [editActivityId, setEditActivityId] = useState('');
+
   const [children, setChildren] = useState([]);
   const [selectedChild, setSelectedChild] = useState('');
   const [nameOfActivity, setNameOfActivity] = useState('');
@@ -38,6 +36,7 @@ const ActivityForm = () => {
 
   const handleChildChange = (event) => {
     setSelectedChild(event.target.value);
+    console.log("Selected child", event.target.value );
   };
 
   const handleActivityNameChange = (event) => {
@@ -62,13 +61,6 @@ const ActivityForm = () => {
     setMood(event.target.value);
   };
 
-  useEffect(() => {
-    // Set the editActivityId based on the id parameter
-    setEditActivityId(id || '');
-  }, [id]);
-
-
-
   const handleSubmit = async (event) => {
     event.preventDefault();
         if (!selectedChild || !nameOfActivity || !typeOfActivity || !date || !durationOfActivity || !mood) {
@@ -79,19 +71,7 @@ const ActivityForm = () => {
     console.log('Activity data:', activityData);
 
     try {
-      let response;
-      
-        if (editActivityId) {
-            response = await fetch(`/activities/${editActivityId}`, {
-              method: 'PUT',
-              headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-              body: JSON.stringify(activityData),
-            });
-          } else {
-            response = await fetch(`/activities`, {
+      let response = await fetch(`/activities`, {
               method: 'POST',
               headers: {
                 'Accept': 'application/json',
@@ -99,13 +79,12 @@ const ActivityForm = () => {
               },
               body: JSON.stringify(activityData),
             });
-          }
+          
     
           if (!response.ok) {
             console.error('Error during activity submission:', response.status);
             return;
           }
-          setEditActivityId('');
           setSelectedChild('');
           setNameOfActivity('');
           setDate('');
@@ -127,7 +106,7 @@ const ActivityForm = () => {
         <select value={selectedChild} onChange={handleChildChange}>
           <option value="" disabled>Select a child</option>
           {children.map((child) => (
-            <option key={child.id} value={child.id}>
+            <option key={child.id} value={child}>
               {child.childName}
             </option>
           ))}
@@ -168,4 +147,3 @@ const ActivityForm = () => {
 };
 
 export default ActivityForm;
-*/
