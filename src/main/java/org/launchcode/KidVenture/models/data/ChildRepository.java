@@ -1,13 +1,14 @@
+
 package org.launchcode.KidVenture.models.data;
 
-import org.launchcode.KidVenture.models.Activity;
 
+import org.launchcode.KidVenture.models.Child;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+
 @Repository
-public interface ActivityRepository extends JpaRepository<Activity, Integer>{
+public interface ChildRepository extends JpaRepository<Child, Integer> {
 }

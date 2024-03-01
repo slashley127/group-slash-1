@@ -9,10 +9,10 @@ import java.util.Date;
 @Entity
 public class Activity extends AbstractEntity {
 
-    //TO DO: change child from String to Child type once we add the child profiles.
-
     private String nameOfActivity;
-    private String child;
+
+    @ManyToOne
+    private Child child;
     private String date;
     private double durationOfActivity;
     private String typeOfActivity;
@@ -20,7 +20,7 @@ public class Activity extends AbstractEntity {
 
     public Activity() {
     }
-    public Activity(String nameOfActivity, String child, String date, double durationOfActivity, String typeOfActivity, String mood) {
+    public Activity(String nameOfActivity, Child child,  String date, double durationOfActivity, String typeOfActivity, String mood) {
         super();
         this.nameOfActivity = nameOfActivity;
         this.child = child;
@@ -28,6 +28,14 @@ public class Activity extends AbstractEntity {
         this.durationOfActivity = durationOfActivity;
         this.typeOfActivity = typeOfActivity;
         this.mood = mood;
+    }
+
+    public Child getChild() {
+        return child;
+    }
+
+    public void setChild(Child child) {
+        this.child = child;
     }
 
     public String getNameOfActivity() {
@@ -44,14 +52,6 @@ public class Activity extends AbstractEntity {
 
     public void setTypeOfActivity(String typeOfActivity) {
         this.typeOfActivity = typeOfActivity;
-    }
-
-    public String getChild() {
-        return child;
-    }
-
-    public void setChild(String child) {
-        this.child = child;
     }
 
 

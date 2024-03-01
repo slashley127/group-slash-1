@@ -12,14 +12,22 @@ public class Enrichment {
     private int id;
     private String activity;
     private String benefits;
+    private String indoor;
+    private String toddler;
+    private String bigKid;
+    private String teenager;
 
     public Enrichment() {
     }
 
-    public Enrichment(int id, String activity, String benefits) {
+    public Enrichment(int id, String activity, String benefits, String indoor, String toddler, String bigKid, String teenager) {
         this.id = id;
         this.activity = activity;
         this.benefits = benefits;
+        this.indoor = indoor;
+        this.toddler = toddler;
+        this.bigKid = bigKid;
+        this.teenager = teenager;
     }
 
     public int getId() {
@@ -28,6 +36,22 @@ public class Enrichment {
 
     public String getActivity() {
         return activity;
+    }
+
+    public String isIndoor() {
+        return indoor;
+    }
+
+    public String isToddler() {
+        return toddler;
+    }
+
+    public String isBigKid() {
+        return bigKid;
+    }
+
+    public String isTeenager() {
+        return teenager;
     }
 
     public String getBenefits() {
